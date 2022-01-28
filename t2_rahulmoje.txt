@@ -1,0 +1,1 @@
+Trying a commit to individual branch and then merging it to the main branch.
