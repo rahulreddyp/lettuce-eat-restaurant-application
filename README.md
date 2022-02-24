@@ -2,7 +2,7 @@
 
 * *Date Created*: 23 FEB 2022
 * *Last Modification Date*: 23 FEB 2022
-* *Deployment URL*: https://a1-rahul-reddy-puchakayala.herokuapp.com/
+* *Deployment URL*: https://group01-web-design.herokuapp.com/
 * *Git URL*: https://git.cs.dal.ca/ashaikh/csci-5709_group-01/-/tree/rahulreddy_puchakayala
 
 
