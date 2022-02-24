@@ -1,6 +1,5 @@
 import React from "react";
 import { Link, withRouter } from "react-router-dom";
-import food_logo from "../resources/food_logo.png";
 
 const Header = ({ props }) => {
   return (
@@ -21,21 +20,22 @@ const Header = ({ props }) => {
         <div className="ms-auto">
           <h2 className="text-white">Lettuce Eat</h2>
         </div>
+
         <ul className="navbar-nav ms-auto">
+          <li className="nav-item">
+            <Link className="nav-link text-warning" to="/menu">
+              Menu
+            </Link>
+          </li>
           <li className="nav-item">
             <Link className="nav-link text-white" to="/cart">
               Cart
             </Link>
           </li>
+
           <li className="nav-item">
             <Link className="nav-link text-white" to="/account">
               My Account
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link className="nav-link text-warning" to="/logout">
-              Logout
             </Link>
           </li>
         </ul>
