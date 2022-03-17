@@ -1,47 +1,34 @@
-import React from "react";
-import { Link, withRouter } from "react-router-dom";
+import React from 'react'
+import {Navbar,Nav,NavDropdown,Container, Button} from 'react-bootstrap';
+import {FaPizzaSlice ,FaOpencart ,FaPercentage} from 'react-icons/fa'
+import { useNavigate } from "react-router-dom";
 
-const Header = ({ props }) => {
+const Header = () => {
+
+  //const navigate = useNavigate();
+
   return (
-    <nav className="navbar navbar-expand-sm bg-dark">
-      <div className="collapse navbar-collapse show ms-sm-4">
-        {/* <Link className="navbar-brand ml-5" to="/">
-          <img src={food_logo} alt="Logo" width="40px" />
-        </Link> */}
+   
+    <Navbar  bg="dark" expand="lg" variant='dark'>
+    <Container fluid>
+    <Navbar.Brand style={{fontFamily:'Garamond',fontSize:'0.65cm', textAlign:'left'}} href="/">Lettuce EAT</Navbar.Brand>
+    <Navbar.Toggle aria-controls="basic-navbar-nav" />
+    <Navbar.Collapse id="basic-navbar-nav">
+      <Nav className="me-auto" style={{fontWeight:'normal',fontVariant:'-moz-initial'}}>
+        <Nav.Link href="/menu">Menu <FaPizzaSlice /></Nav.Link>      
+        <Nav.Link href="/orders">Orders <FaOpencart/></Nav.Link>
+        <Nav.Link href="/Coupons">Coupons <FaPercentage/></Nav.Link>
+        
+        
+      </Nav>
+      <Button variant="outline-light" >Login</Button>
+    </Navbar.Collapse>
+    </Container>
+</Navbar>
 
-        <form className="form-inline">
-          <input
-            className="form-control"
-            type="search"
-            placeholder="Search Menu.."
-            aria-label="Search"
-          />
-        </form>
-        <div className="ms-auto">
-          <h2 className="text-white">Lettuce Eat</h2>
-        </div>
+       
+    
+  )
+}
 
-        <ul className="navbar-nav ms-auto">
-          <li className="nav-item">
-            <Link className="nav-link text-warning" to="/menu">
-              Menu
-            </Link>
-          </li>
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/cart">
-              Cart
-            </Link>
-          </li>
-
-          <li className="nav-item">
-            <Link className="nav-link text-white" to="/account">
-              My Account
-            </Link>
-          </li>
-        </ul>
-      </div>
-    </nav>
-  );
-};
-
-export default withRouter(Header);
+export default Header;
