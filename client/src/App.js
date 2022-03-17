@@ -2,9 +2,9 @@ import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import Header from './Components/Header';
-import HomeScreen from './Components/HomeScreen';
-import Login from './Components/Login';
-import Signup from './Components/Signup'
+import HomeScreen from './Components/pages/HomeScreen';
+import Login from './Components/pages/Login';
+import Signup from './Components/pages/Signup'
 import Footer from './Components/Footer'
 
 function App() {
