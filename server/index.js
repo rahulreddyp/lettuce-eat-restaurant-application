@@ -15,8 +15,7 @@ app.use(userRouter);
 app.use(menuRouter);
 
 mongoose
-  .connect(`mongodb+srv://admin:admin@tutorial.e8ugf.mongodb.net/lettuceeat`,
-  // mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`,
+  .connect(`mongodb+srv://${dbConfig.USERNAME}:${dbConfig.PASSWORD}@${dbConfig.CLUSTER}.${dbConfig.HOST}/${dbConfig.DB}`,
    {
     useNewUrlParser: true,
     useUnifiedTopology: true
