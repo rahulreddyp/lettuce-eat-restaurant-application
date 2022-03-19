@@ -1,11 +1,13 @@
 import 'bootstrap/dist/css/bootstrap.min.css';
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
-import Header from './Components/Header';
-import HomeScreen from './Components/pages/HomeScreen';
-import Login from './Components/pages/Login';
-import Signup from './Components/pages/Signup'
-import Footer from './Components/Footer'
+import Header from './components/Header';
+import HomeScreen from './components/pages/HomeScreen';
+import Login from './components/pages/Login';
+import Signup from './components/pages/Signup';
+import Menu from './components/pages/Menu';
+import MenuItem from './components/pages/MenuItem';
+import Footer from './components/Footer';
 
 function App() {
   return (
@@ -16,6 +18,8 @@ function App() {
           <Route  path="/" element={<HomeScreen/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/menu" element={<Menu/>}/>
+          <Route path="/menuitem" element={<MenuItem/>}/>
 
         </Routes>
       </Router>
