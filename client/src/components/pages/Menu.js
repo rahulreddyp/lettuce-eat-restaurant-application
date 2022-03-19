@@ -25,7 +25,7 @@ const Menu = () => {
       <div className="row">
         <div className="col-12">
           <div className="jumbotron text-center">
-            <h1>What's on our Menu ?</h1>
+            <h1>WHAT'S ON OUR MENU ?</h1>
             <p>Best food, best served</p>
           </div>
         </div>

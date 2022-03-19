@@ -35,7 +35,7 @@ const MenuItem = () => {
 
   const handleChange = (customization_type, e) => {
     const userChoice = e.target.value;
-    setCartItem({...cartItem, [customization_type]: userChoice})
+    setCartItem({ ...cartItem, [customization_type]: userChoice });
 
     console.log(cartItem);
   };
@@ -46,11 +46,17 @@ const MenuItem = () => {
     // if(cartItem === null) {
     //   setError("Please choose your customizations");
     // } else {
-      
-      setCartItem({...cartItem, id: item._id, name: item.name, price: item.price, category: item.category})
-      console.log(cartItem);
+
+    setCartItem({
+      ...cartItem,
+      id: item._id,
+      name: item.name,
+      price: item.price,
+      category: item.category,
+    });
+    console.log(cartItem);
     // }
-  }
+  };
 
   return (
     <div className="container-fluid">
@@ -75,13 +81,21 @@ const MenuItem = () => {
         <div className="row">
           <div className="col-md-8">
             <h1>{item.name}</h1>
-            <div className="col-md-2">{/* wishlist  */}</div>
-            <div className="col-md-2">{/* rating */}</div>
           </div>
-          <div className="row">
-            <div className="col-12">
-              <p>{item.description}</p>
-            </div>
+          <div className="col-md-2">{/* wishlist  */}</div>
+          <div className="col-md-2">{/* rating */}</div>
+        </div>
+        <div className="row">
+          <div className="col-md-12">
+            <p>{item.description}</p>
+          </div>
+        </div>
+        <div className="row">
+          <div className="col-md-2">
+            <ul className="list-group align-items-left">
+              <li className="list-group-item border-0">{item.category}</li>
+              <li className="list-group-item border-0">{}</li>
+            </ul>
           </div>
         </div>
       </div>
@@ -92,13 +106,17 @@ const MenuItem = () => {
             Object.keys(customizations).map((options, index) => {
               return (
                 <div className="form-group mb-3" key={index}>
-                <p>Please choose your food {options}:</p>
-                <MenuOptions index={index} customizations={customizations} options={options} onChange={(e) => handleChange(options, e)} />
+                  <p>Please choose your food {options}:</p>
+                  <MenuOptions
+                    index={index}
+                    customizations={customizations}
+                    options={options}
+                    onChange={(e) => handleChange(options, e)}
+                  />
                 </div>
-       
               );
             })}
-            <button type="submit">Add to Cart</button>    
+          <button type="submit">Add to Cart</button>
         </form>
       </div>
     </div>

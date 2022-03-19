@@ -3,7 +3,7 @@ import { Stack, Button, Row, Col, Container, Figure } from "react-bootstrap";
 import HomeCarousel from "./HomeCarousel";
 import "../styles/homeScreen.css";
 import { FaVolumeUp } from "react-icons/fa";
-
+ 
 const HomeScreen = () => {
   return (
    
