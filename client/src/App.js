@@ -6,6 +6,8 @@ import HomeScreen from './components/pages/HomeScreen';
 import Login from './components/pages/Login';
 import Signup from './components/pages/Signup'
 import Footer from './components/Footer'
+import Profile from './components/pages/Userprofile'
+import Editprofile from './components/pages/Editprofile';
 
 function App() {
   return (
@@ -13,9 +15,10 @@ function App() {
       <Header />
       <Router>
         <Routes>
-          <Route  path="/" element={<HomeScreen/>}/>
+          <Route  path="/" element={<Profile/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/editprofile" element={<Editprofile/>}/>
 
         </Routes>
       </Router>
