@@ -8,7 +8,7 @@ import Signup from './components/pages/Signup';
 import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
 import Footer from './components/Footer';
-
+import Wishlist from './components/pages/Wishlist';
 function App() {
   return (
     <div className="App">
@@ -20,7 +20,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/menu" element={<Menu/>}/>
           <Route path="/menuitem" element={<MenuItem/>}/>
-
+          <Route path="/wishlist" element={<Wishlist/>}/>
         </Routes>
       </Router>
       <Footer />

@@ -1,8 +1,7 @@
-import React from "react";
+import React,{ useState} from "react";
 import { useNavigate, withRouter } from "react-router-dom";
 import foodImage from "../../images/food_image.jpg";
 import "../styles/Menu.css";
-
 const MenuCard = ({ item }) => {
     const navigate = useNavigate();
 
@@ -14,6 +13,7 @@ const MenuCard = ({ item }) => {
     };
 
     const CardImage = item.photo ? item.photo : "No Image";
+
 
   return (
     <div className="card shadow" onClick={()=>{redirectToItemDetails()}}>
@@ -28,7 +28,7 @@ const MenuCard = ({ item }) => {
           {/* {redirectToItemDetails()} */}        
           <h3 className="card-title">{item.name}</h3>
           <p className="card-description">{item.description}</p>
-          <span className="text-white bg-success rounded p-2">{item.price}</span>
+          <span className="text-white bg-success rounded p-2">{item.price} </span>
         </div>
       </div>
     </div>

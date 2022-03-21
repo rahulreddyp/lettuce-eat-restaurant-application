@@ -2,16 +2,17 @@ import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getMenuItem } from "../../apicalls/MenuCalls";
 import MenuOptions from "./MenuOptions";
+import Heart from "react-animated-heart";
 
 const MenuItem = () => {
   const [item, setItem] = useState([]);
   const [error, setError] = useState([]);
   const [customizations, setCustomizations] = useState([]);
-
   const [cartItem, setCartItem] = useState([]);
-
+  const [wishlistItem, setWishlistItem] = useState([]);
   const { state } = useLocation();
   const { itemId } = state || {};
+  const [isClick, setClick] = useState(false);
 
   const getMenuItemDetails = () => {
     if (itemId) {
@@ -57,7 +58,24 @@ const MenuItem = () => {
     console.log(cartItem);
     // }
   };
+function updateWishlist(){
+    addtoWishlist();
+    updateclick();
+}
+const updateclick = (e)=>{
+  setClick(!isClick);
+}
+ const addtoWishlist = (e)=>{
+    setWishlistItem({
+      ...wishlistItem,
+      id: item._id,
+      name: item.name,
+      price: item.price,
+      category: item.category,
+    });
+    console.log(wishlistItem);
 
+ };
   return (
     <div className="container-fluid">
       <div className="row">
@@ -71,10 +89,10 @@ const MenuItem = () => {
                   src={item.photo}
                 />
               </div>
-              {/* <div className="carousel-caption">
+              <div className="carousel-caption">
               <h1>{item.name}</h1>
               <p>{item.description}</p>
-            </div> */}
+            </div>
             </div>
           </div>
         </div>
@@ -82,7 +100,7 @@ const MenuItem = () => {
           <div className="col-md-8">
             <h1>{item.name}</h1>
           </div>
-          <div className="col-md-2">{/* wishlist  */}</div>
+          <div className="col-md-2"><Heart isClick={isClick} onClick={() => updateWishlist()} /></div>
           <div className="col-md-2">{/* rating */}</div>
         </div>
         <div className="row">
