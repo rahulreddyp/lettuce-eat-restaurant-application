@@ -2,6 +2,7 @@ const express = require('express')
 const app = express()
 const cors = require('cors')
 const userRouter = require("./Routes/user.routes");
+const menuRouter = require("./Routes/menu.routes");
 const mongoose = require('mongoose');
 const dbConfig = require('./config/db.config')
 
@@ -9,10 +10,13 @@ app.use(cors());
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 
+//Routes
 app.use(userRouter);
+app.use(menuRouter);
 
 mongoose
-  .connect(`mongodb://${dbConfig.HOST}:${dbConfig.PORT}/${dbConfig.DB}`, {
+  .connect(`mongodb+srv://${dbConfig.USERNAME}:${dbConfig.PASSWORD}@${dbConfig.CLUSTER}.${dbConfig.HOST}/${dbConfig.DB}`,
+   {
     useNewUrlParser: true,
     useUnifiedTopology: true
   })
