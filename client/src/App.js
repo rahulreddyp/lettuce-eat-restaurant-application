@@ -8,6 +8,8 @@ import Signup from './components/pages/Signup';
 import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
 import Footer from './components/Footer';
+import GetOrderStatus from './components/pages/GetOrderStatus';
+import OrderStatus from './components/pages/OrderStatus';
 
 function App() {
   return (
@@ -20,7 +22,8 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/menu" element={<Menu/>}/>
           <Route path="/menuitem" element={<MenuItem/>}/>
-
+          <Route path="/getorderstatus" element={<GetOrderStatus/>} />
+            <Route path="/getorderstatus/:orderid" element={<OrderStatus/>}/>
         </Routes>
       </Router>
       <Footer />

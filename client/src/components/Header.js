@@ -18,10 +18,12 @@ const Header = () => {
         <Nav.Link href="/menu">Menu <FaPizzaSlice /></Nav.Link>      
         <Nav.Link href="/orders">Orders <FaOpencart/></Nav.Link>
         <Nav.Link href="/Coupons">Coupons <FaPercentage/></Nav.Link>
+
+        <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
         
         
       </Nav>
-      <Button variant="outline-light" >Login</Button>
+      <Button variant="outline-light" href="/login" >Login</Button>
     </Navbar.Collapse>
     </Container>
 </Navbar>
