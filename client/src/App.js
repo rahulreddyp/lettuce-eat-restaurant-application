@@ -11,6 +11,7 @@ import Footer from "./components/Footer";
 import GetOrderStatus from "./components/pages/GetOrderStatus";
 import OrderStatus from "./components/pages/OrderStatus";
 import UpdateOrderStatus from "./components/pages/UpdateOrderStatus";
+import UpdateOrderFinalScreen from "./components/pages/css/UpdateOrderFinalScreen";
 
 function App() {
   return (
@@ -26,6 +27,10 @@ function App() {
           <Route path="/getorderstatus" element={<GetOrderStatus />} />
           <Route path="/getorderstatus/:orderid" element={<OrderStatus />} />
           <Route path="/updateorderstatus" element={<UpdateOrderStatus />} />
+          <Route
+            path="/updateorderstatus/:id"
+            element={<UpdateOrderFinalScreen />}
+          />
         </Routes>
       </Router>
       <Footer />

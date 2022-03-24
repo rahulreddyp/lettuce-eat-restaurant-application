@@ -7,9 +7,12 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Dropdown, DropdownButton } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 function UserElement(props) {
   const { name, item_map, status, user_address } = props;
+  const id = 1;
+  const navigator = useNavigate();
   return (
     <>
       <div class="container" align="center">
@@ -30,7 +33,14 @@ function UserElement(props) {
               <Dropdown.Item href="#/action-3">Delivered</Dropdown.Item>
             </DropdownButton> */}
             <br></br>
-            <Button size="small">Update Order Status</Button>
+            <Button
+              size="small"
+              onClick={() => {
+                navigator(`/updateorderstatus/${id}`);
+              }}
+            >
+              Update Order Status
+            </Button>
           </CardActions>
         </Card>
       </div>
