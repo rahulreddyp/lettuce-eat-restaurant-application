@@ -7,6 +7,7 @@ import Login from './components/pages/Login';
 import Signup from './components/pages/Signup';
 import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
+import Payments from './components/pages/Payments';
 import Footer from './components/Footer';
 
 function App() {
@@ -20,7 +21,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/menu" element={<Menu/>}/>
           <Route path="/menuitem" element={<MenuItem/>}/>
-
+          <Route path="/payments" element={<Payments/>}/>
         </Routes>
       </Router>
       <Footer />

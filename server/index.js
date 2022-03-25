@@ -3,6 +3,7 @@ const app = express()
 const cors = require('cors')
 const userRouter = require("./Routes/user.routes");
 const menuRouter = require("./Routes/menu.routes");
+const paymentsRouter = require("./Routes/payments.routes")
 const mongoose = require('mongoose');
 const dbConfig = require('./config/db.config')
 
@@ -13,6 +14,8 @@ app.use(express.urlencoded({ extended: true }));
 //Routes
 app.use(userRouter);
 app.use(menuRouter);
+app.use(paymentsRouter)
+console.log(`mongodb+srv://${dbConfig.USERNAME}:${dbConfig.PASSWORD}@${dbConfig.CLUSTER}.${dbConfig.HOST}/${dbConfig.DB}`)
 
 mongoose
   .connect(`mongodb+srv://${dbConfig.USERNAME}:${dbConfig.PASSWORD}@${dbConfig.CLUSTER}.${dbConfig.HOST}/${dbConfig.DB}`,
