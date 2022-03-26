@@ -11,7 +11,7 @@ import Footer from "./components/Footer";
 import GetOrderStatus from "./components/pages/GetOrderStatus";
 import OrderStatus from "./components/pages/OrderStatus";
 import UpdateOrderStatus from "./components/pages/UpdateOrderStatus";
-import UpdateOrderFinalScreen from "./components/pages/css/UpdateOrderFinalScreen";
+import UpdateOrderFinalScreen from "./components/pages/UpdateOrderFinalScreen";
 
 function App() {
   return (

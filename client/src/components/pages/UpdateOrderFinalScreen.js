@@ -7,8 +7,10 @@ import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Dropdown, DropdownButton } from "react-bootstrap";
+import { useNavigate } from "react-router";
 
 function UpdateOrderFinalScreen(props) {
+  const navigator = useNavigate();
   var name = "";
   var item_map = new Map();
   var status = "";
@@ -70,6 +72,15 @@ function UpdateOrderFinalScreen(props) {
           }}
         >
           Update Order Status
+        </Button>
+
+        <Button
+          size="small"
+          onClick={() => {
+            navigator(-1);
+          }}
+        >
+          Go back
         </Button>
       </div>
     </>

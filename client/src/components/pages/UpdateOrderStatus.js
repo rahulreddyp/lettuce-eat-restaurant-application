@@ -11,6 +11,7 @@ import Grid from "@mui/material/Grid";
 import UserElement from "./UserElement";
 
 function UpdateOrderStatus() {
+  const navigator = useNavigate();
   const name = "Alex McCarthy";
   const item_map = new Map();
   const status = "Confirmed";
@@ -27,6 +28,14 @@ function UpdateOrderStatus() {
           user_address={user_address}
         />
       </Grid>
+      <Button
+        size="small"
+        onClick={() => {
+          navigator(-1);
+        }}
+      >
+        Go back
+      </Button>
     </>
   );
 }
