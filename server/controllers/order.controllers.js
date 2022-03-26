@@ -1,5 +1,5 @@
-const { Router } = require("express");
-const router = Router();
+// const { Router } = require("express");
+// const router = Router();
 
 const Order = require("../models/order.models");
 
@@ -76,8 +76,27 @@ const updateOrder = async (req, res) => {
   }
 };
 
-router.post("/updateOrder/:id", updateOrder);
-router.get("/getAllOrders", getAllOrders);
-router.post("/createOrder", createOrder);
+const getOrderById = async (req, res) => {
+  try {
+    const id = req.params.id;
+    const order = await Order.find({ _id: `${id}` })
+      .populate("user", "-password")
+      .populate({
+        path: "items",
+      });
+    res.status(200).json(order);
+  } catch (error) {
+    console.log(error);
+    res.status(500).json({
+      sucess: false,
+      message: "Something went wrong!",
+    });
+  }
+};
 
-module.exports = router;
+module.exports = {
+  getAllOrders,
+  updateOrder,
+  createOrder,
+  getOrderById,
+};

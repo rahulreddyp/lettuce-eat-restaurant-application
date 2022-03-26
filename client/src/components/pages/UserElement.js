@@ -10,13 +10,12 @@ import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useNavigate } from "react-router";
 
 function UserElement(props) {
-  const { name, item_map, status, user_address } = props;
-  const id = 1;
+  const { name, item_map, status, user_address, id } = props;
   const navigator = useNavigate();
   return (
     <>
       <div class="container" align="center">
-        <Card sx={{ maxWidth: 500 }}>
+        <Card sx={{ maxWidth: 500, m: 2, bgcolor: "#f5f5f5" }}>
           <CardContent>
             <Typography gutterBottom variant="h5" component="div">
               {name}
