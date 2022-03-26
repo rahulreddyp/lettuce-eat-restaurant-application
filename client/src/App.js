@@ -12,6 +12,7 @@ import GetOrderStatus from "./components/pages/GetOrderStatus";
 import OrderStatus from "./components/pages/OrderStatus";
 import UpdateOrderStatus from "./components/pages/UpdateOrderStatus";
 import UpdateOrderFinalScreen from "./components/pages/UpdateOrderFinalScreen";
+import Order from "./components/pages/Order";
 
 function App() {
   return (
@@ -31,6 +32,7 @@ function App() {
             path="/updateorderstatus/:id"
             element={<UpdateOrderFinalScreen />}
           />
+          <Route path="/orders" element={<Order />} />
         </Routes>
       </Router>
       <Footer />
