@@ -12,11 +12,17 @@ const savePaymentData = async (req, res) => {
         paymentAmount: req.body.totalAmount,
         couponCode: req.body.couponCode
     })
-    const response = await payment1.save()
-    console.log(response)
-    const responseToSend = {id: response._id, version: response.__v, success: true}
-    console.log(responseToSend)
-    return res.json(responseToSend)
+    try{
+        const response = await payment1.save()
+        console.log(response)
+        const responseToSend = {id: response._id, version: response.__v, success: true}
+        console.log(responseToSend)
+        return res.json(responseToSend)
+    } catch(err) {
+        console.log(err)
+        return res.status(500).send({id: '', version: '', success: false});
+    }
+    
 
 }
 
