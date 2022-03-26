@@ -8,6 +8,7 @@ import Signup from './components/pages/Signup';
 import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
 import Payments from './components/pages/Payments';
+import AddCard from './components/paymentscomponents/AddCard';
 import Footer from './components/Footer';
 
 function App() {
@@ -22,6 +23,7 @@ function App() {
           <Route path="/menu" element={<Menu/>}/>
           <Route path="/menuitem" element={<MenuItem/>}/>
           <Route path="/payments" element={<Payments/>}/>
+          <Route path="/addCard" element={<AddCard/>}/>
         </Routes>
       </Router>
       <Footer />
