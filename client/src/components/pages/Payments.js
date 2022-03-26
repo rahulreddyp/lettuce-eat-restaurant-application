@@ -1,38 +1,26 @@
-import { useState } from 'react'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Form } from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
-import { savePaymentData } from '../paymentscomponents/PaymentCalls';
-import PaymentForm from '../paymentscomponents/PaymentForm';
+import React, { useState } from 'react';
+import { Col, Container, Row } from 'react-bootstrap';
 import AddCard from '../paymentscomponents/AddCard';
 import ApplyCoupon from '../paymentscomponents/ApplyCoupon';
+import PaymentForm from '../paymentscomponents/PaymentForm';
 
 const Payments = () => {
 
     const [totalAmount, setTotalAmount] = useState(35)
-    const [mainForm, setMainForm] = useState({
-        "cardType": "",
-        "cardNumber": "",
-        "cardName": "",
-        "cardValidity": "",
-        "cvv": "",
-        "paymentAmount": totalAmount
-    })
+    const[couponCode, setCouponCode] = useState('')
 
     return (
        <Container className='p-1'>
+           
            <Row className='p-3'>
                <Col className='md-4'><AddCard/></Col>
-               <Col className='md-4'>Total Payment Amount - {totalAmount}</Col>
-               <Col className='md-4'><ApplyCoupon totalAmount={totalAmount} setTotalAmount={setTotalAmount}/></Col>
+               <Col className='md-4'><div className='jumbotron'>Total Payment Amount - {totalAmount}</div></Col>
+               <Col className='md-4'><ApplyCoupon totalAmount={totalAmount} setTotalAmount={setTotalAmount} couponCode={couponCode} setCouponCode = {setCouponCode}/></Col>
            </Row>
            <Row className='p-3'>
-               <PaymentForm totalAmount={totalAmount}/>
+               <PaymentForm totalAmount={totalAmount} couponCode = {couponCode}/>
            </Row>
+           
        </Container>
     )
 

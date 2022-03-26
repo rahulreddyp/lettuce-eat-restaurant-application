@@ -1,8 +1,6 @@
-import { API } from '../../API'
+import { API } from '../../API';
 
 export const savePaymentData = async (object) => {
-    console.log('Within front-end payment call', object)
-    console.log(object instanceof String)
     const response = await fetch(`${API}/payments`, {
         method: 'POST',
         headers: {
@@ -12,6 +10,5 @@ export const savePaymentData = async (object) => {
         body: JSON.stringify(object)
       })
       const data = await response.json()
-      console.log(data)
       return data
   };  

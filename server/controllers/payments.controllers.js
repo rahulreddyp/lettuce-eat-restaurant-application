@@ -1,11 +1,22 @@
 const Payment = require("../Models/payments.models");
 
 const savePaymentData = async (req, res) => {
-    console.log(req.body)
-    const payment1 = new Payment({userEmail:'xyz', cardNumber:'xyz', paymentAmount:'24', couponApplied:'yes'})
+    const payment1 = new Payment({
+        userId: req.body.userId,
+        userEmail: req.body.userEmail,
+        orderId: req.body.orderId,
+        cardType: req.body.cardType,
+        cardNumber: req.body.cardNumber,
+        cardName: req.body.cardName,
+        cardValidity: req.body.cardValidity,
+        paymentAmount: req.body.totalAmount,
+        couponCode: req.body.couponCode
+    })
     const response = await payment1.save()
     console.log(response)
-    return res.json(response)
+    const responseToSend = {id: response._id, version: response.__v, success: true}
+    console.log(responseToSend)
+    return res.json(responseToSend)
 
 }
 

@@ -1,11 +1,5 @@
-import { useState } from 'react'
-import React from 'react';
-import ReactDOM from 'react-dom';
-import { Form } from 'react-bootstrap';
-import { Container } from 'react-bootstrap';
-import { Button } from 'react-bootstrap';
-import { Row } from 'react-bootstrap';
-import { Col } from 'react-bootstrap';
+import React, { useState } from 'react';
+import { Button, Col, Container, Form, Row } from 'react-bootstrap';
 import { savePaymentData } from '../paymentscomponents/PaymentCalls';
 
 
@@ -22,11 +16,14 @@ const PaymentForm = (props) => {
         "cardNumber": "",
         "cardName": "",
         "cardValidity": "",
-        "cvv": "",
-        "totalAmount": ""
+        "cvv": ""
     })
 
     mainForm.totalAmount = props.totalAmount
+    mainForm.couponCode = props.couponCode
+    mainForm.userId = '1'
+    mainForm.userEmail = 'example@gmail.com'
+    mainForm.orderId = '1'
 
     const [validated, setValidated] = useState(false);
 
@@ -89,7 +86,7 @@ const PaymentForm = (props) => {
 
 
     return (
-        <Container className='col-md-6 border'>
+        <Container className='col-md-6 block-example border border-dark'>
 
             <Form validated={validated} onSubmit={handleSubmit}>
                 <Row className='mb-3 justify-content-md-center'>
