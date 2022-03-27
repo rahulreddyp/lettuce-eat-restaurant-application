@@ -81,19 +81,29 @@ const updateOrder = async (req, res) => {
 };
 
 const getOrderById = async (req, res) => {
-  try {
-    const id = req.params.id;
-    const order = await Order.find({ _id: `${id}` })
-      .populate("user", "-password")
-      .populate({
-        path: "items",
+  const id = req.params.id;
+  if (id.length === 24) {
+    try {
+      const order = await Order.find({ _id: `${id}` })
+        .populate("user", "-password")
+        .populate({
+          path: "items",
+        });
+      res.status(200).json({
+        success: true,
+        order: order,
       });
-    res.status(200).json(order);
-  } catch (error) {
-    console.log(error);
-    res.status(500).json({
-      sucess: false,
-      message: "Something went wrong!",
+    } catch (error) {
+      console.log(error);
+      res.status(500).json({
+        sucess: false,
+        message: "Something went wrong!",
+      });
+    }
+  } else {
+    res.status(500).send({
+      success: false,
+      message: "Please enter correct OID",
     });
   }
 };

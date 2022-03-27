@@ -19,7 +19,7 @@ function GetOrderStatus() {
   const onSubmit = () => {
     //alert(oid);
     if (oid !== "" || oid.length != 0) {
-      navigator("/getorderstatus/123");
+      navigator(`/getorderstatus/${oid}`);
     } else {
       alert("Please enter the required field : OID");
     }

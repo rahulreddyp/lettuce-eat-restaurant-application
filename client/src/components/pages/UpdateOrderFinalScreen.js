@@ -33,7 +33,7 @@ function UpdateOrderFinalScreen(props) {
       .then((data) => {
         if (!data.error) {
           // setError(data.error);
-          setOrder(data[0]);
+          setOrder(data["order"][0]);
         } else {
           //SOmething
         }
