@@ -54,7 +54,6 @@ const createMenuItem = (req, res) => {
 const getAllMenu = (req, res) => {
   Menu.find()
     .populate("category")
-    .select("photo")
     .exec((err, menuitems) => {
       if (err) {
         return res.status(400).json({
