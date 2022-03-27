@@ -1,7 +1,7 @@
 import React, { useState } from 'react';
-import { useRef } from 'react';
+import { useRef, useEffect } from 'react';
 import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { savePaymentData } from '../paymentscomponents/PaymentCalls';
+import { savePaymentData, retrieveUserCards } from '../paymentscomponents/PaymentCalls';
 
 
 
@@ -24,6 +24,7 @@ const PaymentForm = (props) => {
 
     const [paySuccess, setPaySuccess] = useState(false)
     const [paymentId, setPaymentId] = useState('')
+    const [userCards, setUserCards] = useState('')
 
     mainForm.totalAmount = props.totalAmount
     mainForm.couponCode = props.couponCode
@@ -44,6 +45,19 @@ const PaymentForm = (props) => {
         })
         setFormErrors({})
     }
+
+    
+    
+    useEffect(
+        () => {
+          retrieveUserCards(mainForm.userId)
+          .then(response => {
+              console.log(response)
+              setUserCards(response)
+          })
+        },
+        [],
+      );
 
 
     //On submitting form

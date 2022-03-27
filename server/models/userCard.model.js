@@ -1,7 +1,7 @@
 const mongoose = require("mongoose");
 
 
-const Payment = new mongoose.Schema(
+const UserCard = new mongoose.Schema(
     {
         id: {
             type: mongoose.Schema.Types.ObjectId
@@ -16,11 +16,6 @@ const Payment = new mongoose.Schema(
             required: true,
             maxlength: 32,
             trim: true
-        },
-        orderId: {
-            type: Number,
-            trim: true,
-            required: true
         },
         cardType: {
             type: String,
@@ -46,23 +41,16 @@ const Payment = new mongoose.Schema(
             required: true,
             maxlength: 32,
         },
-        paymentAmount: {
-            type: Number,
+        cvv: {
+            type: String,
             trim: true,
             required: true
         },
-        couponCode: {
-            type: String,
-            trim: true,
-            required: false,
-            maxlength: 32,
-        },
     },
     {
-        collection: 'Payment',
-        timestamps: true
+        collection: 'UserCard'
     },
-    
+    { timestamps: true }
 );
 
-module.exports = mongoose.model("Payment", Payment);
+module.exports = mongoose.model("UserCard", UserCard);
