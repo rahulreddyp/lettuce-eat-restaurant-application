@@ -68,9 +68,9 @@ function OrderStatus() {
           <Grid>
             <OrderElement
               sx={{ border: 1 }}
-              image_url={image_url}
-              dish_name={item_map}
+              item_map={item_map}
               quantity={quantity}
+              user_address={user_address}
               order_status={status}
             />
           </Grid>

@@ -6,30 +6,49 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import { CardActionArea, Paper } from "@mui/material";
 
 function OrderElement(props) {
   const navigator = useNavigate();
-  const { image_url, dish_name, quantity, order_status } = props;
+  const { item_map, quantity, user_address, order_status } = props;
   return (
     <>
       <div class="content" align="center">
         <Card sx={{ maxWidth: 300, maxHeight: 900, m: 2 }}>
           <CardActionArea>
-            <CardMedia
+            {/* <CardMedia
               component="img"
               height="170"
               image={image_url}
               alt="Image"
-            />
+            /> */}
             <CardContent>
-              <Typography gutterBottom variant="h5" component="div">
+              {/* <Typography gutterBottom variant="h5" component="div">
                 {dish_name}
-              </Typography>
+              </Typography> */}
+              <Typography>Items: </Typography>
+              {item_map.map((item, key) => {
+                return (
+                  <div key={key}>
+                    <Paper
+                      sx={{
+                        bgcolor: "#0d47a1",
+                        color: "white",
+                        m: 1,
+                        width: "30%",
+                      }}
+                    >
+                      <Typography>{item} </Typography>
+                      {console.log(item)}
+                    </Paper>
+                  </div>
+                );
+              })}
               {/* variant="body2" color="text.secondary" */}
               <Typography>Quantity : {quantity}</Typography>
+              <Typography>Your Address : {user_address} </Typography>
               <Typography>
-                Order Status:{" "}
+                Your Order Status:{" "}
                 <Typography variant="body" color="text.primary">
                   {" "}
                   {order_status}

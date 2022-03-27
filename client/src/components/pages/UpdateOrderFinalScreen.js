@@ -5,7 +5,14 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
-import { CardActionArea } from "@mui/material";
+import {
+  Box,
+  CardActionArea,
+  InputLabel,
+  MenuItem,
+  Paper,
+  Select,
+} from "@mui/material";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { getOrderById } from "../../apicalls/UpdateOrderStatusCalls";
@@ -23,6 +30,10 @@ function UpdateOrderFinalScreen(props) {
   //   item_map.push(order.items[i].name);
   // }
   const [order, setOrder] = useState([]);
+
+  const handleChange = (event) => {
+    setS(event.target.value);
+  };
 
   const loadOrder = () => {
     var url_str = window.location.href;
@@ -67,6 +78,7 @@ function UpdateOrderFinalScreen(props) {
   // item_map.set("Paneer Tikka", 2);
   // item_map.set("Burger", 3);
   // }
+  const [s, setS] = useState("");
 
   return (
     <>
@@ -79,56 +91,74 @@ function UpdateOrderFinalScreen(props) {
               <br></br>
               {user_address}
             </Typography>
-            <Typography>Items: {item_map} </Typography>
+            <Typography variant="h5">Items: </Typography>
+            {item_map.map((item, key) => {
+              return (
+                <div key={key}>
+                  <Paper
+                    sx={{
+                      bgcolor: "#0d47a1",
+                      color: "white",
+                      m: 1,
+                      width: "30%",
+                    }}
+                  >
+                    <Typography>{item} </Typography>
+                    {console.log(item)}
+                  </Paper>
+                </div>
+              );
+            })}
+
             <Typography>Current Status : {status}</Typography>
           </CardContent>
         </Card>
-        <DropdownButton id="dropdown-basic-button" title="Select Status">
-          <Dropdown.Item
-            onClick={() => {
-              status = "Confirmed";
-            }}
-          >
-            Confirmed
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              status = "Preparing";
-            }}
-          >
-            Preparing
-          </Dropdown.Item>
-          <Dropdown.Item
-            onClick={() => {
-              status = "Delivered";
-            }}
-          >
-            Delivered
-          </Dropdown.Item>
-        </DropdownButton>
+
+        <InputLabel id="demo-simple-select-filled-label">
+          Order Status:
+        </InputLabel>
+        <Select
+          sx={{ m: 2 }}
+          labelId="demo-simple-select-filled-label"
+          id="demo-simple-select-filled"
+          value={s}
+          onChange={handleChange}
+        >
+          <MenuItem value={"Confirmed"}>Confirmed</MenuItem>
+          <MenuItem value={"Preparing"}>Preparing</MenuItem>
+          <MenuItem value={"Delivered"}>Delivered</MenuItem>
+        </Select>
+
         <br></br>
 
-        <Button
-          size="small"
-          onClick={() => {
-            axios
-              .post(`${API}/updateOrderStatus/${key}`, {
-                orderStatus: status,
-              })
-              .then((result) => {
-                console.log(result);
-                alert(result.data.message);
-                window.location.reload(true);
-              })
-              .catch((err) => {
-                console.error(err);
-              });
-          }}
-        >
-          Update Order Status
-        </Button>
+        <Box sx={{ m: 1 }}>
+          <Button
+            size="small"
+            onClick={() => {
+              if (s !== "") {
+                axios
+                  .post(`${API}/updateOrderStatus/${key}`, {
+                    orderStatus: s,
+                  })
+                  .then((result) => {
+                    console.log(result);
+                    alert(result.data.message);
+                    window.location.reload(true);
+                  })
+                  .catch((err) => {
+                    console.error(err);
+                  });
+              } else {
+                alert("Please select a valid status");
+              }
+            }}
+          >
+            Update Order Status
+          </Button>
+        </Box>
 
         <Button
+          sx={{ m: 1 }}
           size="small"
           onClick={() => {
             navigator(-1);

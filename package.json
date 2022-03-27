@@ -17,15 +17,15 @@
     "web-vitals": "^2.1.4"
   },
   "scripts": {
-    "start": "react-scripts start",
+    "start-react": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
     "eject": "react-scripts eject",
     "setup-frontend": "cd client && npm install",
-    "setup-backend" : "cd server && npm install",
-    "front" : "cd client && npm start",
-    "back" : "cd server && npm start",
-    "start-full-app" : "concurrently \"npm run front\" \"npm run back\""
+    "setup-backend": "cd server && npm install",
+    "front": "cd client && npm start",
+    "back": "cd server && npm start",
+    "start": "concurrently \"npm run front\" \"npm run back\""
   },
   "eslintConfig": {
     "extends": [
