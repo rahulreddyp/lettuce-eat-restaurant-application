@@ -9,6 +9,8 @@ import { CardActionArea } from "@mui/material";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useNavigate } from "react-router";
 import { getOrderById } from "../../apicalls/UpdateOrderStatusCalls";
+import axios from "axios";
+import { API } from "../../API";
 
 function UpdateOrderFinalScreen(props) {
   var name = "";
@@ -109,7 +111,18 @@ function UpdateOrderFinalScreen(props) {
         <Button
           size="small"
           onClick={() => {
-            alert("Status Updated Successfully :" + status);
+            axios
+              .post(`${API}/updateOrderStatus/${key}`, {
+                orderStatus: status,
+              })
+              .then((result) => {
+                console.log(result);
+                alert(result.data.message);
+                window.location.reload(true);
+              })
+              .catch((err) => {
+                console.error(err);
+              });
           }}
         >
           Update Order Status

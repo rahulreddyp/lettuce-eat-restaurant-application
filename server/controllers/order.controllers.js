@@ -3,6 +3,10 @@
 
 const Order = require("../models/order.models");
 
+const dbConfig = require("../config/db.config");
+const mongoClient = require("mongodb").MongoClient;
+var ObjectId = require("mongodb").ObjectID;
+
 const createOrder = async (req, res) => {
   const { items, user, orderStatus, quantity, total } = req.body;
   try {
@@ -94,9 +98,72 @@ const getOrderById = async (req, res) => {
   }
 };
 
+const updateOrderStatus = async (req, res) => {
+  const id = req.params.id;
+  if (id.length === 24) {
+    try {
+      const order = await Order.find({ _id: `${id}` });
+      if (!order) {
+        res.status(500).json({
+          success: false,
+          message: "Please enter correct order ID",
+        });
+      }
+
+      mongoClient
+        .connect(
+          `mongodb+srv://${dbConfig.USERNAME}:${dbConfig.PASSWORD}@${dbConfig.CLUSTER}.${dbConfig.HOST}/${dbConfig.DB}`,
+          {
+            useNewUrlParser: true,
+            useUnifiedTopology: true,
+          }
+        )
+        .then((client) => {
+          const db = client.db("lettuceeat");
+          const collection = db.collection("order-data");
+
+          collection
+            .updateOne(
+              { _id: ObjectId(id) },
+              { $set: { orderStatus: req.body.orderStatus } }
+            )
+            .then((result) => {
+              console.log(result);
+              if (result.matchedCount === 1) {
+                res.status(200);
+                res.json({
+                  message: "Order Status Updated successfully",
+                  success: true,
+                });
+              } else {
+                res.status(404);
+                res.json({
+                  message: "Order not found",
+                  success: false,
+                });
+              }
+            });
+        });
+
+      //res.send(order);
+    } catch (err) {
+      console.log(err);
+      res.status(500).json({
+        message: "Internal Server Error",
+      });
+    }
+  } else {
+    res.status(500).send({
+      success: false,
+      message: "Please enter correct order ID",
+    });
+  }
+};
+
 module.exports = {
   getAllOrders,
   updateOrder,
   createOrder,
   getOrderById,
+  updateOrderStatus,
 };
