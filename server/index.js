@@ -1,12 +1,14 @@
 const express = require('express')
 const app = express()
-const cors = require('cors')
+const cors = require('cors');
+const bodyParser = require("body-parser");
 const userRouter = require("./Routes/user.routes");
 const menuRouter = require("./Routes/menu.routes");
 const mongoose = require('mongoose');
 const dbConfig = require('./config/db.config')
 
 app.use(cors());
+app.use(bodyParser.json())
 app.use(express.json());
 app.use(express.urlencoded({ extended: true }));
 

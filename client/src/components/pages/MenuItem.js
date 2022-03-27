@@ -1,6 +1,6 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getMenuItem } from "../../apicalls/MenuCalls";
+import { getMenuItem, getItemCategory } from "../../apicalls/MenuCalls";
 import MenuOptions from "./MenuOptions";
 
 const MenuItem = () => {
@@ -20,8 +20,12 @@ const MenuItem = () => {
           setError(data.error);
         } else {
           console.log(data);
-          setItem(data);
+          setItem(data);      
           setCustomizations(data.customization);
+
+          // getItemCategory(data.category).then((item_catgory) => {
+          //   setItem({...item, category: item_catgory.category_name});
+          //   });
         }
       });
     } else {
