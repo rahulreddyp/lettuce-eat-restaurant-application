@@ -9,6 +9,7 @@ import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
 import Footer from './components/Footer';
 import Wishlist from './components/pages/Wishlist';
+import Cart from './components/pages/Cart';
 function App() {
   return (
     <div className="App">
@@ -20,6 +21,7 @@ function App() {
           <Route path="/login" element={<Login/>}/>
           <Route path="/menu" element={<Menu/>}/>
           <Route path="/menuitem" element={<MenuItem/>}/>
+          <Route path="/cart" element={<Cart/>}/>
           <Route path="/wishlist" element={<Wishlist/>}/>
         </Routes>
       </Router>

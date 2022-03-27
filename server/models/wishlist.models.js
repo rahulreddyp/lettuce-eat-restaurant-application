@@ -12,22 +12,24 @@ const Wishlist = new mongoose.Schema(
       maxlength: 32,
       trim: true
     },
+    price: { type: Number, required: true, maxlength: 32, trim: true },
+   category: {
+      type: Number,
+      trim: true,
+    },
+    photo: {
+      type: String,
+      required: true
+      },
     description: {
       type: String,
       trim: true,
       required: true,
       maxlength: 2000,
     },
-    category: {
-      type: Number,
-      trim: true,
-    },
+    
     // sizes: {},
-    price: { type: Number, required: true, maxlength: 32, trim: true },
-    photo: {
-        data: Buffer,
-        contentType: String
-      }
+    
   },  
   {
     collection: 'Wishlist'

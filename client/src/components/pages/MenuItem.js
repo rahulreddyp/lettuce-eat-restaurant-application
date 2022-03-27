@@ -1,19 +1,26 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { getMenuItem } from "../../apicalls/MenuCalls";
+import { putItem } from "../../apicalls/WishlistCalls";
 import MenuOptions from "./MenuOptions";
 import Heart from "react-animated-heart";
+import { useNavigate } from "react-router-dom";
+import { Button } from "react-bootstrap";
+const URL = "http://localhost:5000/";
 
 const MenuItem = () => {
+  const navigate = useNavigate();
   const [item, setItem] = useState([]);
-  const [error, setError] = useState([]);
+  const [error, setError] = useState("");
   const [customizations, setCustomizations] = useState([]);
   const [cartItem, setCartItem] = useState([]);
-  const [wishlistItem, setWishlistItem] = useState([]);
+  const [wishlistitems, setwishlistitems] = useState([]);
   const { state } = useLocation();
   const { itemId } = state || {};
   const [isClick, setClick] = useState(false);
-
+  const data = JSON.parse(localStorage.getItem("item"));
+  //const{item , onAdd} = props;
+  
   const getMenuItemDetails = () => {
     if (itemId) {
       getMenuItem(itemId).then((data) => {
@@ -43,11 +50,6 @@ const MenuItem = () => {
 
   const addtoCart = (e) => {
     e.preventDefault();
-
-    // if(cartItem === null) {
-    //   setError("Please choose your customizations");
-    // } else {
-
     setCartItem({
       ...cartItem,
       id: item._id,
@@ -56,26 +58,22 @@ const MenuItem = () => {
       category: item.category,
     });
     console.log(cartItem);
-    // }
+    
   };
-function updateWishlist(){
-    addtoWishlist();
-    updateclick();
-}
-const updateclick = (e)=>{
-  setClick(!isClick);
-}
- const addtoWishlist = (e)=>{
-    setWishlistItem({
-      ...wishlistItem,
-      id: item._id,
-      name: item.name,
-      price: item.price,
-      category: item.category,
-    });
-    console.log(wishlistItem);
 
- };
+  const addtoWishlist = async () => {
+    const result = await fetch(URL+'menuitem',{
+        method: 'POST',
+        headers: {
+          'Content-Type': 'application/json'
+        },
+        body:JSON.stringify(item)
+    })
+    const resultinjson = await result.json();
+    console.log(resultinjson)
+    };
+
+
   return (
     <div className="container-fluid">
       <div className="row">
@@ -100,7 +98,10 @@ const updateclick = (e)=>{
           <div className="col-md-8">
             <h1>{item.name}</h1>
           </div>
-          <div className="col-md-2"><Heart isClick={isClick} onClick={() => updateWishlist()} /></div>
+          <div className="col-md-2">
+          <Button onClick={addtoWishlist}>Add to Wishlist</Button>
+          </div>
+          {/* <div className="col-md-2"><Heart isClick={isClick} onClick={updateWishlist} /></div> */}
           <div className="col-md-2">{/* rating */}</div>
         </div>
         <div className="row">

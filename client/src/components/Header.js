@@ -1,6 +1,6 @@
 import React from 'react'
 import {Navbar,Nav,NavDropdown,Container, Button} from 'react-bootstrap';
-import {FaPizzaSlice ,FaOpencart ,FaPercentage , FaHeart} from 'react-icons/fa'
+import {FaPizzaSlice ,FaOpencart ,FaPercentage , FaHeart, FaShoppingBasket} from 'react-icons/fa'
 import { useNavigate } from "react-router-dom";
 
 const Header = () => {
@@ -19,7 +19,7 @@ const Header = () => {
         <Nav.Link href="/wishlist">Wishlist <FaHeart /></Nav.Link>    
         <Nav.Link href="/orders">Orders <FaOpencart/></Nav.Link>
         <Nav.Link href="/Coupons">Coupons <FaPercentage/></Nav.Link>
-        
+        <Nav.Link href="/Cart">Cart <FaShoppingBasket/></Nav.Link>
       </Nav>
       <Button variant="outline-light" >Login</Button>
     </Navbar.Collapse>
