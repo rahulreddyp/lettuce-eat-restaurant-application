@@ -79,8 +79,5 @@ video {
   /* background-color: #dd7230;  
   color: white;
   font-size: 25px;  */
-  width: 100%;
-  bottom: 0;
-  position: fixed; 
-  margin-top: auto;
+  position:relative;
  }

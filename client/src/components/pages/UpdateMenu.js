@@ -1,11 +1,16 @@
 import React, { useState, useEffect, Fragment } from "react";
-import { createMenuItem, getAllCategories } from "../../apicalls/AdminCalls";
+import { useLocation } from "react-router-dom";
+import { updateMenutem, getAllCategories } from "../../apicalls/AdminCalls";
+import { getMenuItem } from "../../apicalls/MenuCalls";
 
-const MenuForm = () => {
+const UpdateMenu = () => {
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
 
-  const [state, setState] = useState({
+  const { state } = useLocation();
+  const { itemId } = state || {};
+
+  const [item, setItem] = useState({
     name: "",
     description: "",
     category: "",
@@ -18,7 +23,30 @@ const MenuForm = () => {
     formData: "",
   });
 
-  const {formData, success, message} = state;
+
+  const {name, description, category, dietary, customization, price, success, message, formData} = item;
+
+  const loadItemDetails = (itemId) => {
+    getMenuItem(itemId).then(data => {
+        
+        if(data.error){
+            setError(data.error);
+        }
+        else{
+            setItem({
+                ...item,
+                name: data.name,
+                description: data.description,
+                category: data.category,
+                dietary: data.dietary,
+                customization: data.customization,
+                price: data.price,
+                formData: new FormData()                    
+            });
+            loadCategories();            
+        }
+    })
+};
 
   const loadCategories = () => {
     getAllCategories().then(data => {
@@ -28,25 +56,24 @@ const MenuForm = () => {
         }
         else{
             setCategories(data);
-            setState({...state, 
-              formData: new FormData()
-            });            
+            // setItem({...item, 
+            //   formData: new FormData()
+            // });            
         }
-    })
-    
+    })  
 };
   
   useEffect(() => {
-    loadCategories();
-}, []);
+    loadItemDetails(itemId);
+}, [itemId]);
 
   const handleChange = (e) => {
     const value = e.target.name == "photo" ? e.target.files[0] : e.target.value
     const name = e.target.name;  
     
     formData.set(name, value);
-    setState({
-        ...state,
+    setItem({
+        ...item,
         [e.target.name]: value,
       })
   };
@@ -55,16 +82,18 @@ const MenuForm = () => {
     e.preventDefault();
         
        // check if all the form fields are filled or not
-       if (!state) {
+       if (!item) {
         setError("Please enter all the field values!" );
       } else if(!error) {
 
-        createMenuItem(formData)
+        updateMenutem(itemId, formData)
         .then(data => {
             if(data.error){
                 setError(data.error)
-            }else{              
-                setState({...state, 
+            }else{
+                console.log('after update');
+
+                setItem({...item, 
                     name: "",
                     description: "",
                     category: "",
@@ -73,16 +102,12 @@ const MenuForm = () => {
                     price: 0,
                     photo: "",
                     success: true,
-                message: data.message})
+                message: "Menu Item updated successfully!"})
             }
         })
         .catch(err => {console.log(err)})
   }
 };
-
-  const selectStyle = {
-    dropdownIndicator: { backgroundColor: "blue" },
-  };
 
   const successMessage = () => (
     <div className="alert alert-info alert-dismissable fade show" role="alert">     
@@ -112,6 +137,7 @@ const MenuForm = () => {
                   type="text"
                   name="name"
                   placeholder="Enter menu item name"
+                  value={name}
                   onChange={handleChange}
                 />
               </label>
@@ -124,6 +150,7 @@ const MenuForm = () => {
                   className="form-control"
                   name="description"
                   placeholder="Enter item description"
+                  value={item.description}
                   onChange={handleChange}
                 />
               </label>
@@ -135,14 +162,10 @@ const MenuForm = () => {
                 className="form-control"
                 name="category"
                 // styles={selectStyle}
+                value={item.category}
                 onChange={handleChange}
               >
-                <option>Select Category</option>
-                {/* <option value="0">Vegetarian</option>
-                <option value="1">Non-Vegetarian</option>
-                <option value="2">Fast Food</option>
-                <option value="3">Vegan</option>
-                <option value="4">Seafood</option> */}
+                <option>Select Category</option>              
                 {categories && 
               categories.map((cat, index) => (
                 <option key={index} value={cat._id}>{cat.category_name}</option>
@@ -159,7 +182,9 @@ const MenuForm = () => {
                   type="text"
                   name="dietary"
                   placeholder="enter dietary information"
+                  value={item.dietary}
                   onChange={handleChange}
+                  readOnly
                 />
               </label>
             </div>
@@ -172,6 +197,7 @@ const MenuForm = () => {
                   type="text"
                   name="customization"
                   placeholder="Enter customizations"
+                  value={item.customization}
                   onChange={handleChange}
                 />
               </label>
@@ -185,6 +211,7 @@ const MenuForm = () => {
                   type="number"
                   name="price"
                   placeholder="Enter item price"
+                  value={item.price}
                   onChange={handleChange}
                 />
               </label>
@@ -204,7 +231,7 @@ const MenuForm = () => {
             </div>
 
             <button onClick={onSubmit} className="btn btn-success btn-block">
-              Add
+              Update Item
             </button>
           </form>
         </div>
@@ -213,4 +240,4 @@ const MenuForm = () => {
   );
 };
 
-export default MenuForm;
+export default UpdateMenu;

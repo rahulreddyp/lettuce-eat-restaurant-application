@@ -12,6 +12,7 @@ import Admin from './components/pages/Admin';
 import AdminRoute from './components/pages/AdminRoute';
 import MenuForm from './components/pages/MenuForm';
 import ManageMenu from './components/pages/ManageMenu';
+import UpdateMenu from './components/pages/UpdateMenu';
 
 function App() {
   return (
@@ -28,6 +29,7 @@ function App() {
             <Route path="home" element={<Admin/>}/>
             <Route index path="menu/add" element={<MenuForm />} />
             <Route index path="menu/manage" element={<ManageMenu />} />
+            <Route path="menu/update" element={<UpdateMenu />}/>
             </Route>
         </Routes>
       </Router>

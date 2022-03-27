@@ -153,11 +153,13 @@ const updateMenuItem = (req, res) => {
           res.status(400).json({
             error: "Error occurred when updating Item to database!" + err,
           });
-        } else {
-          res
-            .status(200)
-            .json({ message: "Menu Item updated successfully!", item });
         }
+        //   res
+        //     .status(200)
+        //     .json({ message: "Menu Item updated successfully!", item });   
+                        
+            res.writeHead(200, {'content-type' : 'application/json'})
+            res.end(item, null, 2);
       });
     });
   } catch (err) {

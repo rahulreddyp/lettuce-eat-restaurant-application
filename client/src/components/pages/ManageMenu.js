@@ -20,7 +20,6 @@ const ManageMenu = () => {
     loadMenu();
   }, []);
 
-
   return (
     <div className="container d-flex justify-content-center">
       <div className="row">

@@ -10,9 +10,10 @@ const MenuCard = ({ item, isAdmin }) => {
   const [deleteItem, setDeleteItem] = useState(false);
 
   const redirectToItemDetails = () => {
-    navigate("/menuitem", { state: { itemId: item._id } });
+    navigate("/admin/menu/update", { state: { itemId: item._id } });
   };
 
+  
   var CardImage = item.photo ? item.photo : item.photo;
   // `${API}/menu/photo/${item._id}`
 
