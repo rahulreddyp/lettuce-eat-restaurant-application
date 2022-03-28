@@ -1,6 +1,5 @@
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
-import { getMenuItem } from "../../apicalls/MenuCalls";
 import { putItem } from "../../apicalls/WishlistCalls";
 import { getMenuItem, getItemCategory } from "../../apicalls/MenuCalls";
 import MenuOptions from "./MenuOptions";

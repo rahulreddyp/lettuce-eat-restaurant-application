@@ -9,7 +9,6 @@ import Editprofile from './components/pages/Editprofile';
 import Signup from './components/pages/Signup';
 import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
-import Footer from './components/Footer';
 import Wishlist from './components/pages/Wishlist';
 import Cart from './components/pages/Cart';
 import Admin from './components/pages/Admin';
