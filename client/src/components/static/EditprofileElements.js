@@ -4,25 +4,25 @@ const content = {
             label:'First Name',
             name: 'firstName',
             type: 'text',
-            default:JSON.parse(localStorage.getItem('user')).firstName
+            default:localStorage.getItem('user')&& JSON.parse(localStorage.getItem('user')).firstName
         },
         {
             label:'Last Name',
             name: 'lastName',
             type: 'text',
-            default:JSON.parse(localStorage.getItem('user')).lastName
+            default:localStorage.getItem('user')&&JSON.parse(localStorage.getItem('user')).lastName
         },
         {
             label:'Email',
             name: 'email',
             type: 'text',
-            default:JSON.parse(localStorage.getItem('user')).email
+            default:localStorage.getItem('user')&&JSON.parse(localStorage.getItem('user')).email
         },
         {
             label:'Address',
             name: 'address',
             type: 'text',
-            default:JSON.parse(localStorage.getItem('user')).address
+            default:localStorage.getItem('user')&&JSON.parse(localStorage.getItem('user')).address
         }
     ]
 };
