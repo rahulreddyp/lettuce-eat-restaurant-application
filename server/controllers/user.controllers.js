@@ -32,13 +32,15 @@ const login = async (req,res) => {
             firstName: user.firstName,
             lastName: user.lastName,
             email: user.email,
+            address:user.address
         },
         process.env.TOKEN_SECRET_KEY
         )
         res.status(200).json({success: true, token:token,id:user._id,
             firstName: user.firstName,
             lastName: user.lastName,
-            email: user.email});
+            email: user.email,
+            address:user.address});
     }
     else{
         return res.status(400).json({success: false, message:'Credentials entered are wrong'})
@@ -88,9 +90,10 @@ const updateProfile = async (req,res) => {
 
 const deleteProfile = async (req,res) => {
     const userID = req.body.id;
-
+    console.log(userID)
     User.findByIdAndDelete(userID,(err,result) => {
         if(err){
+            console.log(err)
             res.status(400).json({success:false});
         }else if(!result){
             return res.status(204).json({success:false});
