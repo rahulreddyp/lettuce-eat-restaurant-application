@@ -1,3 +1,5 @@
+// Author: Rahul Reddy Puchakayala
+
 import React, { useState, useEffect, Fragment } from "react";
 import { useLocation } from "react-router-dom";
 import MenuCard from "./MenuCard";
@@ -6,7 +8,7 @@ import { getMenu } from "../../apicalls/MenuCalls";
 const ManageMenu = () => {
 
   const [menuItems, setMenuItems] = useState([]);
-  const [itemLength, setItemLength] = useState(0);
+  const [reload, setReload] = useState(false);
 
   const { state } = useLocation();
   const { deletemessage } = state || {};
@@ -18,10 +20,6 @@ const ManageMenu = () => {
       } else {
         setMenuItems(data);  
         
-        // if(deletemessage) {
-        //     // update menu after every change to the menu
-        //     setItemLength(itemLength + 1);
-        //   }
       }
     });
   };  
@@ -31,10 +29,10 @@ const ManageMenu = () => {
     
     const interval=setInterval(() => {
         loadMenu();
-       },10000)
+       },20000)
                   
        return() => clearInterval(interval);
-  }, []);
+  }, [reload]);
 
   const deleteMessage = () => (
     <div className="alert alert-info alert-dismissable fade show" role="alert">
@@ -63,7 +61,7 @@ const ManageMenu = () => {
         {menuItems.map((item, index) => {
           return (
             <div key={index} className="col-md-4 mb-4">
-              <MenuCard item={item} isAdmin={true} />
+              <MenuCard item={item} isAdmin={true} setReload={setReload} title="Click to update" reload={reload} />
             </div>
           );
         })}

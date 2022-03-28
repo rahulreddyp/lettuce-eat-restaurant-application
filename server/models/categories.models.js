@@ -1,10 +1,9 @@
+// Author: Rahul Reddy Puchakayala
+
 const mongoose = require("mongoose");
 
 const Category = new mongoose.Schema(
   {
-    // id: {
-    //   type: mongoose.Schema.Types.ObjectId,
-    // },
     category_name: {
       type: String,
       trim: true,

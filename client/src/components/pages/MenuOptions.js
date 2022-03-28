@@ -1,7 +1,8 @@
+// Author: Rahul Reddy Puchakayala
+
 import React from "react";
 
 const MenuOptions = ({ index, customizations, options, onChange }) => {
-
 
   return (
     <div className="radio" key={index}>

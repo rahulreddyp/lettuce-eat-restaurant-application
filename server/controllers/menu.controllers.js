@@ -1,3 +1,5 @@
+// Author: Rahul Reddy Puchakayala
+
 const Menu = require("../Models/menu.models");
 const formidable = require("formidable");
 const fs = require("fs");
@@ -17,8 +19,7 @@ const createMenuItem = (req, res) => {
           err,
         });
       }
-      // const { body } = req;
-      // const menu = _.extend(body, fields);
+      
       const menuItem = new Menu(fields);
 
       if (file.photo) {
@@ -29,7 +30,8 @@ const createMenuItem = (req, res) => {
         }
 
         menuItem.photo.data = fs.readFileSync(file.photo.filepath);
-        menuItem.photo.contentType = file.photo.type;
+        console.log('file', file.photo);
+        menuItem.photo.contentType = file.photo.mimetype;
       }
 
       menuItem.save((err, item) => {
@@ -77,18 +79,17 @@ const getMenuItemById = (req, res, next, id) => {
 };
 
 const getMenuItem = (req, res) => {
-  // req.menu.photo = undefined
   return res.json(req.menuitem);
 };
 
-// Middleware
+// Photo Middleware
 const getMenuItemPhoto = (req, res, next) => {
-  if (req.menuitem.alt_photo) {
-    console.log("inside");
-    // res.set("Content-Type", req.menuitem.alt_photo.contentType)
-    res.set("Content-Type", "binary/octet-stream");
-    return res.send(req.menuitem.alt_photo.data);
+  if ('data' in req.menuitem.photo) {
+    res.set("Content-Type", req.menuitem.photo.contentType);
+    return res.send(req.menuitem.photo.data);
   }
+    res.send(req.menuitem.photo);
+
   next();
 };
 
@@ -134,8 +135,8 @@ const updateMenuItem = (req, res) => {
         });
       }
 
-      let menuItem = req.menuItem;
-      menuItem = _.extend(menuItem, fields);
+      let menuitem = req.menuitem;
+      menuitem = _.extend(menuitem, fields);
 
       if (file.photo) {
         if (file.photo.size > 5000000) {
@@ -144,22 +145,22 @@ const updateMenuItem = (req, res) => {
           });
         }
 
-        menuItem.photo.data = fs.readFileSync(file.photo.filepath);
-        menuItem.photo.contentType = file.photo.type;
+        menuitem.photo.data = fs.readFileSync(file.photo.filepath);
+        menuitem.photo.contentType = file.photo.type;
       }
 
-      menuItem.save((err, item) => {
+      menuitem.save((err, item) => {
         if (err) {
           res.status(400).json({
             error: "Error occurred when updating Item to database!" + err,
           });
         }
-        //   res
-        //     .status(200)
-        //     .json({ message: "Menu Item updated successfully!", item });   
+          res
+            .status(200)
+            .json({ message: "Menu Item updated successfully!", item });   
                         
-            res.writeHead(200, {'content-type' : 'application/json'})
-            res.end(item, null, 2);
+            // res.writeHead(200, {'content-type' : 'application/json'})
+            // res.end(item, null, 2);
       });
     });
   } catch (err) {
