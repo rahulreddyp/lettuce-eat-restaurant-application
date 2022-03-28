@@ -1,4 +1,4 @@
-const Payment = require("../Models/payments.models");
+const Payment = require("../models/payments.models");
 const UserCard = require("../models/userCard.model")
 
 const savePaymentData = async (req, res) => {

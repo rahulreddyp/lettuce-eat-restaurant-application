@@ -1,6 +1,6 @@
 import { Button, Col, Container, Row, Form } from "react-bootstrap"
 import { useRef, useState } from 'react';
-import { saveCardDetails } from "./PaymentCalls";
+import { saveCardDetails } from "../../apicalls/PaymentCalls";
 
 const CryptoJS = require("crypto-js")
 

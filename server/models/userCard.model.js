@@ -49,9 +49,9 @@ const UserCard = new mongoose.Schema(
         },
     },
     {
-        collection: 'UserCard'
-    },
-    { timestamps: true }
+        collection: 'UserCard',
+        timestamps: true
+    }
 );
 
 module.exports = mongoose.model("UserCard", UserCard);
