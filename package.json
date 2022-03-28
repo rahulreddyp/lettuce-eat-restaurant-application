@@ -1,5 +1,5 @@
 {
-  "name": "a1_rahulreddy_puchakayala",
+  "name": "csci-5709-group-01",
   "version": "0.1.0",
   "private": true,
   "dependencies": {
@@ -20,7 +20,12 @@
     "start": "react-scripts start",
     "build": "react-scripts build",
     "test": "react-scripts test",
-    "eject": "react-scripts eject"
+    "eject": "react-scripts eject",
+    "setup-frontend": "cd client && npm install",
+    "setup-backend" : "cd server && npm install",
+    "front" : "cd client && npm start",
+    "back" : "cd server && npm start",
+    "start-full-app" : "concurrently \"npm run front\" \"npm run back\""
   },
   "eslintConfig": {
     "extends": [
