@@ -3,7 +3,7 @@ const Wishlist = require("../Models/wishlist.models");
 const getAllWishlist = (req,res) => {
     Wishlist.find((err, wishlistitems) => {
         if (err) {
-          return res.status(400).json({"Error": err});
+          return res.status(400).json({error: err});
         }
         return res.status(200).json(wishlistitems);
       });
@@ -37,17 +37,22 @@ const putWishlistItem = (req,res)=>{
             return res.status(200).json({success: true});
         } 
         else{
-            return res.status(400).json({success:false,error: "Error, Item already Exists",})
+            return res.status(400).json({success:false,error: "Item already in Wishlist",})
         }
     })
    
  }
 
+ const deleteWishlistItem = (req, res) => {
+    console.log("the item to be removed is"+req.body.id)
+    Wishlist.remove({id:req.body.id})
 
+  };
 
 module.exports = {
     getAllWishlist,
     getWishlistItem,
     getWishlistItemById,
-    putWishlistItem
+    putWishlistItem,
+    deleteWishlistItem
   };

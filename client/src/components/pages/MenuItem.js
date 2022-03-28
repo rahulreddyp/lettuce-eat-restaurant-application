@@ -66,15 +66,13 @@ const MenuItem = () => {
   };
 
   const addtoWishlist = async () => {
-    const result = await fetch(URL+'menuitem',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(item)
-    })
-    const resultinjson = await result.json();
-    console.log(resultinjson)
+    putItem(item).then((data)=>{
+      if (data.error) {
+        setError(data.error);
+      } else {
+        console.log(data);
+      }
+    }) 
     };
 
 
