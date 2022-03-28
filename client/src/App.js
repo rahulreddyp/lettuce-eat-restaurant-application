@@ -9,7 +9,7 @@ import Login from "./components/pages/Login";
 import Menu from "./components/pages/Menu";
 import MenuItem from "./components/pages/MenuItem";
 import Order from "./components/pages/Order";
-import OrderStatus from "./components/pages/AllOrders";
+import OrderStatus from "./components/pages/OrderStatus";
 import UpdateOrder from "./components/pages/UpdateOrder";
 import Signup from "./components/pages/Signup";
 import UpdateOrderFinalScreen from "./components/pages/UpdateOrderFinalScreen";
