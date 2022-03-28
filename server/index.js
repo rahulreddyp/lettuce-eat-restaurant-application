@@ -7,12 +7,9 @@ const menuRouter = require("./Routes/menu.routes");
 const orderRouter = require("./Routes/orders.routes");
 const dbConfig = require("./config/db.config");
 const bodyParser = require("body-parser");
-const userRouter = require("./Routes/user.routes");
-const menuRouter = require("./Routes/menu.routes");
 const paymentsRouter = require("./Routes/payments.routes");
 const couponsRouter = require("./routes/coupon.routes");
 const mongoose = require("mongoose");
-const dbConfig = require("./config/db.config");
 const wishlistRouter = require("./Routes/wishlist.routes");
 
 app.use(cors());
