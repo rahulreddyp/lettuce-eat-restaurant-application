@@ -1,12 +1,15 @@
 import { API } from "../API";
 
 export const validateCouponCode = async (couponCode) => {
-    try {
-        const res = await fetch(`${API}/applyCoupon/${couponCode}`, {
-            method: "GET",
-        });
-        return await res.json();
-    } catch (err) {
-        return console.log(err);
-    }
+    const response = await fetch(`${API}/applyCoupon/${couponCode}`, {
+        method: 'GET',
+        headers: {
+          'Content-Type': 'application/json',
+          'Accept': 'application/json'
+        },
+      })
+      const data = await response.json()
+      return data
 };
+
+

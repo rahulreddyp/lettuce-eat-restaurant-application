@@ -1,34 +1,63 @@
 import { useState } from "react"
-import { Form } from "react-bootstrap"
-import { Button, Row, Col, Container } from "react-bootstrap"
+import { InputGroup } from "react-bootstrap"
+import { Button, Form } from "react-bootstrap"
 import { validateCouponCode } from "../../apicalls/CouponCalls"
 
 const ApplyCoupon = (props) => {
 
-    const [inputCouponCode, setInputCouponCode] = useState('')
+    const [validated, setValidated] = useState(false)
+    const [enteredCouponCode, setEnteredCouponCode] = useState('')
 
     const handleCoupon = (event) => {
         event.preventDefault()
         event.stopPropagation()
-        const response = validateCouponCode(inputCouponCode)
-        console.log('Coupon apply response', response)
-        //props.setTotalAmount(props.totalAmount - 1)
+        validateCouponCode(enteredCouponCode)
+        .then(response => {
+            if(response.success) {
+               const successCoupon =  {
+                    'couponCode': enteredCouponCode,
+                    'couponApplied': true,
+                    'discountPercentage': response.discountPercentage,
+                    'couponErrors': ''
+                }
+                props.setCouponData(successCoupon)
+                console.log('Coupon data array', props.couponData)
+                setValidated(true)
+            } else {
+                const failureCoupon =  {
+                    'couponCode': '',
+                    'couponApplied': false,
+                    'discountPercentage': '',
+                    'couponErrors': response.message
+                }
+                props.setCouponData(failureCoupon)
+                console.log('Coupon data array', props.couponData)
+                setValidated(false)
+            }
+        })    
+        
+        
+    }
+
+    const handleCouponCodeChange = (event) => {
+        setEnteredCouponCode(event.target.value)
+        props.setCouponData({})
     }
 
     return (
-            <Form onSubmit={handleCoupon}>
-                <Row>
-                    <Form.Group as={Col} md='9'>
-                        <Form.Label>Coupon</Form.Label>
-                        <Form.Control required type="text" placeholder="Enter coupon code" value={inputCouponCode} onChange={e => setInputCouponCode(e.target.value)} />
-                    </Form.Group>
-                    <Form.Group as={Col} md='3'>
-                        <Button type="submit">Apply coupon</Button>
-                    </Form.Group>
-                    
-                </Row>
-            </Form>
-        
+        <Form className="card p-3" onSubmit={handleCoupon} validated={validated}>
+            <Form.Group>
+                <InputGroup hasValidation>
+                    <Form.Control required type="text" placeholder="Enter Coupon Code" id="couponCodeInput"
+                        value={props.couponCode} onChange={handleCouponCodeChange} 
+                        isInvalid={!!props.couponData.couponErrors}
+                        ></Form.Control>
+                    <Button variant = "secondary" as="input" type="submit" value="Submit" />
+                    <Form.Control.Feedback type='invalid'>{props.couponData.couponErrors}</Form.Control.Feedback>
+                </InputGroup>
+            </Form.Group>
+        </Form>
+
     )
 }
 
