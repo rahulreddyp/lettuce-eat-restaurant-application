@@ -2,6 +2,7 @@ import { Button, Col, Container, Row, Form, Image } from "react-bootstrap"
 import { useRef, useState } from 'react';
 import { saveCardDetails } from "../../apicalls/PaymentCalls";
 import { useNavigate } from "react-router-dom";
+import CardSuccess from "./CardSuccess";
 
 const CryptoJS = require("crypto-js")
 
@@ -106,92 +107,87 @@ const AddCard = () => {
 
 
     return (
-        <div>
-            <Container>
-            <div className="py-3 text-center">
-                <Image className="mb-4 mx-auto d-block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcp5A_15f6JRTCG__u8xicumSBBoBIXy1B6w&usqp=CAU" alt="" height="15%" width="15%" />
-                <h2>Add new card</h2>
-                <p className="lead">Add a new card below for a faster checkout process</p>
-                <div ref={scrollRef}>
-                    {
-                        cardSuccess === false
-                            ? <div>
-                                <Container className='p-1 col-md-6 block-example'>
-                                    <Form validated={validated} onSubmit={handleSubmit}>
-                                        <Row className='mb-3 justify-content-md-center'>
-                                            <Form.Group as={Col} md='6'>
-                                                <Form.Label> {formErrors.message}</Form.Label>
-                                            </Form.Group>
-                                        </Row>
-                                        <Row className='mb-3 justify-content-md-center'>
-                                            <Form.Group as={Col} md='6'>
-                                                <Form.Label>Card type</Form.Label>
-                                                <Form.Select onChange={e => updateFormFields('cardType', e.target.value)} isInvalid={!!formErrors.cardType}>
-                                                    <option value=''>Choose card type</option>
-                                                    <option value='Debit'>Debit</option>
-                                                    <option value='Credit'>Credit</option>
-                                                </Form.Select>
-                                                <Form.Control.Feedback type='invalid'>
-                                                    {formErrors.cardType}
-                                                </Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Row>
-                                        <Row className='mb-3 justify-content-md-center'>
-                                            <Form.Group as={Col} md='6'>
-                                                <Form.Label>Card Number</Form.Label>
-                                                <Form.Control required type='number' id='cardNumber' value={cardForm.cardNumber} placeholder='Enter card number' onChange={e => updateFormFields('cardNumber', e.target.value)} isInvalid={!!formErrors.cardNumber}></Form.Control>
-                                                <Form.Control.Feedback type='invalid'>
-                                                    {formErrors.cardNumber}
-                                                </Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Row>
-                                        <Row className='mb-3 justify-content-md-center'>
-                                            <Form.Group as={Col} md='6'>
-                                                <Form.Label>Cardholder's name</Form.Label>
-                                                <Form.Control required type='text' id='cardHolderName' value={cardForm.cardName} placeholder='Enter cardholders name' onChange={e => updateFormFields('cardName', e.target.value)} isInvalid={!!formErrors.cardName}></Form.Control>
-                                                <Form.Control.Feedback type='invalid'>
-                                                    {formErrors.cardName}
-                                                </Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Row>
-                                        <Row className='mb-3 justify-content-md-center'>
-                                            <Form.Group as={Col} md='6'>
-                                                <Form.Label>Card validity</Form.Label>
-                                                <Form.Control required type='text' id='cardValidity' value={cardForm.cardValidity} placeholder='Enter card expiry - mm/yyyy' onChange={e => updateFormFields('cardValidity', e.target.value)} isInvalid={!!formErrors.cardValidity}></Form.Control>
-                                                <Form.Control.Feedback type='invalid'>
-                                                    {formErrors.cardValidity}
-                                                </Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Row>
-                                        <Row className='mb-3 justify-content-md-center'>
-                                            <Form.Group as={Col} md='6'>
-                                                <Form.Label>CVV</Form.Label>
-                                                <Form.Control required type='password' id='cardCvv' value={cardForm.cvv} placeholder='Enter CVV' onChange={e => updateFormFields('cvv', e.target.value)} isInvalid={!!formErrors.cvv}></Form.Control>
-                                                <Form.Control.Feedback type='invalid'>
-                                                    {formErrors.cvv}
-                                                </Form.Control.Feedback>
-                                            </Form.Group>
-                                        </Row>
-                                        <Row className='mb-3 justify-content-md-center'>
-                                            <Form.Group as={Col} md='6'>
-                                                <Button as="input" type="submit" value="Submit" />
-                                            </Form.Group>
-                                        </Row>
-                                    </Form>
-                                </Container>
-                            </div>
-                            : <div>
-                                <Container className='col-md-6'>
+
+        <Container>
+            {cardSuccess === false
+                ? (
+                    <div className="py-3 text-center">
+                        <Image className="mb-4 mx-auto d-block" src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcTcp5A_15f6JRTCG__u8xicumSBBoBIXy1B6w&usqp=CAU" alt="" height="15%" width="15%" />
+                        <h2>Add new card</h2>
+                        <p className="lead">Add a new card below for a faster checkout process</p>
+                        <div ref={scrollRef}>
+
+
+                            <Container className='p-1 col-md-6 block-example'>
+                                <Form validated={validated} onSubmit={handleSubmit}>
                                     <Row className='mb-3 justify-content-md-center'>
-                                        <Col>{cardId}</Col>
+                                        <Form.Group as={Col} md='6'>
+                                            <Form.Label> {formErrors.message}</Form.Label>
+                                        </Form.Group>
                                     </Row>
-                                </Container>
-                            </div>
-                    }
-                </div>
-            </div>
-            </Container>
-        </div>
+                                    <Row className='mb-3 justify-content-md-center'>
+                                        <Form.Group as={Col} md='6'>
+                                            <Form.Label>Card type</Form.Label>
+                                            <Form.Select onChange={e => updateFormFields('cardType', e.target.value)} isInvalid={!!formErrors.cardType}>
+                                                <option value=''>Choose card type</option>
+                                                <option value='Debit'>Debit</option>
+                                                <option value='Credit'>Credit</option>
+                                            </Form.Select>
+                                            <Form.Control.Feedback type='invalid'>
+                                                {formErrors.cardType}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className='mb-3 justify-content-md-center'>
+                                        <Form.Group as={Col} md='6'>
+                                            <Form.Label>Card Number</Form.Label>
+                                            <Form.Control required type='number' id='cardNumber' value={cardForm.cardNumber} placeholder='Enter card number' onChange={e => updateFormFields('cardNumber', e.target.value)} isInvalid={!!formErrors.cardNumber}></Form.Control>
+                                            <Form.Control.Feedback type='invalid'>
+                                                {formErrors.cardNumber}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className='mb-3 justify-content-md-center'>
+                                        <Form.Group as={Col} md='6'>
+                                            <Form.Label>Cardholder's name</Form.Label>
+                                            <Form.Control required type='text' id='cardHolderName' value={cardForm.cardName} placeholder='Enter cardholders name' onChange={e => updateFormFields('cardName', e.target.value)} isInvalid={!!formErrors.cardName}></Form.Control>
+                                            <Form.Control.Feedback type='invalid'>
+                                                {formErrors.cardName}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className='mb-3 justify-content-md-center'>
+                                        <Form.Group as={Col} md='6'>
+                                            <Form.Label>Card validity</Form.Label>
+                                            <Form.Control required type='text' id='cardValidity' value={cardForm.cardValidity} placeholder='Enter card expiry - mm/yyyy' onChange={e => updateFormFields('cardValidity', e.target.value)} isInvalid={!!formErrors.cardValidity}></Form.Control>
+                                            <Form.Control.Feedback type='invalid'>
+                                                {formErrors.cardValidity}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className='mb-3 justify-content-md-center'>
+                                        <Form.Group as={Col} md='6'>
+                                            <Form.Label>CVV</Form.Label>
+                                            <Form.Control required type='password' id='cardCvv' value={cardForm.cvv} placeholder='Enter CVV' onChange={e => updateFormFields('cvv', e.target.value)} isInvalid={!!formErrors.cvv}></Form.Control>
+                                            <Form.Control.Feedback type='invalid'>
+                                                {formErrors.cvv}
+                                            </Form.Control.Feedback>
+                                        </Form.Group>
+                                    </Row>
+                                    <Row className='mb-3 justify-content-md-center'>
+                                        <Form.Group as={Col} md='6'>
+                                            <Button as="input" type="submit" value="Submit" />
+                                        </Form.Group>
+                                    </Row>
+                                </Form>
+                            </Container>
+                        </div>
+                    </div>
+                )
+                : (<CardSuccess cardId = {cardId}/>)
+            }
+        </Container>
+
 
 
     )
