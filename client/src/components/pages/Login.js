@@ -5,6 +5,13 @@ import content from "../static/LoginElements";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
+import axios from "axios";
+import { useNavigate } from "react-router-dom";
+
+const URL = 'http://localhost:5000/'
+const headers = {
+  'Content-Type': 'application/json'
+}
 
 const schema = yup.object().shape({
   email: yup.string().required().email(),
@@ -12,6 +19,7 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
+  const navigate = useNavigate()
   const {
     register,
     handleSubmit,
@@ -21,8 +29,14 @@ const Login = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
+  const onSubmit = async (data) => {
     console.log(data);
+    const res = await axios.post(URL + 'login', data, { headers: headers });
+    if (res.data.success === true) {
+      console.log(res.data);
+      localStorage.setItem('user', JSON.stringify(res.data));
+      navigate('/');
+    }
   };
 
   return (
