@@ -1,24 +1,55 @@
-import React, { useState, useEffect } from "react";
+import React, { useState, useEffect, Fragment } from "react";
+import { useLocation } from "react-router-dom";
 import MenuCard from "./MenuCard";
 import { getMenu } from "../../apicalls/MenuCalls";
 
 const ManageMenu = () => {
-  const [menuItems, setMenuItems] = useState([]);
 
-  const loadMenu = () => {
+  const [menuItems, setMenuItems] = useState([]);
+  const [itemLength, setItemLength] = useState(0);
+
+  const { state } = useLocation();
+  const { deletemessage } = state || {};
+
+  const loadMenu = () => {   
     getMenu().then((data) => {
       if (data.error) {
         // setError(data.error);
       } else {
-        console.log(data);
-        setMenuItems(data);
+        setMenuItems(data);  
+        
+        // if(deletemessage) {
+        //     // update menu after every change to the menu
+        //     setItemLength(itemLength + 1);
+        //   }
       }
     });
-  };
+  };  
 
   useEffect(() => {
-    loadMenu();
+    loadMenu();    
+    
+    const interval=setInterval(() => {
+        loadMenu();
+       },10000)
+                  
+       return() => clearInterval(interval);
   }, []);
+
+  const deleteMessage = () => (
+    <div className="alert alert-info alert-dismissable fade show" role="alert">
+      {deletemessage}
+      <button
+        type="button"
+        className="close"
+        data-dismiss="alert"
+        aria-label="Close"
+      >
+        <span aria-hidden="true">&times;</span>
+      </button>
+    </div>
+  );
+
 
   return (
     <div className="container d-flex justify-content-center">
@@ -26,7 +57,7 @@ const ManageMenu = () => {
         <div className="col-12">
           <div className="jumbotron text-center">
             <h1>MANAGE YOUR MENU</h1>
-            <p></p>
+            <Fragment>{deletemessage ? deleteMessage() : null}</Fragment>
           </div>
         </div>
         {menuItems.map((item, index) => {

@@ -178,7 +178,7 @@ const deleteMenuItem = (req, res) => {
       });
     }
     res.json({
-      message: `MenuItem ${deletedItem}, deleted successfully`,
+      message: `${deletedItem.name} deleted from menu successfully`,
     });
   });
 };

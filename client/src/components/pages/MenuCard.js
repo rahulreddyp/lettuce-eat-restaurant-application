@@ -1,54 +1,67 @@
 import React, { useState, Fragment } from "react";
-import { useNavigate, withRouter, Link } from "react-router-dom";
+import { useNavigate } from "react-router-dom";
 import { API } from "../../API";
+import { Modal, Button } from "react-bootstrap";
 import "../styles/Menu.css";
 import { deleteMenuItem } from "../../apicalls/AdminCalls";
 
 const MenuCard = ({ item, isAdmin }) => {
   const navigate = useNavigate();
 
-  const [deleteItem, setDeleteItem] = useState(false);
+  const [show, setShow] = useState(false);
+  const handleClose = () => setShow(false);
+  const handleShow = () => setShow(true);
 
   const redirectToItemDetails = () => {
-    navigate("/admin/menu/update", { state: { itemId: item._id } });
+    if(isAdmin) {
+      navigate("/admin/menu/update", { state: { itemId: item._id } });
+    } else {
+      navigate("/menuitem", { state: { itemId: item._id } });
+    }
   };
 
-  
   var CardImage = item.photo ? item.photo : item.photo;
   // `${API}/menu/photo/${item._id}`
 
   const deleteCurrentMenuItem = (itemId) => {
-    setDeleteItem(true);
+    setShow(false);
     deleteMenuItem(itemId).then((data) => {
       if (data.error) {
         console.log(data.error);
       } else {
         console.log(data.message);
-        navigate("/admin/menu/manage", { state: { itemId } });
+
+        const deletemessage = data.message;
+        navigate("/admin/menu/manage", { state: { deletemessage } });
       }
     });
   };
 
-  const deleteConfirmationMessage = () => {
-    <div
-      className="alert alert-prompt alert-dismissable fade show"
-      role="alert"
-    >
-      Are you sure to delete the menu item ?
-      <button
-        type="button"
-        className="close"
-        data-dismiss="alert"
-        aria-label="Close"
-      >
-        <span aria-hidden="true">&times;</span>
-      </button>
-    </div>;
-  };
+  // https://www.c-sharpcorner.com/article/how-to-create-boostrap-modal-in-reactjs/
+  const menuModal = (itemId) => (
+    <>
+      <Modal show={show} onHide={handleClose} centered>
+        <Modal.Header closeButton> 
+          <Modal.Title>Delete Menu Item</Modal.Title>
+        </Modal.Header>
+
+        <Modal.Body>Are you sure you want to delete this item ?</Modal.Body>
+
+        <Modal.Footer>
+          <Button variant="secondary" onClick={handleClose}>
+            Cancel
+          </Button>
+          <Button variant="danger" onClick={() => {deleteCurrentMenuItem(itemId)}}>
+            Delete
+          </Button>
+        </Modal.Footer>
+      </Modal>
+    </>
+  );
 
   return (
     <div className="card shadow">
-      <Fragment>{deleteItem ? deleteConfirmationMessage() : null}</Fragment>
+      {menuModal(item._id)}
       <div
         onClick={() => {
           redirectToItemDetails();
@@ -74,9 +87,10 @@ const MenuCard = ({ item, isAdmin }) => {
       {isAdmin && (
         <div className="mb-2">
           <button
-            onClick={() => {
-              deleteCurrentMenuItem(item._id);
-            }}
+            onClick={
+               handleShow
+              // () => { deleteCurrentMenuItem(item._id);}
+            }
             className="btn btn-danger"
           >
             Delete

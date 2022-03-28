@@ -1,5 +1,6 @@
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const Menu = new mongoose.Schema(
   {
@@ -28,11 +29,10 @@ const Menu = new mongoose.Schema(
       trim: true
     },
     customization: {
-      type: String,
-      maxlength: 32,
-      trim: true
+      type: Array,
+      // maxlength: 32,
+      // trim: true
     },
-    // sizes: {},
     price: { type: Number, required: true, maxlength: 32, trim: true },
     photo: {
         data: Buffer,
