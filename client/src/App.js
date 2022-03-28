@@ -9,6 +9,8 @@ import Editprofile from './components/pages/Editprofile';
 import Signup from './components/pages/Signup';
 import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
+import Payments from './components/pages/Payments';
+import AddCard from './components/paymentscomponents/AddCard';
 import Wishlist from './components/pages/Wishlist';
 import Cart from './components/pages/Cart';
 import Admin from './components/pages/Admin';
@@ -29,6 +31,8 @@ function App() {
           <Route path="/editprofile" element={<Editprofile/>}/>
           <Route path="/menu" element={<Menu/>}/>
           <Route path="/menuitem" element={<MenuItem/>}/>
+          <Route path="/payments" element={<Payments/>}/>
+          <Route path="/addCard" element={<AddCard/>}/>
           <Route path="/cart" element={<Cart/>}/>
           <Route path="/wishlist" element={<Wishlist/>}/>
           <Route path="admin" element={<AdminRoute/>}>
