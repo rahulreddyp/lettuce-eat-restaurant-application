@@ -7,9 +7,10 @@ const Payment = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId
         },
         userId: {
-            type: Number,
+            type: String,
             trim: true,
-            required: true
+            required: true,
+            maxlength: 1024
         },
         userEmail: {
             type: String,
