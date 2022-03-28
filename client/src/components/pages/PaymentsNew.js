@@ -1,15 +1,23 @@
-import { Container, Image, Row, ListGroup, Badge, Card, Form, Button } from "react-bootstrap"
 import { useState } from "react"
-import ApplyCoupon from "../paymentscomponents/ApplyCoupon"
+import { Container, Row } from "react-bootstrap"
+import CartSummary from "../paymentscomponents/CartSummary"
+import NoPayments from "../paymentscomponents/NoPayments"
+import PaymentFormNew from "../paymentscomponents/PaymentFormNew"
+import PaymentIntroduction from "../paymentscomponents/PaymentIntroduction"
+import PostPayments from "../paymentscomponents/PostPayments"
 
 const PaymentsNew = () => {
 
-    const [totalAmount, setTotalAmount] = useState(35)
+    const [totalAmount, setTotalAmount] = useState(100)
     const [couponData, setCouponData] = useState({
         'couponCode': '',
         'couponApplied': false,
         'discountPercentage': '',
         'couponErrors': ''
+    })
+    const [paymentStatus, setPaymentStatus] = useState({
+        'isPaymentComplete': false,
+        'paymentId': ''
     })
 
     const currentOrder = [
@@ -30,53 +38,44 @@ const PaymentsNew = () => {
             'itemName': 'Item3',
             'itemQuantity': '3',
             'itemAmount': '$30'
+        },
+        {
+            'itemId': '4',
+            'itemName': 'Item4',
+            'itemQuantity': '4',
+            'itemAmount': '$40'
         }
 
     ]
 
 
     return (
-        <Container>
-            <div className="py-5 text-center">
-            <Image className="mb-4 mx-auto d-block" src="https://www.nicepng.com/png/full/14-143923_payment-card-icon-png-edwin-m-sarmiento-credit.png" alt="" height="15%" width="15%"/>
-            <h2>Checkout order</h2>
-            <p className="lead">Hurray! You are just one step away from finishing up your order. Complete all the payment details required below. Once done, sit back and relax! We will deliver freshly cooked food to you as soon as possible.</p>
-            </div>
-            <Row>
-                <div className="mb-4 order-md-2 col-md-4">
-                    <h4 className="d-flex justify-content-between align-items-center mb-3">
-                        <span className="text-muted">Cart summary</span>
-                        <Badge pill bg="secondary">3</Badge>
-                    </h4>
-                    <ListGroup as="ul" className="mb-3">
-                        {
-                            currentOrder.map((orderItem) => (
-                            <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start" key={orderItem.itemId}>
-                                <div className="ms-2 me-auto">
-                                    <div className="fw-bold">{orderItem.itemName}</div>
-                                Quantity:{orderItem.itemQuantity}
+        <Container> 
+            {
+                currentOrder.length > 0
+                ?
+                (
+                    paymentStatus.isPaymentComplete
+                        ?
+                        <PostPayments paymentStatus = {paymentStatus}/>
+                        :
+                        <div>
+                            <PaymentIntroduction />
+                            <Row>
+                                <div className="col-md-8">
+                                    <PaymentFormNew totalAmount={totalAmount} couponCode={couponData.couponCode}
+                                    paymentStatus = {paymentStatus} setPaymentStatus = {setPaymentStatus} />
                                 </div>
-                                <Badge bg="secondary" pill>{orderItem.itemAmount}</Badge>
-                            </ListGroup.Item>
-                            ))
-                        }
-                        <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start bg-light">
-                                <div className="ms-2 me-auto text-success">
-                                    <div className="fw-bold">Coupon code</div>
-                                EXAMPLECOUPON
+                                <div className="mb-4 col-md-4">
+                                    <CartSummary currentOrder={currentOrder} couponData={couponData}
+                                        setCouponData={setCouponData} totalAmount={totalAmount} setTotalAmount={setTotalAmount} />
                                 </div>
-                                <Badge bg="success" pill>-$5</Badge>
-                            </ListGroup.Item>
-                            <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
-                                <div className="ms-2 me-auto">
-                                    <div className="fw-bold">Total Amount</div>
-                                </div>
-                                <Badge bg="primary" pill>${totalAmount}</Badge>
-                            </ListGroup.Item>
-                    </ListGroup>
-                    <ApplyCoupon couponData={couponData} setCouponData = {setCouponData}/>
-                </div>
-            </Row>
+                            </Row>
+                        </div>
+                )
+                : <NoPayments/>
+            }
+            
         </Container>
     )
 }

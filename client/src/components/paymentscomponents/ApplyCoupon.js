@@ -21,8 +21,8 @@ const ApplyCoupon = (props) => {
                     'couponErrors': ''
                 }
                 props.setCouponData(successCoupon)
-                console.log('Coupon data array', props.couponData)
                 setValidated(true)
+                props.setTotalAmount(props.totalAmount * ((100-response.discountPercentage)/100))
             } else {
                 const failureCoupon =  {
                     'couponCode': '',
@@ -31,7 +31,6 @@ const ApplyCoupon = (props) => {
                     'couponErrors': response.message
                 }
                 props.setCouponData(failureCoupon)
-                console.log('Coupon data array', props.couponData)
                 setValidated(false)
             }
         })    
@@ -46,16 +45,18 @@ const ApplyCoupon = (props) => {
 
     return (
         <Form className="card p-3" onSubmit={handleCoupon} validated={validated}>
-            <Form.Group>
-                <InputGroup hasValidation>
-                    <Form.Control required type="text" placeholder="Enter Coupon Code" id="couponCodeInput"
-                        value={props.couponCode} onChange={handleCouponCodeChange} 
-                        isInvalid={!!props.couponData.couponErrors}
-                        ></Form.Control>
-                    <Button variant = "secondary" as="input" type="submit" value="Submit" />
-                    <Form.Control.Feedback type='invalid'>{props.couponData.couponErrors}</Form.Control.Feedback>
-                </InputGroup>
-            </Form.Group>
+            <fieldset disabled = {props.couponData.couponApplied}>
+                <Form.Group>
+                    <InputGroup hasValidation>
+                        <Form.Control required type="text" placeholder="Enter Coupon Code" id="couponCodeInput"
+                            value={props.couponCode} onChange={handleCouponCodeChange} 
+                            isInvalid={!!props.couponData.couponErrors}>
+                        </Form.Control>
+                        <Button variant = "secondary" as="input" type="submit" value="Submit" />
+                        <Form.Control.Feedback type='invalid'>{props.couponData.couponErrors}</Form.Control.Feedback>
+                    </InputGroup>
+                </Form.Group>
+            </fieldset>
         </Form>
 
     )
