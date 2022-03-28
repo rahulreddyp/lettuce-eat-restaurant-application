@@ -1,3 +1,5 @@
+// Author: Rahul Reddy Puchakayala
+
 import React, { useState, Fragment } from "react";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../API";
@@ -5,7 +7,8 @@ import { Modal, Button } from "react-bootstrap";
 import "../styles/Menu.css";
 import { deleteMenuItem } from "../../apicalls/AdminCalls";
 
-const MenuCard = ({ item, isAdmin }) => {
+const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = undefined }) => {
+
   const navigate = useNavigate();
 
   const [show, setShow] = useState(false);
@@ -24,16 +27,19 @@ const MenuCard = ({ item, isAdmin }) => {
   // `${API}/menu/photo/${item._id}`
 
   const deleteCurrentMenuItem = (itemId) => {
-    setShow(false);
+    const deletemessage = "";
+
     deleteMenuItem(itemId).then((data) => {
       if (data.error) {
         console.log(data.error);
+        deletemessage = data.error;
       } else {
         console.log(data.message);
-
-        const deletemessage = data.message;
-        navigate("/admin/menu/manage", { state: { deletemessage } });
+        setShow(false);
+        setReload(!reload);  
+        deletemessage = data.message;       
       }
+        navigate("/admin/menu/manage", { state: { deletemessage } });
     });
   };
 
@@ -51,14 +57,13 @@ const MenuCard = ({ item, isAdmin }) => {
           <Button variant="secondary" onClick={handleClose}>
             Cancel
           </Button>
-          <Button variant="danger" onClick={() => {deleteCurrentMenuItem(itemId)}}>
+          <Button variant="danger" onClick={() => {deleteCurrentMenuItem(itemId); }}>
             Delete
           </Button>
         </Modal.Footer>
       </Modal>
     </>
   );
-
 
   return (
     <div className="card shadow">

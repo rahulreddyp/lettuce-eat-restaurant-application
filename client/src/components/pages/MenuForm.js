@@ -1,3 +1,5 @@
+// Author: Rahul Reddy Puchakayala
+
 import React, { useState, useEffect, Fragment } from "react";
 import { createMenuItem, getAllCategories } from "../../apicalls/AdminCalls";
 import customization_options from "../static/MenuCustomizations";
@@ -44,55 +46,57 @@ const MenuForm = () => {
     const userInput = name == "photo" ? e.target.files[0] : e.target.value;
 
     // switch case to handle each field validation
-    switch (name) {
-      case "name":
-        if (!userInput.match(/^[a-zA-Z ]+$/)) {
-          setError("Please enter valid item name - letters only");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
+    if (userInput !== "") {
+      switch (name) {
+        case "name":
+          if (!userInput.match(/^[a-zA-Z ]+$/)) {
+            setError("Please enter valid item name - letters only");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
 
-      case "description":
-        if (!userInput.match(/^[a-zA-Z0-9 ]+$/)) {
-          setError("Please enter  valid description - Alphanumeric only");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
-      case "category":
-        if (userInput === "") {
-          setError("Please choose a category for food item");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
+        case "description":
+          if (!userInput.match(/^[-_ a-zA-Z0-9]+$/)) {
+            setError("Please enter  valid description - Alphanumeric and (underscore, hyphen) only");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
+        case "category":
+          if (userInput === "") {
+            setError("Please choose a category for food item");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
 
-      case "dietary":
-        if (!userInput.match(/^[a-zA-Z ]+$/)) {
-          setError("Please enter  valid dietary instructions - letters only");
-        } else {
+        case "dietary":
+          if (!userInput.match(/^[-_ a-zA-Z0-9]+$/)) {
+            setError("Please enter  valid dietary instructions - letters and (underscore, hyphen) only");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
+
+        case "price":
+          // https://stackoverflow.com/questions/17482473/regular-expression-for-price-validation
+          if (userInput < 1 || !userInput.match(/^\d{1,2}(\.\d{1,2})?$/)) {
+            setError("Please enter valid amount (range: 1-99.99)");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
+
+        default:
           formData.set(name, userInput);
           setState({ ...state, [name]: userInput });
-        }
-        break;
-
-      case "price":
-        // https://stackoverflow.com/questions/17482473/regular-expression-for-price-validation
-        if (userInput < 1 || !userInput.match(/^\d{1,2}(\.\d{1,2})?$/)) {
-          setError("Please enter valid amount (range: 1-99.99)");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
-
-      default:
-        formData.set(name, userInput);
-        setState({ ...state, [name]: userInput });
+      }
     }
   };
 
@@ -148,7 +152,10 @@ const MenuForm = () => {
     // }
 
     // check if all the form fields are filled or not
-    if (
+    if(error) {
+      setError(error);
+    }
+    else if (
       !state.name ||
       !state.description ||
       !state.category ||
