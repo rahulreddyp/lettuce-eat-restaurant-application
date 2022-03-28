@@ -1,11 +1,12 @@
-import React, { useState } from 'react';
-import { useRef, useEffect } from 'react';
-import { Button, Col, Container, Form, Row } from 'react-bootstrap';
-import { savePaymentData, retrieveUserCards } from '../paymentscomponents/PaymentCalls';
+import { useEffect, useRef, useState } from "react";
+import { Button, Col, Form, Row } from "react-bootstrap";
+import { retrieveUserCards, savePaymentData } from "../../apicalls/PaymentCalls"
 
 
 
 const PaymentForm = (props) => {
+
+    const user = JSON.parse(localStorage.getItem("user"));
     //Regex for validations
     const onlyNumbersRegex = /^[0-9]*$/
     const nameRegex = /^[a-zA-Z\s]*$/
@@ -22,15 +23,15 @@ const PaymentForm = (props) => {
 
     const scrollRef = useRef(null)
 
-    const [paySuccess, setPaySuccess] = useState(false)
-    const [paymentId, setPaymentId] = useState('')
+    
     const [userCards, setUserCards] = useState('')
 
     mainForm.totalAmount = props.totalAmount
     mainForm.couponCode = props.couponCode
-    mainForm.userId = '1'
-    mainForm.userEmail = 'example@gmail.com'
+    mainForm.userId = user.id
+    mainForm.userEmail = user.email
     mainForm.orderId = '1'
+
 
     const [validated, setValidated] = useState(false)
 
@@ -46,47 +47,21 @@ const PaymentForm = (props) => {
         setFormErrors({})
     }
 
-    
-    
+
+
     useEffect(
         () => {
-          retrieveUserCards(mainForm.userId)
-          .then(response => {
-              console.log(response)
-              setUserCards(response)
-          })
+            retrieveUserCards(user.id)
+                .then(response => {
+                    console.log('Currently saved user cards', response)
+                    setUserCards(response)
+                })
+            return () => {
+                setUserCards({})
+              };
         },
         [],
-      );
-
-
-    //On submitting form
-    const handleSubmit = (event) => {
-        event.preventDefault();
-        event.stopPropagation();
-        const currentErrors = validateForm()
-        if (Object.keys(currentErrors).length > 0) {
-            setFormErrors(currentErrors)
-            setValidated(false)
-            setPaySuccess(false)
-            scrollRef.current.scrollIntoView()
-        } else {
-            savePaymentData(mainForm)
-                .then(response => {
-                    if (response.success) {
-                        setValidated(true)
-                        setPaySuccess(true)
-                        setPaymentId(response.id)
-                    } else {
-                        setValidated(false)
-                        setPaySuccess(false)
-                        setFormErrors({message:'Failed to authorise a payment. Please try again'})
-                        scrollRef.current.scrollIntoView()
-                    }
-                })
-        }
-    };
-
+    );
 
     //Form validations
     const validateForm = () => {
@@ -117,87 +92,103 @@ const PaymentForm = (props) => {
     }
 
 
+    //On submitting form
+    const handleSubmit = (event) => {
+        event.preventDefault();
+        event.stopPropagation();
+        const currentErrors = validateForm()
+        if (Object.keys(currentErrors).length > 0) {
+            setFormErrors(currentErrors)
+            setValidated(false)
+            props.setPaymentStatus({
+                'isPaymentComplete': false,
+                'paymentId': ''
+            })
+            scrollRef.current.scrollIntoView()
+        } else {
+            savePaymentData(mainForm)
+                .then(response => {
+                    if (response.success) {
+                        props.setPaymentStatus({
+                            'isPaymentComplete': true,
+                            'paymentId': response.id
+                        })
+                        setValidated(true)
+                    } else {
+                        setValidated(false)
+                        props.setPaymentStatus({
+                            'isPaymentComplete': false,
+                            'paymentId': ''
+                        })
+                        setFormErrors({ message: 'Failed to authorise a payment. Please try again' })
+                        scrollRef.current.scrollIntoView()
+                    }
+                })
+        }
+    };
+
     return (
         <div ref={scrollRef}>
-            {
-                paySuccess === false
-                    ? <div>
-                        <Container className='col-md-6 block-example border border-dark'>
-                            <Form validated={validated} onSubmit={handleSubmit}>
-                                <Row className='mb-3 justify-content-md-center'>
-                                    <Form.Group as={Col} md='6'>
-                                        <Form.Label> {formErrors.message}</Form.Label>
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3 justify-content-md-center'>
-                                    <Form.Group as={Col} md='6'>
-                                        <Form.Label>Card type</Form.Label>
-                                        <Form.Select onChange={e => updateFormFields('cardType', e.target.value)} isInvalid={!!formErrors.cardType}>
-                                            <option value=''>Choose card type</option>
-                                            <option value='Debit'>Debit</option>
-                                            <option value='Credit'>Credit</option>
-                                        </Form.Select>
-                                        <Form.Control.Feedback type='invalid'>
-                                            {formErrors.cardType}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3 justify-content-md-center'>
-                                    <Form.Group as={Col} md='6'>
-                                        <Form.Label>Card Number</Form.Label>
-                                        <Form.Control required type='number' id='cardNumber' value={mainForm.cardNumber} placeholder='Enter card number' onChange={e => updateFormFields('cardNumber', e.target.value)} isInvalid={!!formErrors.cardNumber}></Form.Control>
-                                        <Form.Control.Feedback type='invalid'>
-                                            {formErrors.cardNumber}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3 justify-content-md-center'>
-                                    <Form.Group as={Col} md='6'>
-                                        <Form.Label>Cardholder's name</Form.Label>
-                                        <Form.Control required type='text' id='cardHolderName' value={mainForm.cardName} placeholder='Enter cardholders name' onChange={e => updateFormFields('cardName', e.target.value)} isInvalid={!!formErrors.cardName}></Form.Control>
-                                        <Form.Control.Feedback type='invalid'>
-                                            {formErrors.cardName}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3 justify-content-md-center'>
-                                    <Form.Group as={Col} md='6'>
-                                        <Form.Label>Card validity</Form.Label>
-                                        <Form.Control required type='text' id='cardValidity' value={mainForm.cardValidity} placeholder='Enter card expiry - mm/yyyy' onChange={e => updateFormFields('cardValidity', e.target.value)} isInvalid={!!formErrors.cardValidity}></Form.Control>
-                                        <Form.Control.Feedback type='invalid'>
-                                            {formErrors.cardValidity}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3 justify-content-md-center'>
-                                    <Form.Group as={Col} md='6'>
-                                        <Form.Label>CVV</Form.Label>
-                                        <Form.Control required type='password' id='cardCvv' value={mainForm.cvv} placeholder='Enter CVV' onChange={e => updateFormFields('cvv', e.target.value)} isInvalid={!!formErrors.cvv}></Form.Control>
-                                        <Form.Control.Feedback type='invalid'>
-                                            {formErrors.cvv}
-                                        </Form.Control.Feedback>
-                                    </Form.Group>
-                                </Row>
-                                <Row className='mb-3 justify-content-md-center'>
-                                    <Form.Group as={Col} md='6'>
-                                        <Button as="input" type="submit" value="Submit" />
-                                    </Form.Group>
-                                </Row>
-                            </Form>
-                        </Container>
-                    </div>
-                    : <div>
-                        <Container className='col-md-6'>
-                            <Row className='mb-3 justify-content-md-center'>
-                                <Col>{paymentId}</Col>
-                            </Row>
-                        </Container>
-                    </div>
-            }
+            <Form onSubmit={handleSubmit} validated={validated}>
+                <h4 className="mb-3">Payment</h4>
+                <div className="d-block my-3">
+                    <Form.Group>
+                        <Form.Label>Card type</Form.Label>
+                        <Form.Select onChange={e => updateFormFields('cardType', e.target.value)} isInvalid={!!formErrors.cardType}>
+                            <option value=''>Choose card type</option>
+                            <option value='Debit'>Debit</option>
+                            <option value='Credit'>Credit</option>
+                        </Form.Select>
+                        <Form.Control.Feedback type='invalid'>
+                            {formErrors.cardType}
+                        </Form.Control.Feedback>
+                    </Form.Group>
+                    <Row>
+                        <Form.Group as={Col} md='6' className="mb-3">
+                            <Form.Label>Cardholder's name</Form.Label>
+                            <Form.Control required type='text' id='cardHolderName' value={mainForm.cardName} placeholder='Enter cardholders name' onChange={e => updateFormFields('cardName', e.target.value)} isInvalid={!!formErrors.cardName}></Form.Control>
+                            <small className="text-muted">Full name as displayed on card</small>
+                            <Form.Control.Feedback type='invalid'>
+                                {formErrors.cardName}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group as={Col} md='6' className="mb-3">
+                            <Form.Label>Card Number</Form.Label>
+                            <Form.Control required type='number' id='cardNumber' value={mainForm.cardNumber} placeholder='Enter card number' onChange={e => updateFormFields('cardNumber', e.target.value)} isInvalid={!!formErrors.cardNumber}></Form.Control>
+                            <Form.Control.Feedback type='invalid'>
+                                {formErrors.cardNumber}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+                    <Row>
+                        <Form.Group as={Col} md='3' className="mb-3">
+                            <Form.Label>Card validity</Form.Label>
+                            <Form.Control required type='text' id='cardValidity' value={mainForm.cardValidity} placeholder='mm/yyyy' onChange={e => updateFormFields('cardValidity', e.target.value)} isInvalid={!!formErrors.cardValidity}></Form.Control>
+                            <Form.Control.Feedback type='invalid'>
+                                {formErrors.cardValidity}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        <Form.Group as={Col} md='3' className="mb-3">
+                            <Form.Label>CVV</Form.Label>
+                            <Form.Control required type='password' id='cardCvv' value={mainForm.cvv} placeholder='Enter CVV' onChange={e => updateFormFields('cvv', e.target.value)} isInvalid={!!formErrors.cvv}></Form.Control>
+                            <Form.Control.Feedback type='invalid'>
+                                {formErrors.cvv}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                    </Row>
+                    <hr className="mb-1"></hr>
+                    <Row className="justify-content-md-center">
+                        <Form.Group as={Col} md='6' >
+                            <div className="d-grid">
+                                <Button as="input" type="submit" value="Submit" size="lg" />
+                            </div>
+                        </Form.Group>
+                    </Row>
+                </div>
+            </Form>
         </div>
 
-
     )
-
 }
+
 export default PaymentForm
