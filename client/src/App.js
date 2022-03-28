@@ -9,7 +9,8 @@ import Editprofile from './components/pages/Editprofile';
 import Signup from './components/pages/Signup';
 import Menu from './components/pages/Menu';
 import MenuItem from './components/pages/MenuItem';
-import Footer from './components/Footer';
+import Wishlist from './components/pages/Wishlist';
+import Cart from './components/pages/Cart';
 import Admin from './components/pages/Admin';
 import AdminRoute from './components/pages/AdminRoute';
 import MenuForm from './components/pages/MenuForm';
@@ -28,6 +29,8 @@ function App() {
           <Route path="/editprofile" element={<Editprofile/>}/>
           <Route path="/menu" element={<Menu/>}/>
           <Route path="/menuitem" element={<MenuItem/>}/>
+          <Route path="/cart" element={<Cart/>}/>
+          <Route path="/wishlist" element={<Wishlist/>}/>
           <Route path="admin" element={<AdminRoute/>}>
             <Route path="home" element={<Admin/>}/>
             <Route index path="menu/add" element={<MenuForm />} />
