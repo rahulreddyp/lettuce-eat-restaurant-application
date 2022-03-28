@@ -28,10 +28,6 @@ const Header = () => {
         console.log('login')
         window.location='/login'}} >Login</Button>
     
-            
-          <Button variant="outline-light" href="/login">
-            Login
-          </Button>
           </Navbar.Collapse>
     </Container>
 </Navbar>

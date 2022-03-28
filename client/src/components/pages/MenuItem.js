@@ -1,4 +1,4 @@
-// Author: Rahul Reddy Puchakayala
+// Author: Rahul Reddy Puchakayala, Deeksha Sareen
 
 import { API } from "../../API";
 import React, { useState, useEffect } from "react";
@@ -33,8 +33,6 @@ const MenuItem = () => {
           console.log(data);
           setItem(data);      
           setCustomizations(data.customization);
-
-
 
 
           // getItemCategory(data.category).then((item_catgory) => {
@@ -106,29 +104,20 @@ const MenuItem = () => {
           </div>
         </div>
         <div className="row">
-          <div className="col-md-8">
-            <h1>{item.name}</h1>
-          </div>
+          <div className="col-md-6">
+            <p>{item.dietery}</p>
+          </div> 
+          <div className="col-md-2">
+            {/* <h3>{item.price}</h3> */}
+          </div>    
           <div className="col-md-2">
           <Button onClick={addtoWishlist}>Add to Wishlist</Button>
           </div>
           {/* <div className="col-md-2"><Heart isClick={isClick} onClick={updateWishlist} /></div> */}
           <div className="col-md-2">{/* rating */}</div>
-        </div>
-        <div className="row">
-          <div className="col-md-12">
-            <p>{item.description}</p>
-          </div>
-        </div>
-        <div className="row">
-          <div className="col-md-2">
-            <ul className="list-group align-items-left">
-              <li className="list-group-item border-0">{item.category}</li>
-              <li className="list-group-item border-0">{}</li>
-            </ul>
-          </div>
-        </div>
+        </div>   
       </div>
+     
       <div className="row">
         <span className="text-danger text-center">{error}</span>
         <form onSubmit={(e) => addtoCart(e)}>
@@ -146,7 +135,7 @@ const MenuItem = () => {
                 </div>
               );
             })}
-          <button type="submit">Add to Cart</button>
+          <button className="btn btn-secondary">Add to Cart</button>
         </form>
       </div>
     </div>
