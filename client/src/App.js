@@ -9,6 +9,8 @@ import Menu from "./components/pages/Menu";
 import MenuItem from "./components/pages/MenuItem";
 import Footer from "./components/Footer";
 import Order from "./components/pages/Order";
+import OrderStatus from "./components/pages/AllOrders";
+import UpdateOrder from "./components/pages/UpdateOrder";
 
 function App() {
   return (
@@ -19,6 +21,8 @@ function App() {
           <Route path="/" element={<HomeScreen />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/getorderstatus/" element={<OrderStatus />} />
+          <Route path="/updateOrder/:id" element={<UpdateOrder />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/menuitem" element={<MenuItem />} />
           <Route path="/orders" element={<Order />} />

@@ -3,7 +3,7 @@ const app = express();
 const cors = require("cors");
 const userRouter = require("./Routes/user.routes");
 const menuRouter = require("./Routes/menu.routes");
-const orderRouter = require("./controllers/order.controllers");
+const orderRouter = require("./routes/order.routes");
 const mongoose = require("mongoose");
 const dbConfig = require("./config/db.config");
 

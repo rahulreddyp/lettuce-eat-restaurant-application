@@ -42,6 +42,31 @@ const getAllOrders = async (req, res) => {
   }
 };
 
+const getSpecificOrder = async (req, res) => {
+  const id = req.params.id;
+
+  try {
+    const order = await Order.findById(id)
+      .populate("user", "-password")
+      .populate({
+        path: "items",
+      });
+    if (!order) {
+      res.status(400).json({
+        sucess: false,
+        message: "No order exist!",
+      });
+    }
+
+    res.status(200).send(order);
+  } catch (error) {
+    res.status(500).json({
+      sucess: false,
+      message: "Something went wrong!",
+    });
+  }
+};
+
 const updateOrder = async (req, res) => {
   const updates = Object.keys(req.body);
   const allowedUpdates = ["items", "total", "orderStatus", "quantity"];
@@ -55,9 +80,8 @@ const updateOrder = async (req, res) => {
 
   try {
     const order = await Order.findById(req.params.id).populate("items");
-
     if (!order) {
-      res.json({
+      res.status(400).json({
         sucess: false,
         message: "No order found!",
       });
@@ -76,8 +100,9 @@ const updateOrder = async (req, res) => {
   }
 };
 
-router.post("/updateOrder/:id", updateOrder);
-router.get("/getAllOrders", getAllOrders);
-router.post("/createOrder", createOrder);
-
-module.exports = router;
+module.exports = {
+  updateOrder,
+  getAllOrders,
+  getSpecificOrder,
+  createOrder,
+};
