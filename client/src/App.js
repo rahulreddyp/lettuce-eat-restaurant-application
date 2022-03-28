@@ -9,7 +9,8 @@ import Login from "./components/pages/Login";
 import Menu from "./components/pages/Menu";
 import MenuItem from "./components/pages/MenuItem";
 import Order from "./components/pages/Order";
-import OrderStatus from "./components/pages/OrderStatus";
+import OrderStatus from "./components/pages/AllOrders";
+import UpdateOrder from "./components/pages/UpdateOrder";
 import Signup from "./components/pages/Signup";
 import UpdateOrderFinalScreen from "./components/pages/UpdateOrderFinalScreen";
 import UpdateOrderStatus from "./components/pages/UpdateOrderStatus";
@@ -33,6 +34,8 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/getOrders/" element={<OrderStatus />} />
+          <Route path="/updateOrder/:id" element={<UpdateOrder />} />
           <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<Editprofile />} />
           <Route path="/menu" element={<Menu />} />
