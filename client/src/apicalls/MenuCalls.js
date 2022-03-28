@@ -20,3 +20,13 @@ export const getMenuItem = async (ItemId) => {
         return console.log(err);
     }
   };
+
+  export const getItemCategory = (categoryId) => {
+    return fetch(`${API}/menu/category/${categoryId}`, {
+        method: "GET"
+    })
+    .then(resp => {
+        return resp.json()
+    })
+    .catch(err => console.log(err))
+};
