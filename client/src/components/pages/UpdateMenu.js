@@ -85,7 +85,7 @@ const UpdateMenu = () => {
         break;
 
       case "description":
-        if (!userInput.match(/^[-_ a-zA-Z0-9]+$/)) {
+        if (!userInput.match(/^[-_,. a-zA-Z0-9]+$/)) {
           setError("Please enter  valid description - Alphanumeric only");
         } else {
           formData.set(name, userInput);

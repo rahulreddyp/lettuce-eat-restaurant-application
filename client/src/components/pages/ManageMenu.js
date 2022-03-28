@@ -8,7 +8,6 @@ import { getMenu } from "../../apicalls/MenuCalls";
 const ManageMenu = () => {
 
   const [menuItems, setMenuItems] = useState([]);
-  const [itemLength, setItemLength] = useState(0);
   const [reload, setReload] = useState(false);
 
   const { state } = useLocation();
@@ -28,11 +27,11 @@ const ManageMenu = () => {
   useEffect(() => {
     loadMenu();    
     
-    // const interval=setInterval(() => {
-    //     loadMenu();
-    //    },10000)
+    const interval=setInterval(() => {
+        loadMenu();
+       },20000)
                   
-    //    return() => clearInterval(interval);
+       return() => clearInterval(interval);
   }, [reload]);
 
   const deleteMessage = () => (
@@ -62,7 +61,7 @@ const ManageMenu = () => {
         {menuItems.map((item, index) => {
           return (
             <div key={index} className="col-md-4 mb-4">
-              <MenuCard item={item} isAdmin={true} setReload={setReload} reload={reload} />
+              <MenuCard item={item} isAdmin={true} setReload={setReload} title="Click to update" reload={reload} />
             </div>
           );
         })}

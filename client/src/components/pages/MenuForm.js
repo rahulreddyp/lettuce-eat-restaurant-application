@@ -43,7 +43,7 @@ const MenuForm = () => {
     setError("");
     const name = e.target.name;
 
-    const userInput = name == "photo" ? e.target.files[0] : e.target.value;
+    const userInput = name === "photo" ? e.target.files[0] : e.target.value;
 
     // switch case to handle each field validation
     if (userInput !== "") {
@@ -58,7 +58,7 @@ const MenuForm = () => {
           break;
 
         case "description":
-          if (!userInput.match(/^[-_ a-zA-Z0-9]+$/)) {
+          if (!userInput.match(/^[-_,. a-zA-Z0-9]+$/)) {
             setError("Please enter  valid description - Alphanumeric and (underscore, hyphen) only");
           } else {
             formData.set(name, userInput);
@@ -305,11 +305,11 @@ const MenuForm = () => {
             <div className="form-group mb-3">
               <label className="fw-bold">
                 Item Image:
-                <input
-                  className="form-control"
+                <input                  
                   type="file"
                   name="photo"
                   accept="image"
+                  placeholder="Choose an image"
                   onChange={handleChange}
                 />
               </label>

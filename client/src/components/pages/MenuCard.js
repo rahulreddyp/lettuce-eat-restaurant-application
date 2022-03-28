@@ -7,7 +7,7 @@ import { Modal, Button } from "react-bootstrap";
 import "../styles/Menu.css";
 import { deleteMenuItem } from "../../apicalls/AdminCalls";
 
-const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = undefined }) => {
+const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = undefined, title }) => {
 
   const navigate = useNavigate();
 
@@ -23,8 +23,7 @@ const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = 
     }
   };
 
-  var CardImage = item.photo ? item.photo : item.photo;
-  // `${API}/menu/photo/${item._id}`
+  var CardImage = item.photo ?  `${API}/menu/photo/${item._id}` : item.photo;
 
   const deleteCurrentMenuItem = (itemId) => {
     const deletemessage = "";
@@ -66,7 +65,7 @@ const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = 
   );
 
   return (
-    <div className="card shadow">
+    <div className="card shadow" title={title}>
       {menuModal(item._id)}
       <div
         onClick={() => {

@@ -1,5 +1,6 @@
 // Author: Rahul Reddy Puchakayala
 
+import { API } from "../../API";
 import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import { putItem } from "../../apicalls/WishlistCalls";
@@ -32,6 +33,9 @@ const MenuItem = () => {
           console.log(data);
           setItem(data);      
           setCustomizations(data.customization);
+
+
+
 
           // getItemCategory(data.category).then((item_catgory) => {
           //   setItem({...item, category: item_catgory.category_name});
@@ -79,6 +83,7 @@ const MenuItem = () => {
     console.log(resultinjson)
     };
 
+    var image = item.photo ? `${API}/menu/photo/${item._id}` : item.photo;
 
   return (
     <div className="container-fluid">
@@ -90,7 +95,7 @@ const MenuItem = () => {
                 <img
                   className="carousel-fill w-100"
                   alt="Food Item"
-                  src={item.photo}
+                  src={image}
                 />
               </div>
               <div className="carousel-caption">
