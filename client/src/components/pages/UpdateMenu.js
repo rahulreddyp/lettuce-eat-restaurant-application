@@ -177,15 +177,14 @@ const UpdateMenu = () => {
   return (
     <div className="container">
       <h2 className="text-center mt-3">Something to update ?</h2>
-      <div className="row">
+      <div className="row justify-content-center">
         <Fragment>{success ? successMessage() : null}</Fragment>
         <span className="text-danger">{error}</span>
-        <div className="col-md-6 text-left p-3"></div>
-        <div className="col-md-6 text-left p-3">
+        <div className="col-md-5 text-left m-3 p-3 bg-secondary rounded">
           <form encType="multipart/form-data">
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Item Name:
+                Item Name:              </label>
                 <input
                   className="form-control"
                   type="text"
@@ -194,12 +193,12 @@ const UpdateMenu = () => {
                   value={item.name}
                   onChange={handleChange}
                 />
-              </label>
+
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Item Description:
+                Item Description:              </label>
                 <textarea
                   className="form-control"
                   name="description"
@@ -207,7 +206,7 @@ const UpdateMenu = () => {
                   value={item.description}
                   onChange={handleChange}
                 />
-              </label>
+
             </div>
 
             <div className="form-group mb-3">
@@ -230,22 +229,22 @@ const UpdateMenu = () => {
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Dietary Instructions:
+                Dietary Instructions:</label>
                 <input
                   className="form-control"
                   type="text"
                   name="dietary"
+                  title="disabled to edit"
                   placeholder="enter dietary information"
                   value={item.dietary}
                   onChange={handleChange}
                   readOnly
                 />
-              </label>
+              
             </div>
 
             <div className="form-group mb-3">
-              <label className="fw-bold">
-                Price:
+              <label className="fw-bold">Price:</label>
                 <input
                   className="form-control"
                   type="number"
@@ -254,7 +253,7 @@ const UpdateMenu = () => {
                   value={item.price}
                   onChange={handleChange}
                 />
-              </label>
+
             </div>
 
             <div className="form-group mb-3">

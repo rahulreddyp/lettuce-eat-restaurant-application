@@ -211,35 +211,31 @@ const MenuForm = () => {
   return (
     <div className="container">
       <h2 className="text-center mt-3">What's Cooking ?</h2>
-      <div className="row">
+      <div className="row justify-content-center">
         <Fragment>{success ? successMessage() : null}</Fragment>
         <span className="text-danger">{error}</span>
-        <div className="col-md-6 text-left p-3"></div>
-        <div className="col-md-6 text-left p-3">
+        <div className="col-md-5 text-left m-3 p-3 bg-secondary rounded">
           <form encType="multipart/form-data">
             <div className="form-group mb-3">
-              <label className="fw-bold">
-                Item Name:
+              <label className="fw-bold">Item Name:</label>
                 <input
                   className="form-control"
                   type="text"
                   name="name"
                   placeholder="Enter menu item name"
                   onChange={handleChange}
-                />
-              </label>
+                />              
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Item Description:
+                Item Description:</label>
                 <textarea
                   className="form-control"
                   name="description"
                   placeholder="Enter item description"
                   onChange={handleChange}
-                />
-              </label>
+                />              
             </div>
 
             <div className="form-group mb-3">
@@ -261,24 +257,23 @@ const MenuForm = () => {
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Dietary Instructions:
+                Dietary Instructions:</label>
                 <input
                   className="form-control"
                   type="text"
                   name="dietary"
-                  placeholder="enter dietary information"
+                  placeholder="Enter dietary information"
                   onChange={handleChange}
-                />
-              </label>
+                />              
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Customization:
+                Customization:</label>
                 {customization_options.map((option, index) => (
                   <label key={index} htmlFor={option.name}>
                     <input
-                      type="checkbox"
+                      type="checkbox"                      
                       name={option.name}
                       checked={customizations.get(option.name)}
                       onChange={handleCheckboxChange}
@@ -286,12 +281,11 @@ const MenuForm = () => {
                     {option.name}
                   </label>
                 ))}
-              </label>
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Price:
+                Price:</label>
                 <input
                   className="form-control"
                   type="number"
@@ -299,20 +293,20 @@ const MenuForm = () => {
                   placeholder="Enter item price"
                   onChange={handleChange}
                 />
-              </label>
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
                 Item Image:
                 <input                  
-                  type="file"
+                  className="form-control"
+                  type="file"                  
                   name="photo"
                   accept="image"
                   placeholder="Choose an image"
                   onChange={handleChange}
                 />
-              </label>
+                </label>
             </div>
 
             <button onClick={onSubmit} className="btn btn-success btn-block">
