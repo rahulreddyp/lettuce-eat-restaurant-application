@@ -1,10 +1,12 @@
-import { Container, Image, Row, ListGroup, Badge, Card, Form, Button } from "react-bootstrap"
+import { Container, Image, Row, ListGroup, Badge, Card, Form, Button, CloseButton } from "react-bootstrap"
 import { useState } from "react"
 import ApplyCoupon from "../paymentscomponents/ApplyCoupon"
+import PaymentIntroduction from "../paymentscomponents/PaymentIntroduction"
+import PaymentFormNew from "../paymentscomponents/PaymentFormNew"
 
 const PaymentsNew = () => {
 
-    const [totalAmount, setTotalAmount] = useState(35)
+    const [totalAmount, setTotalAmount] = useState(100)
     const [couponData, setCouponData] = useState({
         'couponCode': '',
         'couponApplied': false,
@@ -30,23 +32,38 @@ const PaymentsNew = () => {
             'itemName': 'Item3',
             'itemQuantity': '3',
             'itemAmount': '$30'
+        },
+        {
+            'itemId': '4',
+            'itemName': 'Item4',
+            'itemQuantity': '4',
+            'itemAmount': '$40'
         }
 
     ]
 
+    const cancelCouponChange = () => {
+        setTotalAmount(totalAmount / ((100 - couponData.discountPercentage)/100))
+        setCouponData({
+            'couponCode': '',
+            'couponApplied': false,
+            'discountPercentage': '',
+            'couponErrors': ''
+        })
+    }
+
 
     return (
         <Container>
-            <div className="py-5 text-center">
-            <Image className="mb-4 mx-auto d-block" src="https://www.nicepng.com/png/full/14-143923_payment-card-icon-png-edwin-m-sarmiento-credit.png" alt="" height="15%" width="15%"/>
-            <h2>Checkout order</h2>
-            <p className="lead">Hurray! You are just one step away from finishing up your order. Complete all the payment details required below. Once done, sit back and relax! We will deliver freshly cooked food to you as soon as possible.</p>
-            </div>
+            <PaymentIntroduction/>
             <Row>
-                <div className="mb-4 order-md-2 col-md-4">
+                <div className="col-md-8">
+                    <PaymentFormNew totalAmount = {totalAmount} couponCode = {couponData.couponCode}/>
+                </div>
+                <div className="mb-4 col-md-4">
                     <h4 className="d-flex justify-content-between align-items-center mb-3">
                         <span className="text-muted">Cart summary</span>
-                        <Badge pill bg="secondary">3</Badge>
+                        <Badge pill bg="secondary">{currentOrder.length}</Badge>
                     </h4>
                     <ListGroup as="ul" className="mb-3">
                         {
@@ -60,21 +77,27 @@ const PaymentsNew = () => {
                             </ListGroup.Item>
                             ))
                         }
-                        <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start bg-light">
-                                <div className="ms-2 me-auto text-success">
-                                    <div className="fw-bold">Coupon code</div>
-                                EXAMPLECOUPON
-                                </div>
-                                <Badge bg="success" pill>-$5</Badge>
+                        {
+                            couponData.couponApplied ?
+                            <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start bg-light">
+                                    <div className="ms-2 me-auto text-success">
+                                        <div className="fw-bold">Coupon code</div>
+                                        {couponData.couponCode}
+                                        <CloseButton onClick = {cancelCouponChange} />
+                                    </div>
+                                    <Badge bg="success" pill>{couponData.discountPercentage}% off</Badge>
                             </ListGroup.Item>
-                            <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
-                                <div className="ms-2 me-auto">
-                                    <div className="fw-bold">Total Amount</div>
-                                </div>
-                                <Badge bg="primary" pill>${totalAmount}</Badge>
-                            </ListGroup.Item>
+                           : <div></div>
+                        }                    
+                        <ListGroup.Item as="li" className="d-flex justify-content-between align-items-start">
+                            <div className="ms-2 me-auto">
+                                <div className="fw-bold">Total Amount</div>
+                            </div>
+                            <Badge bg="primary" pill>${totalAmount}</Badge>
+                        </ListGroup.Item>   
                     </ListGroup>
-                    <ApplyCoupon couponData={couponData} setCouponData = {setCouponData}/>
+                    <ApplyCoupon couponData={couponData} setCouponData = {setCouponData} 
+                        totalAmount = {totalAmount} setTotalAmount = {setTotalAmount}/>
                 </div>
             </Row>
         </Container>

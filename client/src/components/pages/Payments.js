@@ -18,19 +18,19 @@ const Payments = () => {
 
     return (
         <div>
-       <Container className='p-1'>
+       <Container className='p-3'>
            
-           <Row className='p-3'>
+           {/* <Row className='p-3'>
                <Col className='md-4'><Button onClick = {redirectToNewCard}>Add new card</Button></Col>
                <Col className='md-4'><div className='jumbotron'>Total Payment Amount - {totalAmount}</div></Col>
                <Col className='md-4'><ApplyCouponNew totalAmount={totalAmount} setTotalAmount={setTotalAmount} couponCode={couponCode} setCouponCode = {setCouponCode}/></Col>
            </Row>
            <Row className='p-3'>
                <PaymentForm totalAmount={totalAmount} couponCode = {couponCode}/>
-           </Row>
-           
+           </Row> */}
+    <PaymentsNew/>       
        </Container>
-    <PaymentsNew/>
+    
     </div>
     )
 
