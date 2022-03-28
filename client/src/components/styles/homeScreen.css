@@ -74,3 +74,10 @@ video {
   height: 10cm;
   width: 10cm;
 }
+
+.footer {
+  /* background-color: #dd7230;  
+  color: white;
+  font-size: 25px;  */
+  position:relative;
+ }

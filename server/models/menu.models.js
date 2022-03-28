@@ -1,10 +1,11 @@
 const mongoose = require("mongoose");
-// const {ObjectId} = mongoose.Schema;
+const { ObjectId } = mongoose.Schema;
+const Schema = mongoose.Schema;
 
 const Menu = new mongoose.Schema(
   {
     id: {
-            type: mongoose.Schema.Types.ObjectId
+        type: mongoose.Schema.Types.ObjectId
     },
     name: {
       type: String,
@@ -15,14 +16,23 @@ const Menu = new mongoose.Schema(
     description: {
       type: String,
       trim: true,
-      required: true,
       maxlength: 2000,
     },
     category: {
-      type: Number,
-      trim: true,
+      type: ObjectId,
+      ref: "FoodCategories",
+      required: true,
     },
-    // sizes: {},
+    dietary: {
+      type: String,
+      maxlength: 32,
+      trim: true
+    },
+    customization: {
+      type: Array,
+      // maxlength: 32,
+      // trim: true
+    },
     price: { type: Number, required: true, maxlength: 32, trim: true },
     photo: {
         data: Buffer,
@@ -30,9 +40,9 @@ const Menu = new mongoose.Schema(
       }
   },  
   {
-    collection: 'Menu'
+    collection: 'Menu',
+    timestamps: true
 }
-//   { timestamps: true }
 );
 
 module.exports = mongoose.model("Menu", Menu);
