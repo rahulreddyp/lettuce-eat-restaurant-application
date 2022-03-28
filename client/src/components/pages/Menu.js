@@ -32,7 +32,7 @@ const Menu = () => {
         {menuItems.map((item, index) => {
           return (
             <div key={index} className="col-md-4 mb-4">
-              <MenuCard item={item}/>
+              <MenuCard item={item} isAdmin={false} />
             </div>
           );
         })}

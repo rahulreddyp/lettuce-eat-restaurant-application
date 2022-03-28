@@ -3,9 +3,7 @@ import {Navbar,Nav,NavDropdown,Container, Button} from 'react-bootstrap';
 import {FaPizzaSlice ,FaOpencart ,FaPercentage , FaHeart, FaShoppingBasket} from 'react-icons/fa'
 import { useNavigate } from "react-router-dom";
 
-const Header = () => {
-
-  //const navigate = useNavigate();
+const Header = () => {  
 
   return (
    
@@ -21,7 +19,9 @@ const Header = () => {
         <Nav.Link href="/Coupons">Coupons <FaPercentage/></Nav.Link>
         <Nav.Link href="/Cart">Cart <FaShoppingBasket/></Nav.Link>
       </Nav>
-      <Button variant="outline-light" >Login</Button>
+      <Button variant="outline-light" onClick={()=>{
+        console.log('login')
+        window.location='/login'}} >Login</Button>
     </Navbar.Collapse>
     </Container>
 </Navbar>

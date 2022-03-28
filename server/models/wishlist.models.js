@@ -1,10 +1,9 @@
 const mongoose = require("mongoose");
-// const {ObjectId} = mongoose.Schema;
 
 const Wishlist = new mongoose.Schema(
   {
     id: {
-            type: mongoose.Schema.Types.ObjectId
+      type: mongoose.Schema.Types.ObjectId
     },
     name: {
       type: String,
@@ -13,7 +12,7 @@ const Wishlist = new mongoose.Schema(
       trim: true
     },
     price: { type: Number, required: true, maxlength: 32, trim: true },
-   category: {
+    category: {
       type: Number,
       trim: true,
     },
@@ -28,7 +27,6 @@ const Wishlist = new mongoose.Schema(
       maxlength: 2000,
     },
     
-    // sizes: {},
     
   },  
   {

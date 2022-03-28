@@ -1,7 +1,6 @@
 import React,{ useState} from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate, withRouter } from "react-router-dom";
-import foodImage from "../../images/food_image.jpg";
 import "../styles/Menu.css";
 const WishlistCard = ({ item }) => {
     const navigate = useNavigate();
