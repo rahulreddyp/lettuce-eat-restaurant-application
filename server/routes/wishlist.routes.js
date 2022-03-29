@@ -1,5 +1,5 @@
 const express = require("express");
-const wishlistControllers = require("../Controllers/wishlist.controllers");
+const wishlistControllers = require("../controllers/wishlist.controllers");
 const checkAuth = require('../middlewares/checkAuth.middlewares');
 const router = express.Router();
 //params
