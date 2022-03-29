@@ -1,5 +1,6 @@
+// Author: Rahul Reddy Puchakayala
+
 import React, { useState, useEffect, Fragment } from "react";
-import { Modal, Button } from "react-bootstrap";
 import { useLocation } from "react-router-dom";
 import { updateMenutem, getAllCategories } from "../../apicalls/AdminCalls";
 import { getMenuItem } from "../../apicalls/MenuCalls";
@@ -7,10 +8,6 @@ import { getMenuItem } from "../../apicalls/MenuCalls";
 const UpdateMenu = () => {
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
-
-  const [show, setShow] = useState(false);
-  const handleClose = () => setShow(false);
-  const handleShow = () => setShow(true);
 
   const { state } = useLocation();
   const { itemId } = state || {};
@@ -28,20 +25,25 @@ const UpdateMenu = () => {
     formData: "",
   });
 
-  const {
-    name,
+  const {   
     success,
     message,
     formData,
   } = item;
 
+  useEffect(() => {
+    loadItemDetails(itemId);
+  }, []);
+
   const loadItemDetails = (itemId) => {
+    loadCategories();
+
     getMenuItem(itemId).then((data) => {
       if (data.error) {
         setError(data.error);
       } else {
-        setItem({
-          ...item,
+        setItem(prev => ({
+          ...prev,
           name: data.name,
           description: data.description,
           category: data.category,
@@ -49,8 +51,7 @@ const UpdateMenu = () => {
           customization: data.customization,
           price: data.price,
           formData: new FormData(),
-        });
-        loadCategories();
+        }));
       }
     });
   };
@@ -61,43 +62,83 @@ const UpdateMenu = () => {
         setError(data.error);
       } else {
         setCategories(data);
-        // setItem({...item,
-        //   formData: new FormData()
-        // });
+        setItem({...item, formData: new FormData()});
       }
     });
   };
 
-  useEffect(() => {
-    loadItemDetails(itemId);
-  }, [itemId]);
-
   const handleChange = (e) => {
-    const value = e.target.name == "photo" ? e.target.files[0] : e.target.value;
+    setError("");
     const name = e.target.name;
+    const userInput = name === "photo" ? e.target.files[0] : e.target.value;
+    
+    if(userInput !== "") {
+    // switch case to handle each field validation
+    switch (name) {
+      case "name":
+        if (!userInput.match(/^[-_a-zA-Z ]+$/)) {
+          setError("Please enter valid item name - letters only");
+        } else {
+          formData.set(name, userInput);
+          setItem({ ...item, [name]: userInput });
+        }
+        break;
 
-    formData.set(name, value);
-    setItem({
-      ...item,
-      [e.target.name]: value,
-    });
+      case "description":
+        if (!userInput.match(/^[-_,. a-zA-Z0-9]+$/)) {
+          setError("Please enter  valid description - Alphanumeric only");
+        } else {
+          formData.set(name, userInput);
+          setItem({ ...item, [name]: userInput });
+        }
+        break;
+      case "category":
+        if (userInput === "") {
+          setError("Please choose a category for food item");
+        } else {
+          formData.set(name, userInput);
+          setItem({ ...item, [name]: userInput });
+        }
+        break;
+    
+      case "price":
+        // https://stackoverflow.com/questions/17482473/regular-expression-for-price-validation
+        if (userInput < 1 || !userInput.match(/^\d{1,2}(\.\d{1,2})?$/)) {
+          setError("Please enter valid amount (range: 1-99.99)");
+        } else {
+          formData.set(name, userInput);
+          setItem({ ...item, [name]: userInput });
+        }
+        break;
+
+      default:
+        formData.set(name, userInput);
+        setItem({ ...item, [name]: userInput }); 
+    }  
+  }
+  setItem({ ...item, [name]: userInput });
+
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
-
-    setShow(false);
     // check if all the form fields are filled or not
-    if (!item) {
+    if (
+      !item.name ||
+      !item.description ||
+      !item.category ||
+      !item.price
+    ) {
       setError("Please enter all the field values!");
-    } else if (!error) {
+      
+    } 
+    else if (!error) {
       updateMenutem(itemId, formData)
         .then((data) => {
           if (data.error) {
             setError(data.error);
           } else {
-            console.log("after update");
-
+      
             setItem({
               ...item,
               name: "",
@@ -132,54 +173,31 @@ const UpdateMenu = () => {
     </div>
   );
 
-  const menuModal = () => (
-    <>
-      <Modal show={show} onhide={handleClose} centered>
-        <Modal.Header>
-          <Modal.Title>Update Menu Item</Modal.Title>
-        </Modal.Header>
-
-        <Modal.Body>info</Modal.Body>
-
-        <Modal.Footer>
-          <Button variant="secondary" onClick={handleClose}>
-            Close
-          </Button>
-          <Button variant="primary" onClick={onSubmit}>
-            Update
-          </Button>
-        </Modal.Footer>
-      </Modal>
-    </>
-  );
 
   return (
     <div className="container">
-      <h2 className="text-center mt-3">What's Cooking ?</h2>
-      <div className="row">
-        {menuModal()}
+      <h2 className="text-center mt-3">Something to update ?</h2>
+      <div className="row justify-content-center">
         <Fragment>{success ? successMessage() : null}</Fragment>
         <span className="text-danger">{error}</span>
-        <div className="col-md-6 text-left p-3"></div>
-        <div className="col-md-6 text-left p-3">
+        <div className="col-md-5 text-left m-3 p-3 border rounded">
           <form encType="multipart/form-data">
             <div className="form-group mb-3">
-              <label className="fw-bold">
-                Item Name:
+              <label className="fw-bold">Item Name:</label>
                 <input
                   className="form-control"
                   type="text"
                   name="name"
                   placeholder="Enter menu item name"
-                  value={name}
+                  value={item.name}
                   onChange={handleChange}
                 />
-              </label>
+
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Item Description:
+                Item Description:              </label>
                 <textarea
                   className="form-control"
                   name="description"
@@ -187,7 +205,7 @@ const UpdateMenu = () => {
                   value={item.description}
                   onChange={handleChange}
                 />
-              </label>
+
             </div>
 
             <div className="form-group mb-3">
@@ -210,36 +228,22 @@ const UpdateMenu = () => {
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Dietary Instructions:
+                Dietary Instructions:</label>
                 <input
                   className="form-control"
                   type="text"
                   name="dietary"
+                  title="disabled to edit"
                   placeholder="enter dietary information"
                   value={item.dietary}
                   onChange={handleChange}
                   readOnly
                 />
-              </label>
+              
             </div>
 
             <div className="form-group mb-3">
-              <label className="fw-bold">
-                Customization:
-                <input
-                  className="form-control"
-                  type="text"
-                  name="customization"
-                  placeholder="Enter customizations"
-                  value={item.customization}
-                  onChange={handleChange}
-                />
-              </label>
-            </div>
-
-            <div className="form-group mb-3">
-              <label className="fw-bold">
-                Price:
+              <label className="fw-bold">Price:</label>
                 <input
                   className="form-control"
                   type="number"
@@ -248,7 +252,7 @@ const UpdateMenu = () => {
                   value={item.price}
                   onChange={handleChange}
                 />
-              </label>
+
             </div>
 
             <div className="form-group mb-3">
@@ -263,10 +267,6 @@ const UpdateMenu = () => {
                 />
               </label>
             </div>
-
-            {/* <button className="btn-modal" onClick={handleShow}>
-              Update Item
-            </button> */}
 
             <button onClick={onSubmit} className="btn btn-success btn-block">
               Update Item

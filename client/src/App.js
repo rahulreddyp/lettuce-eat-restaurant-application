@@ -3,28 +3,33 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Admin from "./components/pages/Admin";
+import AdminRoute from "./components/pages/AdminRoute";
+import {
+  default as AllOrders,
+  default as OrderStatus,
+} from "./components/pages/AllOrders";
+import Cart from "./components/pages/Cart";
+import Editprofile from "./components/pages/Editprofile";
 import GetOrderStatus from "./components/pages/GetOrderStatus";
 import HomePage from "./components/pages/HomeScreen";
 import Login from "./components/pages/Login";
+import ManageMenu from "./components/pages/ManageMenu";
 import Menu from "./components/pages/Menu";
+import MenuForm from "./components/pages/MenuForm";
 import MenuItem from "./components/pages/MenuItem";
-import OrderStatus from "./components/pages/AllOrders";
-import UpdateOrder from "./components/pages/UpdateOrder";
+import Payments from "./components/pages/Payments";
+import ResetPassword from "./components/pages/ResetPassword";
+import SendMail from "./components/pages/SendMail";
 import Signup from "./components/pages/Signup";
+import UpdateMenu from "./components/pages/UpdateMenu";
+import UpdateOrder from "./components/pages/UpdateOrder";
 import UpdateOrderFinalScreen from "./components/pages/UpdateOrderFinalScreen";
 import UpdateOrderStatus from "./components/pages/UpdateOrderStatus";
 import Profile from "./components/pages/Userprofile";
-import Editprofile from "./components/pages/Editprofile";
-import Payments from "./components/pages/Payments";
-import AddCard from "./components/paymentscomponents/AddCard";
-import Cart from "./components/pages/Cart";
-import Admin from "./components/pages/Admin";
-import AdminRoute from "./components/pages/AdminRoute";
-import ManageMenu from "./components/pages/ManageMenu";
-import UpdateMenu from "./components/pages/UpdateMenu";
-import MenuForm from "./components/pages/MenuForm";
+import VerifyOtp from "./components/pages/VerifyOtp";
 import Wishlist from "./components/pages/Wishlist";
-import AllOrders from "./components/pages/AllOrders";
+import AddCard from "./components/paymentscomponents/AddCard";
 function App() {
   return (
     <div className="App">
@@ -35,9 +40,15 @@ function App() {
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
           <Route path="/orders" element={<AllOrders />} />
+          <Route path="/signup" element={<Signup />} />
+          <Route path="/login" element={<Login />} />
+          <Route path="/sendmail" element={<SendMail />} />
+          <Route path="/verifyotp" element={<VerifyOtp />} />
+          <Route path="/resetpassword" element={<ResetPassword />} />
+          <Route path="/profile" element={<Profile />} />
+          <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/getOrders/" element={<OrderStatus />} />
           <Route path="/updateOrder/:id" element={<UpdateOrder />} />
-          <Route path="/profile" element={<Profile />} />
           <Route path="/editprofile" element={<Editprofile />} />
           <Route path="/menu" element={<Menu />} />
           <Route path="/menuitem" element={<MenuItem />} />

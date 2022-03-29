@@ -7,6 +7,8 @@ import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { useState } from "react";
+import { useEffect } from "react";
 
 const URL = "http://localhost:5000/updateprofile";
 const headers = {
@@ -21,8 +23,9 @@ const schema = yup.object().shape({
 });
 
 const Editprofile = () => {
-  const navigate = useNavigate();
   const user = JSON.parse(localStorage.getItem("user"));
+  const navigate = useNavigate();
+  const [newUserDetails, setNewUserDetails] = useState({});
   const {
     register,
     handleSubmit,
@@ -30,7 +33,6 @@ const Editprofile = () => {
   } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
 
   const onSubmit = async (data) => {
-    console.log(data);
     const updatedData = {
       id: user.id,
       firstName: data.firstName,
@@ -38,19 +40,29 @@ const Editprofile = () => {
       email: data.email,
       address: data.address,
     };
-    console.log(updatedData.id);
-    console.log(URL)
-    console.log(data.token)
-    const res = await axios.put("http://localhost:5000/updateprofile", updatedData, {
-      headers: {
-        "Content-Type": "application/json",
-        "x-access-token": user.token,
-      },
-    });
+
+    const res = await axios.put(
+      "http://localhost:5000/updateprofile",
+      updatedData,
+      {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": user.token,
+        },
+      }
+    );
     if (res.data.success === true) {
-      navigate("/login");
+      Object.keys(data).forEach((key) => {
+        user[key] = data[key];
+      });
+      console.log(user);
+      window.localStorage.setItem("user", JSON.stringify(user));
+      navigate("/menu");
     }
   };
+  useEffect(() => {
+    console.log("user updated");
+  }, [user]);
 
   return (
     <Container

@@ -1,3 +1,5 @@
+// Author: Rahul Reddy Puchakayala
+
 const express = require("express");
 const menuControllers = require("../Controllers/menu.controllers");
 const checkAuth = require('../middlewares/checkAuth.middlewares');
@@ -7,8 +9,7 @@ const router = express.Router();
 router.param("itemId", menuControllers.getMenuItemById);
 router.param("categoryId", menuControllers.getCategoryById);
 
-//Middleware
-router.get("/menu/photo/:itemId", menuControllers.getMenuItemPhoto);
+router.get("/menu/photo/:itemId", menuControllers.getImageObject);
 
 router.get("/menu", menuControllers.getAllMenu);
 

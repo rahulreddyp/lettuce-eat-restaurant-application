@@ -1,14 +1,38 @@
+// Author: Rahul Reddy Puchakayala, Aadil Sadik Mohammad
+
 const Menu = require("../Models/menu.models");
 const formidable = require("formidable");
 const fs = require("fs");
 const Category = require("../models/categories.models");
 const _ = require("lodash");
+const AWSConfig = require("../config/aws.config");
+
+const uploadFile = (fileContent, fileName) => {
+  const { s3, params } = AWSConfig;
+
+  // Setting up S3 upload parameters
+  const params1 = {
+    Bucket: params.Bucket,
+    Key: fileName,
+    Body: fileContent,
+  };
+
+  // Uploading files to the bucket
+  s3.upload(params1, function (err, data) {
+    if (err) {
+      throw err;
+    }
+    console.log(`File uploaded successfully. ${data.Location}`);
+
+    return data.Location;
+  });
+};
 
 const createMenuItem = (req, res) => {
-  console.log("request");
   try {
+
     let form = new formidable.IncomingForm();
-    form.keepExtensions = true;
+    form.keepExtensions = true;    
 
     form.parse(req, (err, fields, file) => {
       if (err) {
@@ -17,10 +41,14 @@ const createMenuItem = (req, res) => {
           err,
         });
       }
-      // const { body } = req;
-      // const menu = _.extend(body, fields);
+
       const menuItem = new Menu(fields);
 
+      if (fields.customization) {
+        const userCustomizations = JSON.parse(fields.customization);
+        menuItem.customization = userCustomizations;
+      }
+  
       if (file.photo) {
         if (file.photo.size > 5000000) {
           return res.status(400).json({
@@ -28,8 +56,13 @@ const createMenuItem = (req, res) => {
           });
         }
 
-        menuItem.photo.data = fs.readFileSync(file.photo.filepath);
-        menuItem.photo.contentType = file.photo.type;
+        const fileContent = fs.readFileSync(file.photo.filepath);
+
+        const data = uploadFile(fileContent, file.photo.originalFilename);
+        menuItem.photo.data = file.photo.originalFilename.toString();
+    
+        // menuItem.photo.data = fs.readFileSync(file.photo.filepath);
+        // menuItem.photo.contentType = file.photo.mimetype;
       }
 
       menuItem.save((err, item) => {
@@ -49,6 +82,25 @@ const createMenuItem = (req, res) => {
       err,
     });
   }
+};
+
+
+const getImageObject = (req, res) => {
+   AWSConfig.s3.getObject(
+    {
+      Bucket: AWSConfig.params.Bucket,
+      Key: req.menuitem.photo.data,
+    },
+    function (errtxt, file) {
+      if (errtxt) {
+        console.Log("lireFic", "ERR " + errtxt);
+        return res.json({error: errtxt});
+      } else {
+        res.send(file.Body);
+
+      }
+    }
+  );
 };
 
 const getAllMenu = (req, res) => {
@@ -77,18 +129,16 @@ const getMenuItemById = (req, res, next, id) => {
 };
 
 const getMenuItem = (req, res) => {
-  // req.menu.photo = undefined
   return res.json(req.menuitem);
 };
 
-// Middleware
+// Photo Middleware
 const getMenuItemPhoto = (req, res, next) => {
-  if (req.menuitem.alt_photo) {
-    console.log("inside");
-    // res.set("Content-Type", req.menuitem.alt_photo.contentType)
-    res.set("Content-Type", "binary/octet-stream");
-    return res.send(req.menuitem.alt_photo.data);
+  if (req.menuitem) {
+    res.set("Content-Type", req.menuitem.photo.contentType);
+    return res.send(req.menuitem.photo.data);
   }
+
   next();
 };
 
@@ -117,11 +167,11 @@ const getAllCategories = (req, res) => {
 };
 
 const getMenuItemCategory = (req, res) => {
-    return res.json(req.category);
+  return res.json(req.category);
 };
 
 const updateMenuItem = (req, res) => {
-  console.log("update request");
+  
   try {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
@@ -134,32 +184,34 @@ const updateMenuItem = (req, res) => {
         });
       }
 
-      let menuItem = req.menuItem;
-      menuItem = _.extend(menuItem, fields);
+      let menuitem = req.menuitem;
+      menuitem = _.extend(menuitem, fields);
 
       if (file.photo) {
-        if (file.photo.size > 5000000) {
+        if (file.photo.size > 3000000) {
           return res.status(400).json({
-            error: "File size is big, Max: 5 MB",
+            error: "File size is big, Max: 3 MB",
           });
         }
 
-        menuItem.photo.data = fs.readFileSync(file.photo.filepath);
-        menuItem.photo.contentType = file.photo.type;
+        // menuitem.photo.data = fs.readFileSync(file.photo.filepath);
+        // menuitem.photo.contentType = file.photo.mimetype;
+        const data = uploadFile(fileContent, file.photo.originalFilename);
+        menuitem.photo.data = file.photo.originalFilename.toString();
       }
 
-      menuItem.save((err, item) => {
+      menuitem.save((err, item) => {
         if (err) {
           res.status(400).json({
             error: "Error occurred when updating Item to database!" + err,
           });
         }
-        //   res
-        //     .status(200)
-        //     .json({ message: "Menu Item updated successfully!", item });   
-                        
-            res.writeHead(200, {'content-type' : 'application/json'})
-            res.end(item, null, 2);
+        res
+          .status(200)
+          .json({ message: "Menu Item updated successfully!", item });
+
+        // res.writeHead(200, {'content-type' : 'application/json'})
+        // res.end(item, null, 2);
       });
     });
   } catch (err) {
@@ -194,4 +246,5 @@ module.exports = {
   getMenuItemCategory,
   updateMenuItem,
   deleteMenuItem,
+  getImageObject
 };

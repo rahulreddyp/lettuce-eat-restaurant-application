@@ -1,3 +1,5 @@
+// Author: Rahul Reddy Puchakayala
+
 const customization_options = [
     {
       name: 'size',

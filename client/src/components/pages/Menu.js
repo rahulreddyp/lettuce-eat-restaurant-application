@@ -1,16 +1,20 @@
+// Author: Rahul Reddy Puchakayala
+
 import React, { useState, useEffect } from "react";
 import MenuCard from "./MenuCard";
 import { getMenu } from "../../apicalls/MenuCalls";
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
+  const [error, setError] = useState("");
+  const [reload, setReload] = useState(false);
 
   const loadMenu = () => {
     getMenu().then((data) => {
       if (data.error) {
-        // setError(data.error);
+        setError(data.error);
+        console.log(data.error);
       } else {
-        console.log(data);
         setMenuItems(data);
       }
     });
@@ -18,7 +22,7 @@ const Menu = () => {
 
   useEffect(() => {
     loadMenu();
-  }, []);
+  }, [reload]);
 
   return (
     <div className="container d-flex justify-content-center">
@@ -32,7 +36,7 @@ const Menu = () => {
         {menuItems.map((item, index) => {
           return (
             <div key={index} className="col-md-4 mb-4">
-              <MenuCard item={item} isAdmin={false} />
+              <MenuCard item={item} isAdmin={false} title="Click to view item details" />
             </div>
           );
         })}

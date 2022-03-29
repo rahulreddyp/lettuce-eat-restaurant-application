@@ -1,4 +1,7 @@
+// Author: Rahul Reddy Puchakayala
+
 import React, { useState, useEffect, Fragment } from "react";
+import { useNavigate } from "react-router-dom";
 import { createMenuItem, getAllCategories } from "../../apicalls/AdminCalls";
 import customization_options from "../static/MenuCustomizations";
 
@@ -6,13 +9,13 @@ const MenuForm = () => {
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
   const [customizations, setCustomizations] = useState(new Map());
+  const navigate = useNavigate();
 
   const [state, setState] = useState({
     name: "",
     description: "",
     category: "",
     dietary: "",
-    customization: [],
     price: 0,
     photo: "",
     success: false,
@@ -20,7 +23,7 @@ const MenuForm = () => {
     formData: "",
   });
 
-  const { formData, success, message, customization } = state;
+  const { formData, success, message } = state;
 
   const loadCategories = () => {
     getAllCategories().then((data) => {
@@ -41,119 +44,112 @@ const MenuForm = () => {
     setError("");
     const name = e.target.name;
 
-    const userInput = name == "photo" ? e.target.files[0] : e.target.value;
+    const userInput = name === "photo" ? e.target.files[0] : e.target.value;
 
     // switch case to handle each field validation
-    switch (name) {
-      case "name":
-        if (!userInput.match(/^[a-zA-Z ]+$/)) {
-          setError("Please enter valid item name - letters only");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
+    if (userInput !== "") {
+      switch (name) {
+        case "name":
+          if (!userInput.match(/^[a-zA-Z ]+$/)) {
+            setError("Please enter valid item name - letters only");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
 
-      case "description":
-        if (!userInput.match(/^[a-zA-Z0-9 ]+$/)) {
-          setError("Please enter  valid description - Alphanumeric only");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
-      case "category":
-        if (userInput === "") {
-          setError("Please choose a category for food item");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
+        case "description":
+          if (!userInput.match(/^[-_,. a-zA-Z0-9]+$/)) {
+            setError("Please enter  valid description - Alphanumeric and (underscore, hyphen) only");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
+        case "category":
+          if (userInput === "") {
+            setError("Please choose a category for food item");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
 
-      case "dietary":
-        if (!userInput.match(/^[a-zA-Z ]+$/)) {
-          setError("Please enter  valid dietary instructions - letters only");
-        } else {
+        case "dietary":
+          if (!userInput.match(/^[-_ a-zA-Z0-9]+$/)) {
+            setError("Please enter  valid dietary instructions - letters and (underscore, hyphen) only");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
+
+        case "price":
+          // https://stackoverflow.com/questions/17482473/regular-expression-for-price-validation
+          if (userInput < 1 || !userInput.match(/^\d{1,2}(\.\d{1,2})?$/)) {
+            setError("Please enter valid amount (range: 1-99.99)");
+          } else {
+            formData.set(name, userInput);
+            setState({ ...state, [name]: userInput });
+          }
+          break;
+
+        default:
           formData.set(name, userInput);
           setState({ ...state, [name]: userInput });
-        }
-        break;
-
-      case "price":
-        // https://stackoverflow.com/questions/17482473/regular-expression-for-price-validation
-        if (userInput < 1 || !userInput.match(/^\d{1,2}(\.\d{1,2})?$/)) {
-          setError("Please enter valid amount (range: 1-99.99)");
-        } else {
-          formData.set(name, userInput);
-          setState({ ...state, [name]: userInput });
-        }
-        break;
-
-      default:
-        formData.set(name, userInput);
-        setState({ ...state, [name]: userInput });
+      }
     }
   };
 
   const handleCheckboxChange = (e) => {
     const isChecked = e.target.checked;
-    if (isChecked) {
-      customization.push(e.target.name);
-    } else {
-      customization.remove(e.target.name);
-    }
-
+ 
     setCustomizations(new Map(customizations.set(e.target.name, isChecked)));
   };
 
   const onSubmit = (e) => {
     e.preventDefault();
 
-    if (customization) {
-      var filteredArray = [];
-
-      var array = {};
-
-      customization.forEach((e) => {
-        filteredArray = customization_options.filter(
-          (options) => options.name == e
-        );
-        array[e] = filteredArray[0].values;
-      });
-
-      console.log("options", filteredArray);
-      console.log("array", array);
-
-      if (customization.length !== 0) {
-        formData.set("customization", array);
-      }
-    }
-
     // check if user customizations are selected
-    // if(customizations) {
-    //   const setCustomizationValues = (cb) => {
-    //     var selectedOptions = [];
-    //       for (const [key, value] of customizations.entries()) {
-    //         if(value === true) {
-    //             selectedOptions.push(key);
-    //         }
-    //       }
-    //       cb(selectedOptions);
-    //     }
 
-    //   setCustomizationValues((data) => {
-    //     formData.set('customization', data);
-    //   });
-    // }
+      // get user selected customization options only
+      const setCustomizationValues = (cb) => {
+        var selectedOptions = [];
+          for (const [key, value] of customizations.entries()) {
+            if(value === true) {
+                selectedOptions.push(key);
+            }
+          }
+          cb(selectedOptions);
+        }
+
+      // set customizations values to formData  
+      setCustomizationValues((data) => {
+
+        if(data.length !== 0) {
+          var filteredArray = [];
+        
+          // filter through user options array and get only the selected one
+          data.forEach((e) => {
+          filteredArray = customization_options.filter(
+            (options) => options.name === e
+          )
+
+          console.log(filteredArray);
+        });
+          formData.set("customization", JSON.stringify(filteredArray[0]));
+        }
+      }); 
 
     // check if all the form fields are filled or not
-    if (
+    if(error) {
+      setError(error);
+    }
+    else if (
       !state.name ||
       !state.description ||
       !state.category ||
       !state.dietary ||
-      !state.customization ||
       !state.price
     ) {
       setError("Please enter all the field values!");
@@ -173,12 +169,12 @@ const MenuForm = () => {
               description: "",
               category: "",
               dietary: "",
-              customization: "",
               price: 0,
               photo: "",
               success: true,
               message: data.message,
             });
+
           }
         })
         .catch((err) => {
@@ -194,7 +190,8 @@ const MenuForm = () => {
         type="button"
         className="close"
         data-dismiss="alert"
-        aria-label="Close"
+        aria-label="Close"             
+        onClick={() => navigate("/admin/menu/manage")}
       >
         <span aria-hidden="true">&times;</span>
       </button>
@@ -204,35 +201,31 @@ const MenuForm = () => {
   return (
     <div className="container">
       <h2 className="text-center mt-3">What's Cooking ?</h2>
-      <div className="row">
+      <div className="row justify-content-center">
         <Fragment>{success ? successMessage() : null}</Fragment>
         <span className="text-danger">{error}</span>
-        <div className="col-md-6 text-left p-3"></div>
-        <div className="col-md-6 text-left p-3">
+        <div className="col-md-6 text-left m-3 p-3 border rounded">        
           <form encType="multipart/form-data">
             <div className="form-group mb-3">
-              <label className="fw-bold">
-                Item Name:
+              <label className="fw-bold">Item Name:</label>
                 <input
                   className="form-control"
                   type="text"
                   name="name"
                   placeholder="Enter menu item name"
                   onChange={handleChange}
-                />
-              </label>
+                />              
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Item Description:
+                Item Description:</label>
                 <textarea
                   className="form-control"
                   name="description"
                   placeholder="Enter item description"
                   onChange={handleChange}
-                />
-              </label>
+                />              
             </div>
 
             <div className="form-group mb-3">
@@ -254,24 +247,23 @@ const MenuForm = () => {
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Dietary Instructions:
+                Dietary Instructions:</label>
                 <input
                   className="form-control"
                   type="text"
                   name="dietary"
-                  placeholder="enter dietary information"
+                  placeholder="Enter dietary information"
                   onChange={handleChange}
-                />
-              </label>
+                />              
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Customization:
+                Customization:</label>
                 {customization_options.map((option, index) => (
                   <label key={index} htmlFor={option.name}>
                     <input
-                      type="checkbox"
+                      type="checkbox"                      
                       name={option.name}
                       checked={customizations.get(option.name)}
                       onChange={handleCheckboxChange}
@@ -279,12 +271,11 @@ const MenuForm = () => {
                     {option.name}
                   </label>
                 ))}
-              </label>
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
-                Price:
+                Price:</label>
                 <input
                   className="form-control"
                   type="number"
@@ -292,26 +283,27 @@ const MenuForm = () => {
                   placeholder="Enter item price"
                   onChange={handleChange}
                 />
-              </label>
             </div>
 
             <div className="form-group mb-3">
               <label className="fw-bold">
                 Item Image:
-                <input
+                <input                  
                   className="form-control"
-                  type="file"
+                  type="file"                  
                   name="photo"
                   accept="image"
+                  placeholder="Choose an image"
                   onChange={handleChange}
                 />
-              </label>
+                </label>
             </div>
 
             <button onClick={onSubmit} className="btn btn-success btn-block">
               Add
             </button>
           </form>
+          
         </div>
       </div>
     </div>
