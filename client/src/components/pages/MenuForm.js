@@ -203,7 +203,7 @@ const MenuForm = () => {
       <div className="row justify-content-center">
         <Fragment>{success ? successMessage() : null}</Fragment>
         <span className="text-danger">{error}</span>
-        <div className="col-md-5 text-left m-3 p-3 bg-secondary rounded">
+        <div className="col-md-6 text-left m-3 p-3 border rounded">        
           <form encType="multipart/form-data">
             <div className="form-group mb-3">
               <label className="fw-bold">Item Name:</label>
@@ -302,6 +302,7 @@ const MenuForm = () => {
               Add
             </button>
           </form>
+          
         </div>
       </div>
     </div>
