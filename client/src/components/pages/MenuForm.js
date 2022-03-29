@@ -135,6 +135,7 @@ const MenuForm = () => {
             (options) => options.name === e
           )
 
+          console.log(filteredArray);
         });
           formData.set("customization", JSON.stringify(filteredArray[0]));
         }
