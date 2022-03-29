@@ -3,7 +3,7 @@
  * @author Aadil Sadik Shaikh <ad979991@dal.ca>
  */
 const express = require("express");
-const orderControllers = require("../Controllers/order.controllers");
+const orderControllers = require("../controllers/order.controllers");
 const checkAuth = require("../middlewares/checkAuth.middlewares");
 const router = express.Router();
 
