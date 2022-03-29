@@ -1,13 +1,17 @@
 import React,{ useState} from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate, withRouter } from "react-router-dom";
-import { deleteWishlistItem } from "../../apicalls/WishlistCalls";
+import { deleteWishlistItem ,moveItemtoCart} from "../../apicalls/WishlistCalls";
 import "../styles/Menu.css";
 import { API } from "../../API";
 
 
 const WishlistCard = ({ item }) => {
+    //const [wishlistitem, setItem] = useState([]);
+    //setItem = item
     const [error, setError] = useState("");
+    const [cartItem, setCartItem] = useState([]);
+ 
     const navigate = useNavigate();
 
     const redirectToItemDetails = () => {
@@ -31,14 +35,28 @@ const WishlistCard = ({ item }) => {
         }
       }) 
     };
-  const moveToCart = async()=> {
+
+  const moveToCart = async () => {
+    setCartItem({
+      ...cartItem,
+      id: item._id,
+      name: item.name,
+      price: item.price,
+      category: item.category,
+    });
+    item.quanity = 1;
+    item.value= "small";
+    console.log(item);
     moveItemtoCart(item).then((data)=>{
       if (data.error) {
         setError(data.error);
       } else {
         console.log(data);
+
+        
       }
     }) 
+   // removefromWishlist();
   }
   return (
 

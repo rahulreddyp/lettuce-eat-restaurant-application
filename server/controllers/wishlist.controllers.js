@@ -1,6 +1,6 @@
 const Wishlist = require("../Models/wishlist.models");
 const Cart = require("../Models/cart.models");
-
+//const Menu = require("../Models/menu.models")
 const getAllWishlist = (req,res) => {
     Wishlist.find((err, wishlistitems) => {
         if (err) {
@@ -25,6 +25,7 @@ const getWishlistItemById = (req, res, next, id) => {
 };
 
 const moveToCart = (req, res)=>{
+    console.log(req.body)
     Cart.findOne({name: req.body.name})
     .then(results => {
         const cart = new Cart(req.body)
@@ -33,7 +34,10 @@ const moveToCart = (req, res)=>{
             return res.status(200).json({success: true});
         } 
         else{
-            return res.status(400).json({success:false,error: "Item already in Cart",})
+            req.body.quantity++;
+            const cart = new Cart(req.body)
+            cart.save();
+            return res.status(200).json({success:true});
         }
     })
 }
@@ -79,5 +83,5 @@ module.exports = {
     getWishlistItemById,
     putWishlistItem,
     deleteWishlistItem,
-    moveToCart
+    moveToCart,
   };

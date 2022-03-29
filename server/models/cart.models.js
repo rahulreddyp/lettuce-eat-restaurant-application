@@ -26,7 +26,14 @@ const Cart = new mongoose.Schema(
       required: true,
       maxlength: 2000,
     },
-    
+    value:{
+      type: String,
+      trim: true,
+    },
+    quantity:{
+      type: Number,
+      trim: true,
+    }
     
   },  
   {

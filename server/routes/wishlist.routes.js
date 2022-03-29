@@ -8,7 +8,8 @@ router.param("itemId", wishlistControllers.getWishlistItemById);
 router.get("/wishlist", wishlistControllers.getAllWishlist);
 router.post("/menuitem", wishlistControllers.putWishlistItem);
 router.delete("/wishlist/:itemId", wishlistControllers.deleteWishlistItem);
-router.put("/wishlist", wishlistControllers.moveToCart);
+router.post("/wishlist", wishlistControllers.moveToCart);
+router.get("/wishlist/:itemId", wishlistControllers.getWishlistItem);
 //  checkAuth.verifyToken,
 
 module.exports = router;

@@ -22,13 +22,14 @@ export const deleteWishlistItem = async (item) => {
 };
 
 export const moveItemtoCart = async(item)=> {
+    console.log(item.body.name)
     try{
         const res = await fetch(`${API}/wishlist`, {
-            method: "PUT",
+            method: 'POST',
             headers: {
                 Accept: "application/json"
             },
-            body: item
+            body: JSON.stringify(item)
         });
         return await res.json();
     }catch (err) {
@@ -45,6 +46,16 @@ export const getWishlist = async () => {
     .catch(err => console.log(err));
 };
 
+export const getWishlistItem = async (ItemId) => {
+    try {
+        const res = await fetch(`${API}/wishlist/${ItemId}`, {
+            method: "GET",
+        });
+        return await res.json();
+    } catch (err) {
+        return console.log(err);
+    }
+  };
 export const putItem = async (item) => {
      try{
         const result = await fetch(`${API}/menuitem`,{
