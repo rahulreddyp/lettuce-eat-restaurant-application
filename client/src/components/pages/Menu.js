@@ -7,6 +7,7 @@ import { getMenu } from "../../apicalls/MenuCalls";
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [error, setError] = useState("");
+  const [reload, setReload] = useState(false);
 
   const loadMenu = () => {
     getMenu().then((data) => {
@@ -21,7 +22,7 @@ const Menu = () => {
 
   useEffect(() => {
     loadMenu();
-  });
+  }, [reload]);
 
   return (
     <div className="container d-flex justify-content-center">

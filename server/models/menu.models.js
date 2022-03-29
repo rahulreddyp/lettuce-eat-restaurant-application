@@ -37,8 +37,9 @@ const Menu = new mongoose.Schema(
     },
     price: { type: Number, required: true, maxlength: 32, trim: true },
     photo: {
-        data: Buffer,
-        contentType: String,
+        data: String,
+        // data: Buffer,
+        // contentType: String,
       }
   },  
   {

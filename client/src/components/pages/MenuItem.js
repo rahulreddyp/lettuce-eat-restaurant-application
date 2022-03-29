@@ -76,7 +76,7 @@ const MenuItem = () => {
     console.log(resultinjson)
     };
 
-    var image = item.photo ? `${API}/menu/photo/${item._id}` : item.photo;
+    var image = `${API}/menu/photo/${item._id}`;
 
   return (
     <div className="container-fluid">

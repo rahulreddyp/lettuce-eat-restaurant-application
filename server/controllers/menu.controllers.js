@@ -1,13 +1,38 @@
-// Author: Rahul Reddy Puchakayala
+// Author: Rahul Reddy Puchakayala, Aadil Sadik Mohammad
 
 const Menu = require("../Models/menu.models");
 const formidable = require("formidable");
 const fs = require("fs");
 const Category = require("../models/categories.models");
 const _ = require("lodash");
+const AWSConfig = require("../config/aws.config");
+const AWS = require("aws-sdk");
+
+const uploadFile = (fileContent, fileName) => {
+  const { s3, params } = AWSConfig;
+  // Read content from the file
+  //const fileContent = fs.readFileSync(file);
+
+  // Setting up S3 upload parameters
+  const params1 = {
+    Bucket: params.Bucket,
+    Key: fileName,
+    Body: fileContent,
+  };
+
+  // Uploading files to the bucket
+  s3.upload(params1, function (err, data) {
+    if (err) {
+      throw err;
+    }
+    console.log(`File uploaded successfully. ${data.Location}`);
+    console.log(data);
+
+    return data.Location;
+  });
+};
 
 const createMenuItem = (req, res) => {
-  console.log("request");
   try {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
@@ -19,7 +44,7 @@ const createMenuItem = (req, res) => {
           err,
         });
       }
-      
+
       const menuItem = new Menu(fields);
 
       if (file.photo) {
@@ -29,8 +54,14 @@ const createMenuItem = (req, res) => {
           });
         }
 
-        menuItem.photo.data = fs.readFileSync(file.photo.filepath);
-        menuItem.photo.contentType = file.photo.mimetype;
+        const fileContent = fs.readFileSync(file.photo.filepath);
+
+        const data = uploadFile(fileContent, file.photo.originalFilename);
+        menuItem.photo.data = file.photo.originalFilename.toString();
+
+      
+        // menuItem.photo.data = fs.readFileSync(file.photo.filepath);
+        // menuItem.photo.contentType = file.photo.mimetype;
       }
 
       menuItem.save((err, item) => {
@@ -52,10 +83,29 @@ const createMenuItem = (req, res) => {
   }
 };
 
+
+const getImageObject = (req, res) => {
+   AWSConfig.s3.getObject(
+    {
+      Bucket: AWSConfig.params.Bucket,
+      Key: req.menuitem.photo.data,
+    },
+    function (errtxt, file) {
+      if (errtxt) {
+        console.Log("lireFic", "ERR " + errtxt);
+        return res.json({error: errtxt});
+      } else {
+        res.send(file.Body);
+
+      }
+    }
+  );
+};
+
 const getAllMenu = (req, res) => {
-  console.log('in backend');
+  console.log("in backend");
   Menu.find()
-    // .populate("category")
+    .populate("category")
     .exec((err, menuitems) => {
       if (err) {
         return res.status(400).json({
@@ -117,11 +167,11 @@ const getAllCategories = (req, res) => {
 };
 
 const getMenuItemCategory = (req, res) => {
-    return res.json(req.category);
+  return res.json(req.category);
 };
 
 const updateMenuItem = (req, res) => {
-  console.log("update request");
+  
   try {
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;
@@ -144,8 +194,10 @@ const updateMenuItem = (req, res) => {
           });
         }
 
-        menuitem.photo.data = fs.readFileSync(file.photo.filepath);
-        menuitem.photo.contentType = file.photo.mimetype;
+        // menuitem.photo.data = fs.readFileSync(file.photo.filepath);
+        // menuitem.photo.contentType = file.photo.mimetype;
+        const data = uploadFile(fileContent, file.photo.originalFilename);
+        menuitem.photo.data = file.photo.originalFilename.toString();
       }
 
       menuitem.save((err, item) => {
@@ -154,12 +206,12 @@ const updateMenuItem = (req, res) => {
             error: "Error occurred when updating Item to database!" + err,
           });
         }
-          res
-            .status(200)
-            .json({ message: "Menu Item updated successfully!", item });   
-                        
-            // res.writeHead(200, {'content-type' : 'application/json'})
-            // res.end(item, null, 2);
+        res
+          .status(200)
+          .json({ message: "Menu Item updated successfully!", item });
+
+        // res.writeHead(200, {'content-type' : 'application/json'})
+        // res.end(item, null, 2);
       });
     });
   } catch (err) {
@@ -194,4 +246,5 @@ module.exports = {
   getMenuItemCategory,
   updateMenuItem,
   deleteMenuItem,
+  getImageObject
 };
