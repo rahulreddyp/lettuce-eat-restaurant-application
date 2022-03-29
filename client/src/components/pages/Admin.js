@@ -22,20 +22,20 @@ const Admin = () => {
     };
 
 
-    const adminDashboard = () => {
-        return(
-            <div className="card mb-4">
-                <ul className="list-group">
-                    <li className="list-group-item border-0">
-                        <p className="badge badge-success mr-2">Name:</p>
-                    </li>
-                    <li className="list-group-item border-0">
-                        <p className="badge badge-success mr-2">Email:</p>
-                    </li>
-                </ul>
-            </div>
-        )
-    }
+    // const adminDashboard = () => {
+    //     return(
+    //         <div className="card mb-4">
+    //             <ul className="list-group">
+    //                 <li className="list-group-item ">
+    //                     <p className="badge badge-success">Name:</p>
+    //                 </li>
+    //                 <li className="list-group-item">
+    //                     <p className="badge badge-success">Email:</p>
+    //                 </li>
+    //             </ul>
+    //         </div>
+    //     )
+    // }
 
     return (        
         <div className="container p-4">
@@ -43,9 +43,10 @@ const Admin = () => {
             <h1>Hey, admin</h1>
             <p>Manage all your services here..</p>
           </div>
-         <div className="row">
-             <div className="col-3">{adminOperations()}</div>
-             <div className="col-9">{adminDashboard()}</div>
+         <div className="row justify-content-center">
+            <div className="col-md-6">
+             {adminOperations()}
+             </div>
          </div>
         </div>
      )

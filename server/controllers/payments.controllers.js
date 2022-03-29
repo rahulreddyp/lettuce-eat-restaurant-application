@@ -1,4 +1,7 @@
-const Payment = require("../Models/payments.models");
+/*
+Author - rahulmoje
+*/
+const Payment = require("../models/payments.models");
 const UserCard = require("../models/userCard.model")
 
 const savePaymentData = async (req, res) => {
@@ -13,23 +16,23 @@ const savePaymentData = async (req, res) => {
         paymentAmount: req.body.totalAmount,
         couponCode: req.body.couponCode
     })
-    try{
+    try {
         const response = await payment1.save()
         console.log(response)
-        const responseToSend = {id: response._id, version: response.__v, success: true}
+        const responseToSend = { id: response._id, version: response.__v, success: true }
         console.log(responseToSend)
         return res.json(responseToSend)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
-        return res.status(500).send({id: '', version: '', success: false});
+        return res.status(500).send({ id: '', version: '', success: false });
     }
-    
+
 
 }
 
 
-const saveNewCard = async(req, res) => {
-    try{
+const saveNewCard = async (req, res) => {
+    try {
         const userCard = new UserCard({
             userId: req.body.userId,
             userEmail: req.body.userEmail,
@@ -41,23 +44,23 @@ const saveNewCard = async(req, res) => {
         })
         const response = await userCard.save()
         console.log(response)
-        const responseToSend = {id: response._id, version: response.__v, success: true}
+        const responseToSend = { id: response._id, version: response.__v, success: true }
         console.log(responseToSend)
         return res.json(responseToSend)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
-        return res.status(500).send({id: '', version: '', success: false});
+        return res.status(500).send({ id: '', version: '', success: false });
     }
 }
 
-const retrieveUserCards = async(req, res) => {
-    try{
-        const response = await UserCard.find({'userId':req.params.userId})
+const retrieveUserCards = async (req, res) => {
+    try {
+        const response = await UserCard.find({ 'userId': req.params.userId })
         return res.json(response)
-    } catch(err) {
+    } catch (err) {
         console.log(err)
-        return res.status(500).send({id: '', version: '', success: false});
-    }    
+        return res.status(500).send({ id: '', version: '', success: false });
+    }
 }
 
 
@@ -65,4 +68,4 @@ module.exports = {
     savePaymentData,
     saveNewCard,
     retrieveUserCards
-  };
+};

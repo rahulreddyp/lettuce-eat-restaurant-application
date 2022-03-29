@@ -57,7 +57,7 @@ const Editprofile = () => {
       });
       console.log(user);
       window.localStorage.setItem("user", JSON.stringify(user));
-      navigate("/");
+      navigate("/menu");
     }
   };
   useEffect(() => {

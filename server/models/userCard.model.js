@@ -1,3 +1,6 @@
+/*
+Author - rahulmoje
+*/
 const mongoose = require("mongoose");
 
 
@@ -7,9 +10,10 @@ const UserCard = new mongoose.Schema(
             type: mongoose.Schema.Types.ObjectId
         },
         userId: {
-            type: Number,
+            type: String,
             trim: true,
-            required: true
+            required: true,
+            maxlength: 1024
         },
         userEmail: {
             type: String,
@@ -48,9 +52,9 @@ const UserCard = new mongoose.Schema(
         },
     },
     {
-        collection: 'UserCard'
-    },
-    { timestamps: true }
+        collection: 'UserCard',
+        timestamps: true
+    }
 );
 
 module.exports = mongoose.model("UserCard", UserCard);

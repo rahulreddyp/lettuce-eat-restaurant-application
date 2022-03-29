@@ -1,5 +1,8 @@
+/*
+Author - rahulmoje
+*/
 const express = require("express");
-const paymentControllers = require("../Controllers/payments.controllers");
+const paymentControllers = require("../controllers/payments.controllers");
 const checkAuth = require('../middlewares/checkAuth.middlewares');
 const router = express.Router();
 

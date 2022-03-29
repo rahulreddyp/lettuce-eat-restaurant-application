@@ -21,17 +21,19 @@ const Header = () => {
         
         
         <Nav.Link href="/Cart">Cart <FaShoppingBasket/></Nav.Link>
+        <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
+            <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
       </Nav>
       <Button variant="outline-light" onClick={()=>{
         console.log('login')
         window.location='/login'}} >Login</Button>
-    </Navbar.Collapse>
+    
+          </Navbar.Collapse>
     </Container>
 </Navbar>
 
-       
     
-  )
-}
+  );
+};
 
 export default Header;

@@ -33,10 +33,10 @@ export const updateMenutem = async (itemId, item) => {
     try {
         const res = await fetch(`${API}/menu/${itemId}`, {
             method: "PUT",
-            body: item,
             headers: {
                 Accept: "application/json"
-            }
+            },
+            body: item
         });
         return await res.json();
     } catch (err) {

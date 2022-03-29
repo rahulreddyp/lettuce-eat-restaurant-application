@@ -1,3 +1,6 @@
+/*
+Author - rahulmoje
+*/
 const mongoose = require("mongoose");
 
 
@@ -24,9 +27,7 @@ const Coupon = new mongoose.Schema(
         },
     },
     {
-        collection: 'Coupon'
-    },
-    {
+        collection: 'Coupon',
         timestamps: true
     }
 );
