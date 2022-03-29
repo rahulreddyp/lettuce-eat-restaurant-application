@@ -70,7 +70,10 @@ const MenuItem = () => {
   };
 
   const addtoWishlist = async () => {
-    putItem(item).then((data)=>{
+    console.log(item.photo)
+    const wishlistItem= {id:item._id, name:item.name, price:item.price, photo: item.photo, description:item.description};
+    console.log("Item to be added "+ wishlistItem)
+    putItem(wishlistItem).then((data)=>{
       if (data.error) {
         setError(data.error);
       } else {

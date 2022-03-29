@@ -16,20 +16,22 @@ const WishlistCard = ({ item }) => {
 
     const CardImage = item.photo ? item.photo : "No Image";
 
-  const removefromWishlist = async (itemId) => {
-    console.log("Here"+ item)
-      deleteWishlistItem(itemId).then((data)=>{
+  const removefromWishlist = async () => {
+    const deletemessage = "";
+    console.log("Here"+ item.id)
+      deleteWishlistItem(item.id).then((data)=>{
         if (data.error) {
           setError(data.error);
+          deletemessage = data.error;
         } else {
           console.log(data);
-          const deletemessage = data.message;
+          deletemessage = data.message;
           navigate("/wishlist", { state: { deletemessage } });
         }
       }) 
     };
   return (
-    <div className="card shadow" onClick={()=>{redirectToItemDetails()}}>
+    <div className="card shadow" >
       <div className="overflow">
           <img
             src={CardImage}

@@ -6,9 +6,9 @@ const navigate = useNavigate
 export const deleteWishlistItem = async (item) => {
     
     try {
-        const res = await fetch(`${API}/wishlist`, {
+        const res = await fetch(`${API}/wishlist/${item}`, {
             method: "DELETE",
-            body: item, 
+            //body: JSON.stringify(item), 
             headers: {
                 Accept: "application/json"
             }
@@ -32,8 +32,7 @@ export const getWishlist = async () => {
 };
 
 export const putItem = async (item) => {
-
-    try{
+     try{
         const result = await fetch(`${API}/menuitem`,{
         method: 'POST',
         headers: {
