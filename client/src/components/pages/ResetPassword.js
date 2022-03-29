@@ -8,8 +8,8 @@ import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../API";
 
-const URL = 'http://localhost:5000/'
 const headers = {
   'Content-Type': 'application/json'
 }
@@ -51,7 +51,7 @@ const ResetPassword = () => {
     const savedData = JSON.parse(localStorage.getItem("otpemail"));
     const finalData = {email:savedData.email,password:data.password}
     console.log(finalData)
-    const res = await axios.post(URL + "resetpassword", finalData, { headers: headers });
+    const res = await axios.post(`${API}/resetpassword`, finalData, { headers: headers });
     if (res.data.success === true) {
         localStorage.clear();
         navigate("/login");

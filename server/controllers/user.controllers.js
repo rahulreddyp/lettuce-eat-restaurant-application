@@ -2,8 +2,8 @@
 //This component is used to handle all the operations of user management
 const express = require("express");
 const app = express();
-const User = require("../Models/user.models");
-const Otp = require("../Models/otp.models");
+const User = require("../models/user.models");
+const Otp = require("../models/otp.models");
 const jwt = require('jsonwebtoken');
 const sendMail = require('./email.contollers')
 require("dotenv").config();

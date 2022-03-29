@@ -11,8 +11,9 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { API } from "../../API";
 
-const URL = "http://localhost:5000/updateprofile";
+const URL = `${API}/updateprofile`;
 const headers = {
   "Content-Type": "application/json",
 };
@@ -44,7 +45,7 @@ const Editprofile = () => {
     };
 
     const res = await axios.put(
-      "http://localhost:5000/updateprofile",
+      `${API}/updateprofile`,
       updatedData,
       {
         headers: {

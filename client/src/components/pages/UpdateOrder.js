@@ -6,6 +6,7 @@ import { Button, Card, Container, Dropdown } from "react-bootstrap";
 import axios from "axios";
 import { useNavigate } from "react-router";
 import { useParams } from "react-router-dom";
+import { API } from "../../API";
 
 import OrderCard from "./OrderCard";
 
@@ -19,7 +20,7 @@ export default function UpdateOrder() {
   const updateOrder = async () => {
     try {
       const updatedOrder = await axios.post(
-        "http://localhost:5000/updateOrder/" + id,
+        `${API}/updateOrder/` + id,
         {
           quantity: orderDetail.quantity,
           total: countTotal(),
@@ -34,7 +35,7 @@ export default function UpdateOrder() {
 
   useEffect(() => {
     const getData = async () => {
-      const res = await axios.get("http://localhost:5000/getOrder/" + id);
+      const res = await axios.get(`${API}/getOrder/` + id);
       console.log(res.data);
       setOrderDetail(res.data);
     };

@@ -6,8 +6,7 @@ import Image from "react-bootstrap/Image";
 import { FaUser, FaVolumeUp } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
-const URL = "http://localhost:5000/";
+import { API } from "../../API";
 
 const Userprofile = () => {
   const navigate = useNavigate();
@@ -18,7 +17,7 @@ const Userprofile = () => {
 
   const deleteProfile = async() => {
     console.log(data.id);
-    const res = await axios.post(URL+"deleteprofile", data, { headers: {'Content-Type': 'application/json','x-access-token':data.token} });
+    const res = await axios.post(`${API}/deleteprofile`, data, { headers: {'Content-Type': 'application/json','x-access-token':data.token} });
     if (res.data.success === true) {
         localStorage.clear();
         navigate("/");
