@@ -100,7 +100,7 @@ const MenuItem = () => {
         </div>
         <div className="row">
           <div className="col-md-6">
-            <p>{item.dietery}</p>
+            <p>{item.dietary}</p>
           </div> 
           <div className="col-md-2">
             {/* <h3>{item.price}</h3> */}
