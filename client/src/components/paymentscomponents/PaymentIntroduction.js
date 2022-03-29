@@ -1,5 +1,8 @@
-import { Image, Button } from "react-bootstrap"
-import { useNavigate } from "react-router-dom"
+/*
+Author - rahulmoje
+*/
+import { Button, Image } from "react-bootstrap";
+import { useNavigate } from "react-router-dom";
 
 const PaymentIntroduction = () => {
 
