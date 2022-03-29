@@ -44,7 +44,7 @@ const getWishlistItem = (req, res) => {
 
 const putWishlistItem = (req,res)=>{
     console.log(req.body.name)
-    Wishlist.findOne({id: req.body.id})
+    Wishlist.findOne({name: req.body.name})
     .then(results => {
         const wish = new Wishlist(req.body)
         if (!results) {
@@ -59,11 +59,7 @@ const putWishlistItem = (req,res)=>{
  }
 
  const deleteWishlistItem = (req, res) => {
-
-    console.log("the item to be removed is"+req.wishlistitem)
-    
     const userID = req.wishlistitem._id;
-    console.log(userID)
     Wishlist.findByIdAndDelete(userID,(err,result) => {
         if(err){
             console.log(err)

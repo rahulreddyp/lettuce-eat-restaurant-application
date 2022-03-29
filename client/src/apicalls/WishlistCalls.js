@@ -21,6 +21,20 @@ export const deleteWishlistItem = async (item) => {
 
 };
 
+export const moveItemtoCart = async(item)=> {
+    try{
+        const res = await fetch(`${API}/wishlist`, {
+            method: "PUT",
+            headers: {
+                Accept: "application/json"
+            },
+            body: item
+        });
+        return await res.json();
+    }catch (err) {
+        return console.log(err);
+    }
+};
 export const getWishlist = async () => {
     return fetch(`${API}/wishlist`, {
         method: "GET"
