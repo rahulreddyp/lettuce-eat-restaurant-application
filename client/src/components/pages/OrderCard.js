@@ -1,3 +1,6 @@
+/**
+ * @author Arpan Nayankumar Bhatt <ar205025@dal.ca>
+ */
 import React, { useState } from "react";
 import { Button, Card, Container, Dropdown } from "react-bootstrap";
 
