@@ -70,7 +70,7 @@ const UpdateMenu = () => {
   const handleChange = (e) => {
     setError("");
     const name = e.target.name;
-    const userInput = name == "photo" ? e.target.files[0] : e.target.value;
+    const userInput = name === "photo" ? e.target.files[0] : e.target.value;
     
     if(userInput !== "") {
     // switch case to handle each field validation
