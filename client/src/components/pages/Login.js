@@ -11,10 +11,6 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../API";
 
-<<<<<<< HEAD
-=======
-const URL = "http://localhost:5000/";
->>>>>>> 8283a4005914570341388c2a010e0f791d962bc0
 const headers = {
   "Content-Type": "application/json",
 };
