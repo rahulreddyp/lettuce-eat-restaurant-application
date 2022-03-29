@@ -8,7 +8,6 @@ import HomePage from "./components/pages/HomeScreen";
 import Login from "./components/pages/Login";
 import Menu from "./components/pages/Menu";
 import MenuItem from "./components/pages/MenuItem";
-import Order from "./components/pages/Order";
 import OrderStatus from "./components/pages/AllOrders";
 import UpdateOrder from "./components/pages/UpdateOrder";
 import Signup from "./components/pages/Signup";
@@ -25,6 +24,7 @@ import ManageMenu from "./components/pages/ManageMenu";
 import UpdateMenu from "./components/pages/UpdateMenu";
 import MenuForm from "./components/pages/MenuForm";
 import Wishlist from "./components/pages/Wishlist";
+import AllOrders from "./components/pages/AllOrders";
 function App() {
   return (
     <div className="App">
@@ -34,6 +34,7 @@ function App() {
           <Route path="/" element={<HomePage />} />
           <Route path="/signup" element={<Signup />} />
           <Route path="/login" element={<Login />} />
+          <Route path="/orders" element={<AllOrders />} />
           <Route path="/getOrders/" element={<OrderStatus />} />
           <Route path="/updateOrder/:id" element={<UpdateOrder />} />
           <Route path="/profile" element={<Profile />} />
@@ -57,7 +58,7 @@ function App() {
             path="/updateorderstatus/:id"
             element={<UpdateOrderFinalScreen />}
           />
-          <Route path="/orders" element={<Order />} />
+          {/* <Route path="/cart" element={<Cart />} /> */}
         </Routes>
       </Router>
       <Footer />
