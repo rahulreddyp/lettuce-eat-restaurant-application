@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to take otp input from user and verify in the process of resetting password
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";

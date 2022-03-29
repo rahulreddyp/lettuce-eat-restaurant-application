@@ -1,3 +1,6 @@
+/**
+ * @author Arpan Nayankumar Bhatt <ar205025@dal.ca>
+ */
 const mongoose = require("mongoose");
 const Order = new mongoose.Schema(
   {

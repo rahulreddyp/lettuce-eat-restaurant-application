@@ -1,3 +1,6 @@
+/**
+ * @author Arpan Nayankumar Bhatt <ar205025@dal.ca>
+ */
 import React from "react";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
@@ -10,29 +13,22 @@ import { CardActionArea } from "@mui/material";
 
 function OrderElement(props) {
   const navigator = useNavigate();
-  const { image_url, dish_name, quantity, order_status, total } = props;
+  const { image_url, dish_name, quantity, order_status, total, orderId } =
+    props;
   return (
     <>
       <div class="content" align="center">
         <Card
-          style={
-            order_status === "OUT_FOR_DELIVERY" ? { pointerEvents: "none" } : {}
-          }
-          sx={{ maxWidth: 300, maxHeight: 900, m: 2 }}
+          style={order_status === "DELIVERED" ? { pointerEvents: "none" } : {}}
+          sx={{ maxWidth: 400, maxHeight: 900, m: 2 }}
           onClick={() => {
-            navigator("/updateOrder/" + dish_name);
+            navigator("/updateOrder/" + orderId);
           }}
         >
           <CardActionArea>
-            <CardMedia
-              component="img"
-              height="170"
-              image={image_url}
-              alt="Image"
-            />
             <CardContent>
               <Typography gutterBottom variant="h5" component="div">
-                {dish_name}
+                Order Number: {dish_name}
               </Typography>
               {/* variant="body2" color="text.secondary" */}
               <Typography>Quantity : {quantity}</Typography>

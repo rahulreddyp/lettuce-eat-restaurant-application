@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This static component has labels for registration/signup page
 const content = {
     inputs: [
         {

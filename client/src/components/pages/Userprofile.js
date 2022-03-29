@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to render profile details of logged in user
 import React from "react";
 import { Col, Container, Row, Figure, Button } from "react-bootstrap";
 import Image from "react-bootstrap/Image";

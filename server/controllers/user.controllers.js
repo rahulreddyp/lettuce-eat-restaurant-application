@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to handle all the operations of user management
 const express = require("express");
 const app = express();
 const User = require("../models/user.models");
@@ -88,9 +90,6 @@ const updateProfile = async (req,res) => {
     });
 };
 
-const postUpdate = async (req,res) => {
-    
-}
 
 const deleteProfile = async (req,res) => {
     const userID = req.body.id;
@@ -153,7 +152,7 @@ const verifyOtp = async (req,res) => {
 };
 
 const resetPassword = async (req,res) => {
-    const email = req.body.email.email;
+    const email = req.body.email;
     const enteredPassword = req.body.password;
 
     const update = {
