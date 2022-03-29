@@ -1,17 +1,14 @@
 // Author: Rahul Reddy Puchakayala, Aadil Sadik Mohammad
 
-const Menu = require("../Models/menu.models");
+const Menu = require("../models/menu.models");
 const formidable = require("formidable");
 const fs = require("fs");
 const Category = require("../models/categories.models");
 const _ = require("lodash");
 const AWSConfig = require("../config/aws.config");
-const AWS = require("aws-sdk");
 
 const uploadFile = (fileContent, fileName) => {
   const { s3, params } = AWSConfig;
-  // Read content from the file
-  //const fileContent = fs.readFileSync(file);
 
   // Setting up S3 upload parameters
   const params1 = {
@@ -26,7 +23,6 @@ const uploadFile = (fileContent, fileName) => {
       throw err;
     }
     console.log(`File uploaded successfully. ${data.Location}`);
-    console.log(data);
 
     return data.Location;
   });
@@ -34,8 +30,9 @@ const uploadFile = (fileContent, fileName) => {
 
 const createMenuItem = (req, res) => {
   try {
+
     let form = new formidable.IncomingForm();
-    form.keepExtensions = true;
+    form.keepExtensions = true;    
 
     form.parse(req, (err, fields, file) => {
       if (err) {
@@ -47,10 +44,18 @@ const createMenuItem = (req, res) => {
 
       const menuItem = new Menu(fields);
 
+      if (fields.customization) {
+        const userCustomizations = JSON.parse(fields.customization);
+
+        console.log('usercu', userCustomizations)
+        menuItem.customization = userCustomizations;
+        console.log('user', menuItem)
+      }
+  
       if (file.photo) {
-        if (file.photo.size > 3000000) {
+        if (file.photo.size > 5000000) {
           return res.status(400).json({
-            error: "File size is big, Max: 3 MB",
+            error: "File size is big, Max: 5 MB",
           });
         }
 
@@ -58,8 +63,7 @@ const createMenuItem = (req, res) => {
 
         const data = uploadFile(fileContent, file.photo.originalFilename);
         menuItem.photo.data = file.photo.originalFilename.toString();
-
-      
+    
         // menuItem.photo.data = fs.readFileSync(file.photo.filepath);
         // menuItem.photo.contentType = file.photo.mimetype;
       }
@@ -103,7 +107,6 @@ const getImageObject = (req, res) => {
 };
 
 const getAllMenu = (req, res) => {
-  console.log("in backend");
   Menu.find()
     .populate("category")
     .exec((err, menuitems) => {

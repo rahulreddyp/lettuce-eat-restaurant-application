@@ -9,7 +9,6 @@ import MenuOptions from "./MenuOptions";
 import Heart from "react-animated-heart";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-const URL = "http://localhost:5000/";
 
 const MenuItem = () => {
   const navigate = useNavigate();
@@ -65,7 +64,7 @@ const MenuItem = () => {
   };
 
   const addtoWishlist = async () => {
-    const result = await fetch(URL+'menuitem',{
+    const result = await fetch(API+'/menuitem',{
         method: 'POST',
         headers: {
           'Content-Type': 'application/json'
@@ -100,7 +99,7 @@ const MenuItem = () => {
         </div>
         <div className="row">
           <div className="col-md-6">
-            <p>{item.dietery}</p>
+            <p>{item.dietary}</p>
           </div> 
           <div className="col-md-2">
             {/* <h3>{item.price}</h3> */}

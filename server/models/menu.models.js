@@ -31,9 +31,7 @@ const Menu = new mongoose.Schema(
     },
     customization: {
       type: Object,
-      default: { "size": [], "toppings": []}
-      // maxlength: 32,
-      // trim: true
+      trim: true
     },
     price: { type: Number, required: true, maxlength: 32, trim: true },
     photo: {

@@ -1,6 +1,7 @@
-// const { Router } = require("express");
-// const router = Router();
-
+/**
+ * @author Arpan Nayankumar Bhatt <ar205025@dal.ca>
+ * @author Aadil Sadik Shaikh <ad979991@dal.ca>
+ */
 const Order = require("../models/order.models");
 
 const dbConfig = require("../config/db.config");
@@ -43,6 +44,20 @@ const getAllOrders = async (req, res) => {
       sucess: false,
       message: "Something went wrong!",
     });
+  }
+};
+
+const getAllOrdersByUser = async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.params.userId })
+      .populate("user", "-password")
+      .populate({
+        path: "items",
+      });
+    res.send(orders);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
   }
 };
 
@@ -204,4 +219,5 @@ module.exports = {
   getOrderById,
   updateOrderStatus,
   getSpecificOrder,
+  getAllOrdersByUser,
 };

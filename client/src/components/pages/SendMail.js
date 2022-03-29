@@ -1,34 +1,35 @@
 // Author : Pavan Abburi
-//This component is used to provide signup form for the user to register in the application
+//This component is used to take email input and send mail to user for reseting password
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import content from "../static/SignupElements";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-
 import { API } from "../../API";
 
 const headers = {
-  'Content-Type': 'application/json'
-}
+  "Content-Type": "application/json",
+};
+
+const content = {
+  inputs: [
+    {
+      label: "Email",
+      name: "email",
+      type: "text",
+    },
+  ],
+};
 
 const schema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
   email: yup.string().required().email(),
-  password: yup.string().required().min(8),
-  retypepassword: yup
-    .string()
-    .oneOf([yup.ref("password"), null], "Passwords must match"),
-  address: yup.string().required(),
 });
 
-const Signup = () => {
-  const navigate = useNavigate()
+const SendMail = () => {
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -38,23 +39,18 @@ const Signup = () => {
     resolver: yupResolver(schema),
   });
 
-  const onSubmit = (data) => {
-    console.log(data);
-    return axios.post(API+'/register',data,{headers:headers}).then(res => {
-      if(res.data.success === true){
-          navigate('/login')
-      }
-  })
+  const onSubmit = async (data) => {
+    // console.log(data);
+    const res = await axios.post(API + "/resetmail", data, { headers: headers });
+    if (res.data.success === true) {
+      navigate("/verifyotp");
+    }
   };
 
   return (
-    <Container
-      style={{
-        height: "100vh"
-      }}
-    >
-      <h1 style={{ fontSize: "70px" }}>Sign Up</h1>
-      <Container style={{width: "75vh", marginTop: "50px"}}>
+    <Container style={{ height: "100vh" }}>
+      <h1 style={{ fontSize: "70px" }}>Verify Email</h1>
+      <Container style={{ width: "75vh", marginTop: "50px" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
@@ -75,6 +71,9 @@ const Signup = () => {
               </Row>
             );
           })}
+          <p>
+            Don't have an account? <a href="/signup">SignUp</a>
+          </p>
           <Button type="submit">Submit</Button>
         </form>
       </Container>
@@ -82,4 +81,4 @@ const Signup = () => {
   );
 };
 
-export default Signup;
+export default SendMail;

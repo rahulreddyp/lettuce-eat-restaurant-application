@@ -1,3 +1,4 @@
+//This component renders navigation bar of the application
 import React from 'react'
 import {Navbar,Nav,NavDropdown,Container, Button} from 'react-bootstrap';
 import {FaPizzaSlice ,FaOpencart ,FaPercentage , FaHeart, FaShoppingBasket, FaMoneyBill} from 'react-icons/fa'
