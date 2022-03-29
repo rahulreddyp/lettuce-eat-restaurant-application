@@ -23,10 +23,10 @@ const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = 
     }
   };
 
-  var CardImage = item.photo ?  `${API}/menu/photo/${item._id}` : item.photo;
+  var CardImage = item.photo ? `${API}/menu/photo/${item._id}`: item.photo;
 
   const deleteCurrentMenuItem = (itemId) => {
-    const deletemessage = "";
+    var deletemessage = "";
 
     deleteMenuItem(itemId).then((data) => {
       if (data.error) {

@@ -23,14 +23,13 @@ const createMenuItem = (req, res) => {
       const menuItem = new Menu(fields);
 
       if (file.photo) {
-        if (file.photo.size > 5000000) {
+        if (file.photo.size > 3000000) {
           return res.status(400).json({
-            error: "File size is big, Max: 5 MB",
+            error: "File size is big, Max: 3 MB",
           });
         }
 
         menuItem.photo.data = fs.readFileSync(file.photo.filepath);
-        console.log('file', file.photo);
         menuItem.photo.contentType = file.photo.mimetype;
       }
 
@@ -54,8 +53,9 @@ const createMenuItem = (req, res) => {
 };
 
 const getAllMenu = (req, res) => {
+  console.log('in backend');
   Menu.find()
-    .populate("category")
+    // .populate("category")
     .exec((err, menuitems) => {
       if (err) {
         return res.status(400).json({
@@ -84,11 +84,10 @@ const getMenuItem = (req, res) => {
 
 // Photo Middleware
 const getMenuItemPhoto = (req, res, next) => {
-  if ('data' in req.menuitem.photo) {
+  if (req.menuitem) {
     res.set("Content-Type", req.menuitem.photo.contentType);
     return res.send(req.menuitem.photo.data);
   }
-    res.send(req.menuitem.photo);
 
   next();
 };
@@ -139,14 +138,14 @@ const updateMenuItem = (req, res) => {
       menuitem = _.extend(menuitem, fields);
 
       if (file.photo) {
-        if (file.photo.size > 5000000) {
+        if (file.photo.size > 3000000) {
           return res.status(400).json({
-            error: "File size is big, Max: 5 MB",
+            error: "File size is big, Max: 3 MB",
           });
         }
 
         menuitem.photo.data = fs.readFileSync(file.photo.filepath);
-        menuitem.photo.contentType = file.photo.type;
+        menuitem.photo.contentType = file.photo.mimetype;
       }
 
       menuitem.save((err, item) => {

@@ -2,7 +2,6 @@
 
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;
-const Schema = mongoose.Schema;
 
 const Menu = new mongoose.Schema(
   {
@@ -32,7 +31,7 @@ const Menu = new mongoose.Schema(
     },
     customization: {
       type: Object,
-      default: {}
+      default: { "size": [], "toppings": []}
       // maxlength: 32,
       // trim: true
     },

@@ -6,13 +6,14 @@ import { getMenu } from "../../apicalls/MenuCalls";
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
+  const [error, setError] = useState("");
 
   const loadMenu = () => {
     getMenu().then((data) => {
       if (data.error) {
-        // setError(data.error);
+        setError(data.error);
+        console.log(data.error);
       } else {
-        console.log(data);
         setMenuItems(data);
       }
     });
@@ -20,7 +21,7 @@ const Menu = () => {
 
   useEffect(() => {
     loadMenu();
-  }, []);
+  });
 
   return (
     <div className="container d-flex justify-content-center">
