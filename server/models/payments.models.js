@@ -1,3 +1,6 @@
+/*
+Author - rahulmoje
+*/
 const mongoose = require("mongoose");
 
 
@@ -63,7 +66,7 @@ const Payment = new mongoose.Schema(
         collection: 'Payment',
         timestamps: true
     },
-    
+
 );
 
 module.exports = mongoose.model("Payment", Payment);

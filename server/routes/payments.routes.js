@@ -1,3 +1,6 @@
+/*
+Author - rahulmoje
+*/
 const express = require("express");
 const paymentControllers = require("../controllers/payments.controllers");
 const checkAuth = require('../middlewares/checkAuth.middlewares');

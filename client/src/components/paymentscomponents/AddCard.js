@@ -1,7 +1,9 @@
-import { Button, Col, Container, Row, Form, Image } from "react-bootstrap"
+/*
+Author - rahulmoje
+*/
 import { useRef, useState } from 'react';
+import { Button, Col, Container, Form, Image, Row } from "react-bootstrap";
 import { saveCardDetails } from "../../apicalls/PaymentCalls";
-import { useNavigate } from "react-router-dom";
 import CardSuccess from "./CardSuccess";
 
 const CryptoJS = require("crypto-js")
@@ -184,7 +186,7 @@ const AddCard = () => {
                         </div>
                     </div>
                 )
-                : (<CardSuccess cardId = {cardId}/>)
+                : (<CardSuccess cardId={cardId} />)
             }
         </Container>
 

@@ -1,3 +1,6 @@
+/*
+Author - rahulmoje
+*/
 import { useState } from "react"
 import { Container, Row } from "react-bootstrap"
 import CartSummary from "./CartSummary"
@@ -50,32 +53,32 @@ const PaymentsBlock = () => {
 
 
     return (
-        <Container> 
+        <Container>
             {
                 currentOrder.length > 0
-                ?
-                (
-                    paymentStatus.isPaymentComplete
-                        ?
-                        <PostPayments paymentStatus = {paymentStatus}/>
-                        :
-                        <div>
-                            <PaymentIntroduction />
-                            <Row>
-                                <div className="col-md-8">
-                                    <PaymentForm totalAmount={totalAmount} couponCode={couponData.couponCode}
-                                    paymentStatus = {paymentStatus} setPaymentStatus = {setPaymentStatus} />
-                                </div>
-                                <div className="mb-4 col-md-4">
-                                    <CartSummary currentOrder={currentOrder} couponData={couponData}
-                                        setCouponData={setCouponData} totalAmount={totalAmount} setTotalAmount={setTotalAmount} />
-                                </div>
-                            </Row>
-                        </div>
-                )
-                : <NoPayments/>
+                    ?
+                    (
+                        paymentStatus.isPaymentComplete
+                            ?
+                            <PostPayments paymentStatus={paymentStatus} />
+                            :
+                            <div>
+                                <PaymentIntroduction />
+                                <Row>
+                                    <div className="col-md-8">
+                                        <PaymentForm totalAmount={totalAmount} couponCode={couponData.couponCode}
+                                            paymentStatus={paymentStatus} setPaymentStatus={setPaymentStatus} />
+                                    </div>
+                                    <div className="mb-4 col-md-4">
+                                        <CartSummary currentOrder={currentOrder} couponData={couponData}
+                                            setCouponData={setCouponData} totalAmount={totalAmount} setTotalAmount={setTotalAmount} />
+                                    </div>
+                                </Row>
+                            </div>
+                    )
+                    : <NoPayments />
             }
-            
+
         </Container>
     )
 }
