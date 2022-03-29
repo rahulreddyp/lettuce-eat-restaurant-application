@@ -7,8 +7,8 @@ import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../API";
 
-const URL = 'http://localhost:5000/'
 const headers = {
   'Content-Type': 'application/json'
 }
@@ -31,7 +31,7 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const res = await axios.post(URL + 'login', data, { headers: headers });
+    const res = await axios.post(API + '/login', data, { headers: headers });
     if (res.data.success === true) {
       console.log(res.data);
       localStorage.setItem('user', JSON.stringify(res.data));
