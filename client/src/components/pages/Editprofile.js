@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to render the edit profile page of logged in user
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";

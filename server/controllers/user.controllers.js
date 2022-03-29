@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to handle all the operations of user management
 const express = require("express");
 const app = express();
 const User = require("../Models/user.models");

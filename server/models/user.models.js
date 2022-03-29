@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to set the schema of collection
 const mongoose = require('mongoose')
 
 const User = new mongoose.Schema(
