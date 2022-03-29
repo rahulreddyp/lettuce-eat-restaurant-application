@@ -124,9 +124,9 @@ function UpdateOrderFinalScreen(props) {
           value={s}
           onChange={handleChange}
         >
-          <MenuItem value={"Confirmed"}>Confirmed</MenuItem>
-          <MenuItem value={"Preparing"}>Preparing</MenuItem>
-          <MenuItem value={"Delivered"}>Delivered</MenuItem>
+          <MenuItem value={"CONFIRMED"}>Confirmed</MenuItem>
+          <MenuItem value={"PREPARING"}>Preparing</MenuItem>
+          <MenuItem value={"DELIVERED"}>Delivered</MenuItem>
         </Select>
 
         <br></br>

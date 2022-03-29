@@ -1,4 +1,4 @@
-import { API } from '../../API';
+import { API } from "../API";
 
 export const savePaymentData = async (object) => {
   const response = await fetch(`${API}/payments`, {

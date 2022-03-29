@@ -24,9 +24,7 @@ const Coupon = new mongoose.Schema(
         },
     },
     {
-        collection: 'Coupon'
-    },
-    {
+        collection: 'Coupon',
         timestamps: true
     }
 );

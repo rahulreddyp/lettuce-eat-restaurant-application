@@ -1,12 +1,12 @@
 import { useState } from "react"
 import { Container, Row } from "react-bootstrap"
-import CartSummary from "../paymentscomponents/CartSummary"
-import NoPayments from "../paymentscomponents/NoPayments"
-import PaymentFormNew from "../paymentscomponents/PaymentFormNew"
-import PaymentIntroduction from "../paymentscomponents/PaymentIntroduction"
-import PostPayments from "../paymentscomponents/PostPayments"
+import CartSummary from "./CartSummary"
+import NoPayments from "./NoPayments"
+import PaymentForm from "./PaymentForm"
+import PaymentIntroduction from "./PaymentIntroduction"
+import PostPayments from "./PostPayments"
 
-const PaymentsNew = () => {
+const PaymentsBlock = () => {
 
     const [totalAmount, setTotalAmount] = useState(100)
     const [couponData, setCouponData] = useState({
@@ -63,7 +63,7 @@ const PaymentsNew = () => {
                             <PaymentIntroduction />
                             <Row>
                                 <div className="col-md-8">
-                                    <PaymentFormNew totalAmount={totalAmount} couponCode={couponData.couponCode}
+                                    <PaymentForm totalAmount={totalAmount} couponCode={couponData.couponCode}
                                     paymentStatus = {paymentStatus} setPaymentStatus = {setPaymentStatus} />
                                 </div>
                                 <div className="mb-4 col-md-4">
@@ -80,4 +80,4 @@ const PaymentsNew = () => {
     )
 }
 
-export default PaymentsNew
+export default PaymentsBlock
