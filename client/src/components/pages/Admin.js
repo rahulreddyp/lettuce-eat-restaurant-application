@@ -1,4 +1,4 @@
-// Rahul Reddy Puchakayala
+// Author: Rahul Reddy Puchakayala
 
 import React from 'react';
 import { Link } from 'react-router-dom';
