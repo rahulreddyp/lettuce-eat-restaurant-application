@@ -46,6 +46,20 @@ const getAllOrders = async (req, res) => {
   }
 };
 
+const getAllOrdersByUser = async (req, res) => {
+  try {
+    const orders = await Order.find({ user: req.params.userId })
+      .populate("user", "-password")
+      .populate({
+        path: "items",
+      });
+    res.send(orders);
+  } catch (error) {
+    console.log(error);
+    res.send(error);
+  }
+};
+
 const getSpecificOrder = async (req, res) => {
   const id = req.params.id;
 
@@ -204,4 +218,5 @@ module.exports = {
   getOrderById,
   updateOrderStatus,
   getSpecificOrder,
+  getAllOrdersByUser,
 };

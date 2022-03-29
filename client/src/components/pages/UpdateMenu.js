@@ -70,7 +70,7 @@ const UpdateMenu = () => {
   const handleChange = (e) => {
     setError("");
     const name = e.target.name;
-    const userInput = name == "photo" ? e.target.files[0] : e.target.value;
+    const userInput = name === "photo" ? e.target.files[0] : e.target.value;
     
     if(userInput !== "") {
     // switch case to handle each field validation
@@ -180,11 +180,10 @@ const UpdateMenu = () => {
       <div className="row justify-content-center">
         <Fragment>{success ? successMessage() : null}</Fragment>
         <span className="text-danger">{error}</span>
-        <div className="col-md-5 text-left m-3 p-3 bg-secondary rounded">
+        <div className="col-md-5 text-left m-3 p-3 border rounded">
           <form encType="multipart/form-data">
             <div className="form-group mb-3">
-              <label className="fw-bold">
-                Item Name:              </label>
+              <label className="fw-bold">Item Name:</label>
                 <input
                   className="form-control"
                   type="text"
