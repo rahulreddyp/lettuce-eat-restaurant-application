@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to provide signup form for the user to register in the application
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
