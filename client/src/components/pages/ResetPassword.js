@@ -12,7 +12,7 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
-const savedData = JSON.parse(localStorage.getItem("otpemail"));
+
 
 const content = {
     inputs: [
@@ -46,9 +46,9 @@ const ResetPassword = () => {
   });
 
   const onSubmit = async (data) => {
-    console.log(data);
-    console.log(data.password)
-    const finalData = {email:savedData,password:data.password}
+    const savedData = JSON.parse(localStorage.getItem("otpemail"));
+    const finalData = {email:savedData.email,password:data.password}
+    console.log(finalData)
     const res = await axios.post(URL + "resetpassword", finalData, { headers: headers });
     if (res.data.success === true) {
         localStorage.clear();
