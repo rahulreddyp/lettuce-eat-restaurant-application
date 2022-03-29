@@ -1,7 +1,6 @@
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import content from "../static/LoginElements";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
@@ -13,12 +12,29 @@ const headers = {
   'Content-Type': 'application/json'
 }
 
+const savedData = JSON.parse(localStorage.getItem("otpemail"));
+
+const content = {
+    inputs: [
+        {
+            label:'Password',
+            name: 'password',
+            type: 'password'
+        },
+        {
+            label:'Re-type Password',
+            name: 'retypepassword',
+            type: 'password'
+        }
+    ]
+};
+
 const schema = yup.object().shape({
-  email: yup.string().required().email(),
-  password: yup.string().required()
+    password: yup.string().required().min(8),
+    retypepassword: yup.string().oneOf([yup.ref("password"), null], "Passwords must match")
 });
 
-const Login = () => {
+const ResetPassword = () => {
   const navigate = useNavigate()
   const {
     register,
@@ -31,17 +47,18 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const res = await axios.post(URL + 'login', data, { headers: headers });
+    console.log(data.password)
+    const finalData = {email:savedData,password:data.password}
+    const res = await axios.post(URL + "resetpassword", finalData, { headers: headers });
     if (res.data.success === true) {
-      console.log(res.data);
-      localStorage.setItem('user', JSON.stringify(res.data));
-      navigate('/profile');
-    }
+        localStorage.clear();
+        navigate("/login");
+      }
   };
 
   return (
     <Container style={{height: "100vh"}} >
-      <h1 style={{ fontSize: "70px" }}>Log In</h1>
+      <h1 style={{ fontSize: "70px" }}>Reset Password</h1>
       <Container style={{width: "75vh", marginTop: "50px"}}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
@@ -71,4 +88,4 @@ const Login = () => {
   );
 };
 
-export default Login;
+export default ResetPassword;

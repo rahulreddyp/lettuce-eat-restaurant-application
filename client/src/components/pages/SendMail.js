@@ -1,76 +1,53 @@
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
-import content from "../static/EditprofileElements";
 import { yupResolver } from "@hookform/resolvers/yup";
 import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
-import { useState } from "react";
-import { useEffect } from "react";
 
-const URL = "http://localhost:5000/updateprofile";
+const URL = "http://localhost:5000/";
 const headers = {
   "Content-Type": "application/json",
 };
 
+const content = {
+  inputs: [
+    {
+      label: "Email",
+      name: "email",
+      type: "text",
+    },
+  ],
+};
+
 const schema = yup.object().shape({
-  firstName: yup.string().required(),
-  lastName: yup.string().required(),
   email: yup.string().required().email(),
-  address: yup.string().required(),
 });
 
-const Editprofile = () => {
-  const user = JSON.parse(localStorage.getItem("user"));
+const SendMail = () => {
   const navigate = useNavigate();
-  const [newUserDetails, setNewUserDetails] = useState({});
   const {
     register,
     handleSubmit,
     formState: { errors },
-  } = useForm({ mode: "onChange", resolver: yupResolver(schema) });
+  } = useForm({
+    mode: "onChange",
+    resolver: yupResolver(schema),
+  });
 
   const onSubmit = async (data) => {
-    const updatedData = {
-      id: user.id,
-      firstName: data.firstName,
-      lastName: data.lastName,
-      email: data.email,
-      address: data.address,
-    };
-
-    const res = await axios.put(
-      "http://localhost:5000/updateprofile",
-      updatedData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": user.token,
-        },
-      }
-    );
+    // console.log(data);
+    const res = await axios.post(URL + "resetmail", data, { headers: headers });
     if (res.data.success === true) {
-      Object.keys(data).forEach((key) => {
-        user[key] = data[key];
-      });
-      console.log(user);
-      window.localStorage.setItem("user", JSON.stringify(user));
-      navigate("/");
+      navigate("/verifyotp");
     }
   };
-  useEffect(() => {
-    console.log("user updated");
-  }, [user]);
 
   return (
-    <Container
-      style={{
-        height: "100vh",
-      }}
-    >
-      <h1 style={{ fontSize: "70px" }}>Edit Profile</h1>
+    <Container style={{ height: "100vh" }}>
+      <h1 style={{ fontSize: "70px" }}>Verify Email</h1>
       <Container style={{ width: "75vh", marginTop: "50px" }}>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
@@ -83,7 +60,6 @@ const Editprofile = () => {
                   <Form.Control
                     name={input.name}
                     type={input.type}
-                    defaultValue={input.default}
                     {...register(input.name, { required: true })}
                   />
                 </Col>
@@ -93,6 +69,9 @@ const Editprofile = () => {
               </Row>
             );
           })}
+          <p>
+            Don't have an account? <a href="/signup">SignUp</a>
+          </p>
           <Button type="submit">Submit</Button>
         </form>
       </Container>
@@ -100,4 +79,4 @@ const Editprofile = () => {
   );
 };
 
-export default Editprofile;
+export default SendMail;

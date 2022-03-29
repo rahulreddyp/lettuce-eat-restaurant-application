@@ -3,6 +3,9 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import './App.css';
 import Header from './components/Header';
 import Login from './components/pages/Login';
+import SendMail from "./components/pages/SendMail";
+import VerifyOtp from "./components/pages/VerifyOtp";
+import ResetPassword from "./components/pages/ResetPassword";
 import Footer from './components/Footer'
 import HomePage from './components/pages/HomeScreen';
 import Profile from './components/pages/Userprofile'
@@ -29,6 +32,9 @@ function App() {
           <Route  path="/" element={<HomePage/>}/>
           <Route path="/signup" element={<Signup/>}/>
           <Route path="/login" element={<Login/>}/>
+          <Route path="/sendmail" element={<SendMail/>}/> 
+          <Route path="/verifyotp" element={<VerifyOtp/>}/>
+          <Route path="/resetpassword" element={<ResetPassword/>}/>
           <Route path="/profile" element={<Profile/>}/>
           <Route path="/editprofile" element={<Editprofile/>}/>
           <Route path="/menu" element={<Menu/>}/>

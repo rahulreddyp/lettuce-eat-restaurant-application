@@ -9,8 +9,7 @@ const URL = "http://localhost:5000/";
 
 const Userprofile = () => {
   const navigate = useNavigate();
-  const data = JSON.parse(localStorage.getItem("user"));
-
+  let data = JSON.parse(localStorage.getItem("user"));
   const editProfile = () => {
       navigate("/editprofile")
   }
