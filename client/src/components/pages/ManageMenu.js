@@ -11,7 +11,7 @@ const ManageMenu = () => {
   const [reload, setReload] = useState(false);
 
   const { state } = useLocation();
-  const { deletemessage } = state || {};
+  var { deletemessage } = state || {};
 
   const loadMenu = () => {   
     getMenu().then((data) => {

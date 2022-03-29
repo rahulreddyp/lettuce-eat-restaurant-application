@@ -1,3 +1,6 @@
+/*
+Author - rahulmoje
+*/
 import React from 'react';
 import { Container } from 'react-bootstrap';
 import PaymentsBlock from '../paymentscomponents/PaymentsBlock';

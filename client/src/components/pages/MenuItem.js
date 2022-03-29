@@ -33,11 +33,6 @@ const MenuItem = () => {
           console.log(data);
           setItem(data);      
           setCustomizations(data.customization);
-
-
-          // getItemCategory(data.category).then((item_catgory) => {
-          //   setItem({...item, category: item_catgory.category_name});
-          //   });
         }
       });
     } else {
@@ -82,7 +77,7 @@ const MenuItem = () => {
     }) 
     };
 
-    var image = item.photo ? `${API}/menu/photo/${item._id}` : item.photo;
+    var image = `${API}/menu/photo/${item._id}`;
 
   return (
     <div className="container-fluid">
