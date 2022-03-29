@@ -2,15 +2,15 @@ const express = require("express");
 const app = express();
 const cors = require("cors");
 
-const userRouter = require("./Routes/user.routes");
-const menuRouter = require("./Routes/menu.routes");
+const userRouter = require("./routes/user.routes");
+const menuRouter = require("./routes/menu.routes");
 const mongoose = require("mongoose");
-const orderRouter = require("./Routes/orders.routes");
+const orderRouter = require("./routes/orders.routes");
 const dbConfig = require("./config/db.config");
 const bodyParser = require("body-parser");
-const paymentsRouter = require("./Routes/payments.routes");
+const paymentsRouter = require("./routes/payments.routes");
 const couponsRouter = require("./routes/coupon.routes");
-const wishlistRouter = require("./Routes/wishlist.routes");
+const wishlistRouter = require("./routes/wishlist.routes");
 
 app.use(cors());
 app.use(express.json({limit: '50mb'}));
