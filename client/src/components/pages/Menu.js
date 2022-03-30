@@ -27,7 +27,8 @@ const Menu = () => {
   }, [reload]);
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div style={{backgroundColor: "#e7e393"}}>
+    <div className="container d-flex justify-content-center" >
       <div className="row">
         <div className="col-12">
           <div className="jumbotron text-center">
@@ -43,6 +44,7 @@ const Menu = () => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };

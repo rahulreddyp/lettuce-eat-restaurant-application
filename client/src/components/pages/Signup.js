@@ -1,6 +1,7 @@
 // Author : Pavan Abburi
 //This component is used to provide signup form for the user to register in the application
 import React from "react";
+import Wrapper from "../styles/usermanagementstyles";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import content from "../static/SignupElements";
@@ -48,13 +49,10 @@ const Signup = () => {
   };
 
   return (
-    <Container
-      style={{
-        height: "100vh"
-      }}
-    >
-      <h1 style={{ fontSize: "70px" }}>Sign Up</h1>
-      <Container style={{width: "75vh", marginTop: "50px"}}>
+    <Wrapper>
+      
+      <Container className="Container">
+      <h1 style={{ fontSize: "40px" }}>Sign Up</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
@@ -78,7 +76,7 @@ const Signup = () => {
           <Button type="submit">Submit</Button>
         </form>
       </Container>
-    </Container>
+      </Wrapper>
   );
 };
 
