@@ -1,11 +1,11 @@
 // Author: Deeksha Sareen
 
 import React,{ useState} from "react";
-import { Button } from "react-bootstrap";
 import { useNavigate, withRouter } from "react-router-dom";
 import "../styles/Menu.css";
 import { API } from "../../API";
 
+import {Dropdown } from "react-bootstrap";
 
 const CartCard = ({ item }) => {
   
@@ -20,13 +20,28 @@ const CartCard = ({ item }) => {
     };
 
     const CardImage = `${API}/menu/photo/${item._id}`;
-
+    const [items, setItems] = useState({item});
+  const removefromcart = async () => {
+      const deletemessage = "";
+        // deleteWishlistItem(item._id).then((data)=>{
+        //   if (data.error) {
+        //     setError(data.error);
+        //     deletemessage = data.error;
+        //   } else {
+        //     console.log(data);
+        //     deletemessage = data.message;
+        //     navigate("/wishlist", { state: { deletemessage } });
+        //   }
+        // } ,window.location.reload(false)) 
+      };
+  
 
   return (
+<div className="container">
 
-    <div class="card">
+    <div className="card shadow" style={{ width: "20rem" }}>
        <div className="overflow">
-       <img
+       {/* <img
             src={CardImage}
             alt="Cart Item"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
@@ -34,8 +49,8 @@ const CartCard = ({ item }) => {
             onClick={() => {
               redirectToItemDetails();
             }}
-         />
-      <div class="card-body">
+         /> */}
+      <div class="card-body" style={{ width: "20rem" }}>
         <h3 class="card-title">{item.name}</h3>
         <p className="card-description">{item.description}</p>
       </div>
@@ -44,9 +59,49 @@ const CartCard = ({ item }) => {
         <span className="text-danger text-center">{error}</span>
         
       </ul>
+      <div class="card-body">
+        <Dropdown>
+              <Dropdown.Toggle>Quantity:{items.quantity}</Dropdown.Toggle>
+
+              <Dropdown.Menu>
+                <Dropdown.Item
+                  onClick={() => {
+                    setItems({
+                      ...items,
+                      quantity: 1 
+                    });
+                  }}
+                >
+                  1
+                </Dropdown.Item>
+                <Dropdown.Item
+                  onClick={() => {
+                    setItems({
+                      ...items,
+                      quantity: 2
+                    });
+                  }}
+                >
+                  2
+                </Dropdown.Item>
+                <Dropdown.Item
+                   onClick={() => {
+                    setItems({
+                      ...items,
+                      quantity: 3
+                    });
+                  }}
+                >
+                  3
+                </Dropdown.Item>
+              </Dropdown.Menu>
+            </Dropdown>
+            <a href="/cart"  style={{margin: '0.3rem'}}  onClick={removefromcart} class="btn btn-outline-danger">Remove from Cart</a>
+     
+      </div>
       </div>
     </div>
-
+    </div>
   );
 };
 
