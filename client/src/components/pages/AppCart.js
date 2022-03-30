@@ -1,24 +1,23 @@
 import React, { useState, useEffect } from "react";
-import WishlistCard from "./WishlistCard";
-import { getWishlist } from "../../apicalls/WishlistCalls";
+import { getCart } from "../../apicalls/CartCalls";
+import CartCard from "./CartCard";
+const AppCart = () => {
+  const [cartItem, setCartItem] = useState([]);
 
-const Wishlist = () => {
-  const [wishlistItem, setWishlistItem] = useState([]);
-
-  const loadWishlist = () => {
-    getWishlist().then((data) => {
+  const loadCart = () => {
+    getCart().then((data) => {
       // if (data) {
       //   // setError(data.error);
       // } else 
       {
         console.log(data);
-        setWishlistItem(data);
+        setCartItem(data);
       }
     });
   };
 
   useEffect(() => {
-    loadWishlist();
+    loadCart();
   }, []);
 
   return (
@@ -26,14 +25,14 @@ const Wishlist = () => {
       <div className="row">
         <div className="col-12">
           <div className="jumbotron text-center">
-            <h1>WHAT'S ON OUR Wishlist ?</h1>
+            <h1>WHAT'S ON YOUR Cart ?</h1>
             <p>Best food, Best served, Best Loved</p>
           </div>
         </div>
-        {wishlistItem.map((item, index) => {
+        {cartItem.map((item, index) => {
           return (
             <div key={index} className="col-md-4 mb-4">
-              <WishlistCard item={item}/>
+             <CartCard item={item}/>
             </div>
           );
         })}
@@ -42,4 +41,4 @@ const Wishlist = () => {
   );
 };
 
-export default Wishlist;
+export default AppCart;
