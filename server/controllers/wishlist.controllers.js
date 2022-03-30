@@ -1,6 +1,6 @@
 const Wishlist = require("../Models/wishlist.models");
 const Cart = require("../Models/cart.models");
-const Menu = require("../Models/menu.models")
+
 const getAllWishlist = (req,res) => {
     Wishlist.find((err, wishlistitems) => {
         if (err) {
