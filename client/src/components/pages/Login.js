@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to login in to the application
 import React from "react";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -7,11 +9,11 @@ import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../API";
 
-const URL = 'http://localhost:5000/'
 const headers = {
-  'Content-Type': 'application/json'
-}
+  "Content-Type": "application/json",
+};
 
 const schema = yup.object().shape({
   email: yup.string().required().email(),
@@ -19,7 +21,7 @@ const schema = yup.object().shape({
 });
 
 const Login = () => {
-  const navigate = useNavigate()
+  const navigate = useNavigate();
   const {
     register,
     handleSubmit,
@@ -31,11 +33,13 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    const res = await axios.post(URL + 'login', data, { headers: headers });
+    
+    localStorage.clear();
+    const res = await axios.post(API + '/login', data, { headers: headers });
     if (res.data.success === true) {
       console.log(res.data);
-      localStorage.setItem('user', JSON.stringify(res.data));
-      navigate('/');
+      localStorage.setItem("user", JSON.stringify(res.data));
+      navigate("/profile");
     }
   };
 
@@ -65,6 +69,9 @@ const Login = () => {
           })}
           <p>
             Don't have an account? <a href="/signup">SignUp</a>
+          </p>
+          <p>
+            Forgot or Reset password? <a href="/sendmail">Reset here</a>
           </p>
           <Button type="submit">Submit</Button>
         </form>

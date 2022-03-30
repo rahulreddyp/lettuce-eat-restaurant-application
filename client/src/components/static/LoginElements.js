@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This static component has labels for login page
 const content = {
     inputs: [
         {

@@ -9,12 +9,12 @@ import MenuOptions from "./MenuOptions";
 import Heart from "react-animated-heart";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
-const URL = "http://localhost:5000/";
 
 const MenuItem = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [customizations, setCustomizations] = useState([]);
   const [cartItem, setCartItem] = useState([]);
   const [wishlistitems, setwishlistitems] = useState([]);
@@ -33,11 +33,6 @@ const MenuItem = () => {
           console.log(data);
           setItem(data);      
           setCustomizations(data.customization);
-
-
-          // getItemCategory(data.category).then((item_catgory) => {
-          //   setItem({...item, category: item_catgory.category_name});
-          //   });
         }
       });
     } else {
@@ -70,18 +65,19 @@ const MenuItem = () => {
   };
 
   const addtoWishlist = async () => {
-    const result = await fetch(URL+'menuitem',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(item)
-    })
-    const resultinjson = await result.json();
-    console.log(resultinjson)
+    console.log(item.id)
+    console.log("Item to be added "+ item.name)
+    putItem(item).then((data)=>{
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setSuccess(data.message);
+        console.log(data);
+      }
+    }) 
     };
 
-    var image = item.photo ? `${API}/menu/photo/${item._id}` : item.photo;
+    var image = `${API}/menu/photo/${item._id}`;
 
   return (
     <div className="container-fluid">
@@ -105,7 +101,7 @@ const MenuItem = () => {
         </div>
         <div className="row">
           <div className="col-md-6">
-            <p>{item.dietery}</p>
+            <p>{item.dietary}</p>
           </div> 
           <div className="col-md-2">
             {/* <h3>{item.price}</h3> */}
@@ -119,6 +115,7 @@ const MenuItem = () => {
       </div>
      
       <div className="row">
+      <span className="text-danger text-center">{success}</span>
         <span className="text-danger text-center">{error}</span>
         <form onSubmit={(e) => addtoCart(e)}>
           {item.customization &&

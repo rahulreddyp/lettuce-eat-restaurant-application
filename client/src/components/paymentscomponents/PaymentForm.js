@@ -1,6 +1,11 @@
+/*
+Author - rahulmoje
+*/
 import { useEffect, useRef, useState } from "react";
 import { Button, Col, Form, Row } from "react-bootstrap";
-import { retrieveUserCards, savePaymentData } from "../../apicalls/PaymentCalls"
+import { retrieveUserCards, savePaymentData } from "../../apicalls/PaymentCalls";
+
+var CryptoJS = require("crypto-js")
 
 
 
@@ -23,7 +28,7 @@ const PaymentForm = (props) => {
 
     const scrollRef = useRef(null)
 
-    
+
     const [userCards, setUserCards] = useState('')
 
     mainForm.totalAmount = props.totalAmount
@@ -34,6 +39,7 @@ const PaymentForm = (props) => {
 
 
     const [validated, setValidated] = useState(false)
+    const [existingCardSelected, setExistingCardSelected] = useState(false)
 
     //Form errors
     const [formErrors, setFormErrors] = useState({})
@@ -53,15 +59,28 @@ const PaymentForm = (props) => {
         () => {
             retrieveUserCards(user.id)
                 .then(response => {
+                    decryptCvv(response)
                     console.log('Currently saved user cards', response)
                     setUserCards(response)
+
                 })
             return () => {
                 setUserCards({})
-              };
+            };
         },
         [],
     );
+
+    const decryptCvv = (cards) => {
+        for (var i = 0; i < cards.length; i++) {
+            var card = cards[i]
+            var encryptedCvv = card.cvv
+            var decryptedCvv = CryptoJS.AES.decrypt(encryptedCvv, 'csci5409_project_group01').toString(CryptoJS.enc.Utf8)
+            console.log('Encrypted cvv', encryptedCvv)
+            console.log('Decrypted cvv', decryptedCvv)
+            cards[i].cvv = decryptedCvv.replaceAll('"', '')
+        }
+    }
 
     //Form validations
     const validateForm = () => {
@@ -88,6 +107,36 @@ const PaymentForm = (props) => {
             errors.cvv = 'CVV should be of 3 digits'
         }
         return errors
+
+    }
+
+    const handleExistingCard = (event) => {
+        if (event.target.value !== '-1') {
+            console.log('Card clicked', event.target.value)
+            for (var i = 0; i < userCards.length; i++) {
+                if (userCards[i]._id === event.target.value) {
+                    var card = userCards[i]
+                    mainForm.cardType = card.cardType
+                    mainForm.cardNumber = card.cardNumber
+                    mainForm.cardName = card.cardName
+                    mainForm.cardValidity = card.cardValidity
+                    mainForm.cvv = card.cvv
+                    setFormErrors({})
+                    setExistingCardSelected(true)
+
+                }
+            }
+        } else {
+            if (existingCardSelected) {
+                console.log('No need to set existing card')
+                mainForm.cardType = ""
+                mainForm.cardNumber = ""
+                mainForm.cardName = ""
+                mainForm.cardValidity = ""
+                mainForm.cvv = ""
+                setFormErrors({})
+            }
+        }
 
     }
 
@@ -131,10 +180,30 @@ const PaymentForm = (props) => {
         <div ref={scrollRef}>
             <Form onSubmit={handleSubmit} validated={validated}>
                 <h4 className="mb-3">Payment</h4>
+                {
+                    userCards.length > 0
+                        ?
+                        <Form.Group>
+                            <Form.Label>Existing cards</Form.Label>
+                            <Form.Select onChange={handleExistingCard}>
+                                <option value='-1'>Do not select existing card</option>
+                                {
+                                    userCards.map((card) => (
+                                        <option value={card._id} key={card._id}>{card.cardNumber}</option>
+                                    ))
+                                }
+                            </Form.Select>
+                            <Form.Control.Feedback type='invalid'>
+                                {formErrors.cardType}
+                            </Form.Control.Feedback>
+                        </Form.Group>
+                        : <div></div>
+                }
+
                 <div className="d-block my-3">
                     <Form.Group>
                         <Form.Label>Card type</Form.Label>
-                        <Form.Select onChange={e => updateFormFields('cardType', e.target.value)} isInvalid={!!formErrors.cardType}>
+                        <Form.Select value={existingCardSelected ? mainForm.cardType : ''} onChange={e => updateFormFields('cardType', e.target.value)} isInvalid={!!formErrors.cardType}>
                             <option value=''>Choose card type</option>
                             <option value='Debit'>Debit</option>
                             <option value='Credit'>Credit</option>
