@@ -30,6 +30,8 @@ import Profile from "./components/pages/Userprofile";
 import VerifyOtp from "./components/pages/VerifyOtp";
 import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
+import AppCart from "./components/pages/AppCart";
+
 function App() {
   return (
     <div className="App">
@@ -54,7 +56,7 @@ function App() {
           <Route path="/menuitem" element={<MenuItem />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/addCard" element={<AddCard />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<AppCart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="admin" element={<AdminRoute />}>
             <Route path="home" element={<Admin />} />
