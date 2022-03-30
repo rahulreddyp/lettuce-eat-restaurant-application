@@ -48,7 +48,7 @@ const WishlistCard = ({ item }) => {
         setError(data.error);
       } else {
         console.log(data);
-        setSuccess(data.message);
+        setError(data.message);
         navigate("/wishlist", { state: { deletemessage } });
         window.location.reload()
         

@@ -8,8 +8,6 @@ import { API } from "../../API";
 const CartCard = ({ item }) => {
   
     const [error, setError] = useState("");
-    const [success, setSuccess] = useState("");
-    const [cartItem, setCartItem] = useState([]);
  
     const navigate = useNavigate();
 

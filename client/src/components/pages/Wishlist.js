@@ -27,7 +27,7 @@ const Wishlist = () => {
         <div className="col-12">
           <div className="jumbotron text-center">
             <h1>WHAT'S ON OUR Wishlist ?</h1>
-            <p>Best food, best served, Best Loved</p>
+            <p>Best food, Best served, Best Loved</p>
           </div>
         </div>
         {wishlistItem.map((item, index) => {

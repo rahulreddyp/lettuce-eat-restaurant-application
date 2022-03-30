@@ -25,8 +25,8 @@ const AppCart = () => {
       <div className="row">
         <div className="col-12">
           <div className="jumbotron text-center">
-            <h1>WHAT'S ON OUR Cart ?</h1>
-            <p>Best food, best served, Best Loved</p>
+            <h1>WHAT'S ON YOUR Cart ?</h1>
+            <p>Best food, Best served, Best Loved</p>
           </div>
         </div>
         {cartItem.map((item, index) => {
