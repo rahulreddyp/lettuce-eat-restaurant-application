@@ -1,3 +1,5 @@
+//Author : Aadil Shaikh
+
 import React, { useEffect, useState } from "react";
 import "./css/orderstatus.css";
 import { useNavigate } from "react-router-dom";
@@ -14,7 +16,7 @@ function OrderStatus() {
 
   const loadOrder = () => {
     var url_str = window.location.href;
-    var c = url_str.substring(37);
+    var c = url_str.substring(53);
     console.log(c);
 
     getOrderById(c)
