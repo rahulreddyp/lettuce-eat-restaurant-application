@@ -1,3 +1,4 @@
+// Author: Deeksha Sareen
 const Wishlist = require("../models/wishlist.models");
 const Cart = require("../models/cart.models");
 
