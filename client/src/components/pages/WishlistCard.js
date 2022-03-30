@@ -37,7 +37,7 @@ const WishlistCard = ({ item }) => {
           deletemessage = data.message;
           navigate("/wishlist", { state: { deletemessage } });
         }
-      }) 
+      } ,window.location.reload(false)) 
     };
 
   const moveToCart = async () => {
@@ -88,29 +88,6 @@ const WishlistCard = ({ item }) => {
       </div>
       </div>
     </div>
-    // <div className="card shadow" >
-    //   <div className="overflow">
-    //       <img
-    //         src={CardImage}
-    //         alt="Wishlist Item"
-    //         style={{ maxHeight: "100%", maxWidth: "100%" }}
-    //         className="card-img-top mb-3 rounded"
-    //       />
-    //   <div className="card-body" >
-    //       {/* {redirectToItemDetails()} */}        
-    //       <h3 className="card-title">{item.name}</h3>
-    //       <p className="card-description">{item.description}</p>
-    //       <span className="text-white bg-success rounded p-2">{item.price} </span>
-    //       &nbsp;
-    //       <span className="text-danger text-center">{error}</span>
-    //       <button onClick={removefromWishlist}  href="/wishlist" className="btn btn-outline-danger active">Remove</button>
-    //       {/* <a href="#" onClick= {removefromWishlist} class="btn btn-danger" role="button">Remove</a> */}
-    
-    //     </div>
-    //   </div>
-    //   {/* <button onClick={removefromWishlist}  href="/wishlist" className="btn btn-outline-danger active btn-link">Remove</button> */}
-      
-    // </div>
   );
 };
 
