@@ -39,7 +39,7 @@ const moveToCart = (req, res) => {
             .status(204)
             .json({
               success: false,
-              error: "Item missing in wishlist (Error in fectching)",
+              error: "Item missing in wishlist (Error in fetching)",
             });
         } else {
           return res.status(200).json({ success: true });
