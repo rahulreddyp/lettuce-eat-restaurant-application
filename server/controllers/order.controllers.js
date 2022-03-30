@@ -1,6 +1,7 @@
-// const { Router } = require("express");
-// const router = Router();
-
+/**
+ * @author Arpan Nayankumar Bhatt <ar205025@dal.ca>
+ * @author Aadil Sadik Shaikh <ad979991@dal.ca>
+ */
 const Order = require("../models/order.models");
 
 const dbConfig = require("../config/db.config");

@@ -13,7 +13,7 @@ function OrderElement(props) {
   const { item_map, quantity, user_address, order_status } = props;
   return (
     <>
-      <div class="content" align="center">
+      <div className="content" align="center">
         <Card sx={{ maxWidth: 300, maxHeight: 900, m: 2 }}>
           <CardActionArea>
             {/* <CardMedia

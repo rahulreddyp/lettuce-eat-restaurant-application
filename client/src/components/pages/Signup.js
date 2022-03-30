@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to provide signup form for the user to register in the application
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -8,7 +10,8 @@ import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 
-const URL = 'http://localhost:5000/'
+import { API } from "../../API";
+
 const headers = {
   'Content-Type': 'application/json'
 }
@@ -37,7 +40,7 @@ const Signup = () => {
 
   const onSubmit = (data) => {
     console.log(data);
-    return axios.post(URL+'register',data,{headers:headers}).then(res => {
+    return axios.post(API+'/register',data,{headers:headers}).then(res => {
       if(res.data.success === true){
           navigate('/login')
       }

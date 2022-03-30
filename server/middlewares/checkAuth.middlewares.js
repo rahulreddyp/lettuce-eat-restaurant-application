@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to verify if request is secure or not by checking if it has a token or not
 const jwt = require('jsonwebtoken');
 
 const verifyToken = (req,res,next) => {

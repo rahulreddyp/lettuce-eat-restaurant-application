@@ -1,6 +1,6 @@
 // Author: Rahul Reddy Puchakayala, Aadil Sadik Mohammad
 
-const Menu = require("../Models/menu.models");
+const Menu = require("../models/menu.models");
 const formidable = require("formidable");
 const fs = require("fs");
 const Category = require("../models/categories.models");
@@ -46,7 +46,10 @@ const createMenuItem = (req, res) => {
 
       if (fields.customization) {
         const userCustomizations = JSON.parse(fields.customization);
+
+        console.log('usercu', userCustomizations)
         menuItem.customization = userCustomizations;
+        console.log('user', menuItem)
       }
   
       if (file.photo) {

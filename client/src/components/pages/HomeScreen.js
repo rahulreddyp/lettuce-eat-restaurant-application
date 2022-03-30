@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is the landing page of the application
 import React from "react";
 import { Stack, Button, Row, Col, Container, Figure } from "react-bootstrap";
 import HomeCarousel from "./HomeCarousel";

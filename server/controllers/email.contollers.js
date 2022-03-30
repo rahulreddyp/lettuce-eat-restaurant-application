@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to send mails
 const nodemailer = require('nodemailer');
 
 let transporter = nodemailer.createTransport({

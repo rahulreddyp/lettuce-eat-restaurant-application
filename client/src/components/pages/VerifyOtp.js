@@ -1,3 +1,5 @@
+// Author : Pavan Abburi
+//This component is used to take otp input from user and verify in the process of resetting password
 import React from "react";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -6,8 +8,8 @@ import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../API";
 
-const URL = "http://localhost:5000/";
 const headers = {
   "Content-Type": "application/json",
 };
@@ -44,7 +46,7 @@ const VerifyOtp = () => {
   });
 
   const onSubmit = async (data) => {
-    const res = await axios.post(URL + "verifyotp", data, { headers: headers });
+    const res = await axios.post(`${API}/verifyotp`, data, { headers: headers });
     if (res.data.success === true) {
       localStorage.setItem('otpemail', JSON.stringify(res.data));
       navigate("/resetpassword");
