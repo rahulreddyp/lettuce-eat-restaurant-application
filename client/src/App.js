@@ -46,6 +46,7 @@ function App() {
           <Route path="/verifyotp" element={<VerifyOtp />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/createOrder" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/getOrders/" element={<OrderStatus />} />
           <Route path="/updateOrder/:id" element={<UpdateOrder />} />
