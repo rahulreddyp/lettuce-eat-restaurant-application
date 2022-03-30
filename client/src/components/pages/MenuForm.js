@@ -105,12 +105,10 @@ const MenuForm = () => {
     const isChecked = e.target.checked;
  
     setCustomizations(new Map(customizations.set(e.target.name, isChecked)));
+    
   };
 
-  const onSubmit = (e) => {
-    e.preventDefault();
-
-    // check if user customizations are selected
+      // check if user customizations are selected
 
       // get user selected customization options only
       const setCustomizationValues = (cb) => {
@@ -123,21 +121,26 @@ const MenuForm = () => {
           cb(selectedOptions);
         }
 
+  const onSubmit = (e) => {
+    e.preventDefault();
+
       // set customizations values to formData  
       setCustomizationValues((data) => {
 
         if(data.length !== 0) {
-          var filteredArray = [];
+          var filteredArray = {};
         
           // filter through user options array and get only the selected one
           data.forEach((e) => {
-          filteredArray = customization_options.filter(
-            (options) => options.name === e
-          )
 
-          console.log(filteredArray);
+          const array = customization_options.filter((options) => options.name === e)
+
+          filteredArray[e] =array[0].values;
+
+          console.log('customizations', filteredArray);
         });
-          formData.set("customization", JSON.stringify(filteredArray[0]));
+
+          formData.set("customization", JSON.stringify(filteredArray));
         }
       }); 
 
@@ -185,15 +188,15 @@ const MenuForm = () => {
 
   const successMessage = () => (
     <div className="alert alert-info alert-dismissable fade show" role="alert">
-      {message}
+      <strong>{message}</strong>
       <button
         type="button"
-        className="close"
-        data-dismiss="alert"
-        aria-label="Close"             
+        className="btn-close"
+        data-bs-dismiss="alert"
+        aria-label="Close"
+        color="none"    
         onClick={() => navigate("/admin/menu/manage")}
       >
-        <span aria-hidden="true">&times;</span>
       </button>
     </div>
   );
@@ -202,7 +205,7 @@ const MenuForm = () => {
     <div className="container">
       <h2 className="text-center mt-3">What's Cooking ?</h2>
       <div className="row justify-content-center">
-        <Fragment>{success ? successMessage() : null}</Fragment>
+        {success ? successMessage() : null}
         <span className="text-danger">{error}</span>
         <div className="col-md-6 text-left m-3 p-3 border rounded">        
           <form encType="multipart/form-data">
