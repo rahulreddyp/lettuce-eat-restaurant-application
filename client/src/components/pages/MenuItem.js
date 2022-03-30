@@ -14,6 +14,7 @@ const MenuItem = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [customizations, setCustomizations] = useState([]);
   const [cartItem, setCartItem] = useState([]);
   const [wishlistitems, setwishlistitems] = useState([]);
@@ -64,15 +65,16 @@ const MenuItem = () => {
   };
 
   const addtoWishlist = async () => {
-    const result = await fetch(API+'/menuitem',{
-        method: 'POST',
-        headers: {
-          'Content-Type': 'application/json'
-        },
-        body:JSON.stringify(item)
-    })
-    const resultinjson = await result.json();
-    console.log(resultinjson)
+    console.log(item.id)
+    console.log("Item to be added "+ item.name)
+    putItem(item).then((data)=>{
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setSuccess(data.message);
+        console.log(data);
+      }
+    }) 
     };
 
     var image = `${API}/menu/photo/${item._id}`;
@@ -113,6 +115,7 @@ const MenuItem = () => {
       </div>
      
       <div className="row">
+      <span className="text-danger text-center">{success}</span>
         <span className="text-danger text-center">{error}</span>
         <form onSubmit={(e) => addtoCart(e)}>
           {item.customization &&

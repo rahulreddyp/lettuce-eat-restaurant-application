@@ -5,10 +5,8 @@ import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Admin from "./components/pages/Admin";
 import AdminRoute from "./components/pages/AdminRoute";
-import {
-  default as AllOrders,
-  default as OrderStatus,
-} from "./components/pages/AllOrders";
+import { default as AllOrders } from "./components/pages/AllOrders";
+import { default as OrderStatus } from "./components/pages/OrderStatus";
 import Cart from "./components/pages/Cart";
 import Editprofile from "./components/pages/Editprofile";
 import GetOrderStatus from "./components/pages/GetOrderStatus";
@@ -30,6 +28,8 @@ import Profile from "./components/pages/Userprofile";
 import VerifyOtp from "./components/pages/VerifyOtp";
 import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
+import AppCart from "./components/pages/AppCart";
+
 function App() {
   return (
     <div className="App">
@@ -46,6 +46,7 @@ function App() {
           <Route path="/verifyotp" element={<VerifyOtp />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />
+          <Route path="/createOrder" element={<Cart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="/getOrders/" element={<OrderStatus />} />
           <Route path="/updateOrder/:id" element={<UpdateOrder />} />
@@ -54,7 +55,7 @@ function App() {
           <Route path="/menuitem" element={<MenuItem />} />
           <Route path="/payments" element={<Payments />} />
           <Route path="/addCard" element={<AddCard />} />
-          <Route path="/cart" element={<Cart />} />
+          <Route path="/cart" element={<AppCart />} />
           <Route path="/wishlist" element={<Wishlist />} />
           <Route path="admin" element={<AdminRoute />}>
             <Route path="home" element={<Admin />} />
