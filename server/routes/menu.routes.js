@@ -1,7 +1,7 @@
 // Author: Rahul Reddy Puchakayala
 
 const express = require("express");
-const menuControllers = require("../Controllers/menu.controllers");
+const menuControllers = require("../controllers/menu.controllers");
 const checkAuth = require('../middlewares/checkAuth.middlewares');
 const router = express.Router();
 

@@ -1,7 +1,7 @@
 // Author : Pavan Abburi
 //This component is used to set the routes for backend api calls for user management related
 const express = require("express");
-const userControllers = require("../Controllers/user.controllers");
+const userControllers = require("../controllers/user.controllers");
 const checkAuth = require('../middlewares/checkAuth.middlewares')
 const router = express.Router();
 

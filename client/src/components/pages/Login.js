@@ -11,7 +11,10 @@ import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../API";
 
+<<<<<<< HEAD
 
+=======
+>>>>>>> 2398a6d02ce65edf0a1c593e725e2c6fdb74ccb6
 const headers = {
   "Content-Type": "application/json",
 };
