@@ -1,1 +1,1 @@
-export const API = "http://csci5409-grp01-lettuceeat.herokuapp.com"
+export const API = "https://lettuce-eat-app-back.herokuapp.com"
