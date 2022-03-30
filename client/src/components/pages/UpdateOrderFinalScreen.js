@@ -38,7 +38,7 @@ function UpdateOrderFinalScreen(props) {
 
   const loadOrder = () => {
     var url_str = window.location.href;
-    var c = url_str.substring(40);
+    var c = url_str.substring(56);
     console.log(c);
 
     getOrderById(c)

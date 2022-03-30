@@ -16,7 +16,7 @@ function OrderStatus() {
 
   const loadOrder = () => {
     var url_str = window.location.href;
-    var c = url_str.substring(37);
+    var c = url_str.substring(53);
     console.log(c);
 
     getOrderById(c)
