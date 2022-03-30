@@ -1,11 +1,13 @@
 // Author: Rahul Reddy Puchakayala
 
 import React, { useState, useEffect, Fragment } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { updateMenutem, getAllCategories } from "../../apicalls/AdminCalls";
 import { getMenuItem } from "../../apicalls/MenuCalls";
 
 const UpdateMenu = () => {
+  const navigate = useNavigate();
+
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
 
@@ -167,6 +169,7 @@ const UpdateMenu = () => {
         className="close"
         data-dismiss="alert"
         aria-label="Close"
+        onClick={() => navigate("/admin/menu/manage")}
       >
         <span aria-hidden="true">&times;</span>
       </button>
