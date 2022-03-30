@@ -1,6 +1,7 @@
+//Author: Deeksha Sareen
 const express = require("express");
 const wishlistControllers = require("../controllers/wishlist.controllers");
-const checkAuth = require('../middlewares/checkAuth.middlewares');
+const checkAuth = require("../middlewares/checkAuth.middlewares");
 const router = express.Router();
 //params
 router.param("itemId", wishlistControllers.getWishlistItemById);

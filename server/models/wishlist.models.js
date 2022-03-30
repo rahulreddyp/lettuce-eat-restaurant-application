@@ -1,4 +1,4 @@
-// Author: Rahul Reddy Puchakayala
+// Author: Deeksha Sareen
 
 const mongoose = require("mongoose");
 const { ObjectId } = mongoose.Schema;

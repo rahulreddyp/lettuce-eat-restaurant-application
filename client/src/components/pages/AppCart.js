@@ -1,3 +1,5 @@
+// Author: Deeksha Sareen
+
 import React, { useState, useEffect } from "react";
 import { getCart } from "../../apicalls/CartCalls";
 import CartCard from "./CartCard";

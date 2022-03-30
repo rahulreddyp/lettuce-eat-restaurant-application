@@ -10,6 +10,7 @@ import Grid from "@mui/material/Grid";
 import { borders } from "@mui/system";
 import { Button } from "react-bootstrap";
 import axios from "axios";
+import { API } from "../../API";
 
 function AllOrders() {
   const [orders, setOrders] = useState();
@@ -22,7 +23,7 @@ function AllOrders() {
     console.log(JSON.parse(localStorage.getItem("user")));
     const getData = async () => {
       const res = await axios.get(
-        "http://localhost:5000/getAllOrders/" +
+        `${API}/getAllOrders/` +
           JSON.parse(localStorage.getItem("user")).id
       );
       console.log(res);
