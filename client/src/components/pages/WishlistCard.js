@@ -10,6 +10,7 @@ const WishlistCard = ({ item }) => {
     //const [wishlistitem, setItem] = useState([]);
     //setItem = item
     const [error, setError] = useState("");
+    const [success, setSuccess] = useState("");
     const [cartItem, setCartItem] = useState([]);
  
     const navigate = useNavigate();
@@ -37,26 +38,23 @@ const WishlistCard = ({ item }) => {
     };
 
   const moveToCart = async () => {
-    setCartItem({
-      ...cartItem,
-      id: item._id,
-      name: item.name,
-      price: item.price,
-      category: item.category,
-    });
-    item.quanity = 1;
-    item.value= "small";
+ 
+    item.quantity = 1;
+    item.itemvalue= "small";
     console.log(item);
+    const deletemessage = "";
     moveItemtoCart(item).then((data)=>{
       if (data.error) {
         setError(data.error);
       } else {
         console.log(data);
-
+        setSuccess(data.message);
+        navigate("/wishlist", { state: { deletemessage } });
+        window.location.reload()
         
       }
     }) 
-   // removefromWishlist();
+  // removefromWishlist();
   }
   return (
 
@@ -83,7 +81,7 @@ const WishlistCard = ({ item }) => {
       <div class="card-body">
         <a href="/wishlist" onClick={removefromWishlist} class="btn btn-outline-danger">Remove from Wishlist</a>
         &nbsp;&nbsp;
-        <a href="/wishlist" onClick={moveToCart} class="btn btn-outline-success">Move to Cart</a>
+        <a href="#" onClick={moveToCart} class="btn btn-outline-success">Move to Cart</a>
       </div>
       </div>
     </div>

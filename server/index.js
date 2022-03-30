@@ -11,7 +11,7 @@ const bodyParser = require("body-parser");
 const paymentsRouter = require("./routes/payments.routes");
 const couponsRouter = require("./routes/coupon.routes");
 const wishlistRouter = require("./routes/wishlist.routes");
-
+const cartRouter = require("./routes/cart.routes")
 app.use(cors());
 app.use(express.json({limit: '50mb'}));
 app.use(express.urlencoded({limit: '50mb'}));
@@ -25,10 +25,13 @@ app.use(menuRouter);
 app.use(orderRouter);
 app.use(paymentsRouter);
 app.use(couponsRouter);
+app.use(wishlistRouter);
+app.use(cartRouter);
+
 console.log(
   `mongodb+srv://${dbConfig.USERNAME}:${dbConfig.PASSWORD}@${dbConfig.CLUSTER}.${dbConfig.HOST}/${dbConfig.DB}`
 );
-app.use(wishlistRouter);
+
 
 mongoose
   .connect(

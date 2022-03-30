@@ -17,8 +17,7 @@ const Cart = new mongoose.Schema(
       trim: true,
     },
     photo: {
-      type: String,
-      required: true
+      data: String
       },
     description: {
       type: String,
@@ -26,7 +25,7 @@ const Cart = new mongoose.Schema(
       required: true,
       maxlength: 2000,
     },
-    value:{
+    itemvalue:{
       type: String,
       trim: true,
     },

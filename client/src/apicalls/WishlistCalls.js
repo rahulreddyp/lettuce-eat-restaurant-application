@@ -22,12 +22,12 @@ export const deleteWishlistItem = async (item) => {
 };
 
 export const moveItemtoCart = async(item)=> {
-    console.log(item.body.name)
+    console.log(item.photo)
     try{
         const res = await fetch(`${API}/wishlist`, {
-            method: 'POST',
+            method: 'PUT',
             headers: {
-                Accept: "application/json"
+                'Content-Type': 'application/json'
             },
             body: JSON.stringify(item)
         });

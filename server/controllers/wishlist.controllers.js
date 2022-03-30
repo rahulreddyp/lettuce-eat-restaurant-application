@@ -1,6 +1,6 @@
 const Wishlist = require("../Models/wishlist.models");
 const Cart = require("../Models/cart.models");
-//const Menu = require("../Models/menu.models")
+const Menu = require("../Models/menu.models")
 const getAllWishlist = (req,res) => {
     Wishlist.find((err, wishlistitems) => {
         if (err) {
@@ -25,21 +25,30 @@ const getWishlistItemById = (req, res, next, id) => {
 };
 
 const moveToCart = (req, res)=>{
-    console.log(req.body)
-    Cart.findOne({name: req.body.name})
-    .then(results => {
-        const cart = new Cart(req.body)
-        if (!results) {
-            cart.save();
-            return res.status(200).json({success: true});
-        } 
-        else{
-            req.body.quantity++;
-            const cart = new Cart(req.body)
-            cart.save();
-            return res.status(200).json({success:true});
-        }
-    })
+            Cart.findOne({name: req.body.name})
+            .then(results => { 
+                if (!results) {    
+                    const cart = new Cart(req.body)
+                    cart.save();
+                    const userID = req.body._id
+                    Wishlist.findByIdAndDelete(userID,(err,result) => {
+                        if(err){
+                            console.log(err)
+                            res.status(400).json({success:false, error:err});
+                        }else if(!result){
+                            return res.status(204).json({success:false, error:"Item missing in wishlist (Error in fectching)"});
+                        }else{
+                            return res.status(200).json({success:true});
+                        }
+                    })
+                
+                  }
+                
+                else{
+                    return res.status(200).json({success:false, error: "Item already in Cart"});
+                }
+            })
+    
 }
 
 const getWishlistItem = (req, res) => {
@@ -47,13 +56,12 @@ const getWishlistItem = (req, res) => {
 };
 
 const putWishlistItem = (req,res)=>{
-    console.log(req.body.name)
     Wishlist.findOne({name: req.body.name})
     .then(results => {
         const wish = new Wishlist(req.body)
         if (!results) {
             wish.save();
-            return res.status(200).json({success: true});
+            return res.status(200).json({success: true, message: "Item added to Wishlist"});
         } 
         else{
             return res.status(400).json({success:false,error: "Item already in Wishlist",})

@@ -15,6 +15,7 @@ const MenuItem = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
   const [error, setError] = useState("");
+  const [success, setSuccess] = useState("");
   const [customizations, setCustomizations] = useState([]);
   const [cartItem, setCartItem] = useState([]);
   const [wishlistitems, setwishlistitems] = useState([]);
@@ -71,6 +72,7 @@ const MenuItem = () => {
       if (data.error) {
         setError(data.error);
       } else {
+        setSuccess(data.message);
         console.log(data);
       }
     }) 
@@ -114,6 +116,7 @@ const MenuItem = () => {
       </div>
      
       <div className="row">
+      <span className="text-danger text-center">{success}</span>
         <span className="text-danger text-center">{error}</span>
         <form onSubmit={(e) => addtoCart(e)}>
           {item.customization &&
