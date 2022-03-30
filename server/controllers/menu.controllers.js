@@ -30,7 +30,7 @@ const uploadFile = (fileContent, fileName) => {
 
 const createMenuItem = (req, res) => {
   try {
-
+    
     let form = new formidable.IncomingForm();
     form.keepExtensions = true;    
 
@@ -47,9 +47,7 @@ const createMenuItem = (req, res) => {
       if (fields.customization) {
         const userCustomizations = JSON.parse(fields.customization);
 
-        console.log('usercu', userCustomizations)
         menuItem.customization = userCustomizations;
-        console.log('user', menuItem)
       }
   
       if (file.photo) {
@@ -123,7 +121,7 @@ const getMenuItemById = (req, res, next, id) => {
   Menu.findById(id).exec((err, item) => {
     if (err || !item) {
       return res.status(400).json({
-        error: "Item not found in DB",
+        error: "Item not found in DB", err
       });
     }
     req.menuitem = item;
