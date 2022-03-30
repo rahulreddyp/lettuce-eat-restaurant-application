@@ -3,15 +3,19 @@
 const customization_options = [
     {
       name: 'size',
-      values: ['small', 'medium' ,'large'],
+      values: ["Small", "Medium", "Large"],
     },
     {
       name: 'toppings',
-      values: ["Extra Cheese", "Tomato", "onions", "Bell Pepper"]
+      values: ["Extra Cheese", "Tomato", "Onions", "Bell Pepper"]
     },
     {
       name: 'extras',
-      values: ['lettuce', 'mayo', 'ranch', 'onions'],
+      values: ['Shredded Lettuce', 'Mayo', 'Ranch', 'Onions'],
+    },
+    {
+      name: "spice level",
+      values: ["No Spice", "Medium", "Extra"]
     }
   ];
 
