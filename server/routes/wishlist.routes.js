@@ -6,8 +6,10 @@ const router = express.Router();
 router.param("itemId", wishlistControllers.getWishlistItemById);
 
 router.get("/wishlist", wishlistControllers.getAllWishlist);
-router.get("/wishlist/:itemId", wishlistControllers.getWishlistItem);
 router.post("/menuitem", wishlistControllers.putWishlistItem);
+router.delete("/wishlist/:itemId", wishlistControllers.deleteWishlistItem);
+router.put("/wishlist", wishlistControllers.moveToCart);
+router.get("/wishlist/:itemId", wishlistControllers.getWishlistItem);
 //  checkAuth.verifyToken,
 
 module.exports = router;
