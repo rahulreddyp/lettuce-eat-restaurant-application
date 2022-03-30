@@ -10,7 +10,7 @@ deploy-back-end:
      - apt-get update -qy
      - apt-get install -y ruby-dev
      - gem install dpl
-     - dpl --provider=heroku --app=csci5409-grp01-lettuceeat-back --api-key=e9ce4f46-f3bf-48c7-aa2d-f443f21aa120
+     - dpl --provider=heroku --app=lettuce-eat-app --api-key=e9ce4f46-f3bf-48c7-aa2d-f443f21aa120
    only:
      - deploybranch
    tags:
