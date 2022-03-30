@@ -195,7 +195,7 @@ const PaymentForm = (props) => {
           <Form.Group>
             <Form.Label>Card type</Form.Label>
             <Form.Select
-              value={existingCardSelected ? mainForm.cardType : ""}
+              value={mainForm.cardType}
               onChange={(e) => updateFormFields("cardType", e.target.value)}
               isInvalid={!!formErrors.cardType}
             >
