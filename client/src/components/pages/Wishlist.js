@@ -1,3 +1,5 @@
+// Author: Deeksha Sareen
+
 import React, { useState, useEffect } from "react";
 import WishlistCard from "./WishlistCard";
 import { getWishlist } from "../../apicalls/WishlistCalls";
