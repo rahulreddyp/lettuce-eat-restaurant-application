@@ -1,0 +1,33 @@
+stages:
+  - deploybackend
+  - deployfrontend
+
+deploy-back-end:
+   stage: deploybackend
+   image: ruby:2.6
+   script:
+     - cd server
+     - apt-get update -qy
+     - apt-get install -y ruby-dev
+     - gem install dpl
+     - dpl --provider=heroku --app=csci5409-grp01-lettuceeat-back --api-key=e9ce4f46-f3bf-48c7-aa2d-f443f21aa120
+   only:
+     - deploybranch
+   tags:
+     - dalfcs_gitlab_docker_ci
+
+deploy-front-end:
+   stage: deployfrontend
+   image: ruby:2.6
+   script:
+     - cd client
+     - apt-get update -qy
+     - apt-get install -y ruby-dev
+     - gem install dpl
+     - dpl --provider=heroku --app=lettuce-eat-app --api-key=e9ce4f46-f3bf-48c7-aa2d-f443f21aa120
+   only:
+     - deploybranch
+   tags:
+     - dalfcs_gitlab_docker_ci
+
+
