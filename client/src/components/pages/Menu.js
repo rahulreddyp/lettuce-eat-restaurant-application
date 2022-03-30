@@ -11,6 +11,8 @@ const Menu = () => {
 
   const loadMenu = () => {
     getMenu().then((data) => {
+
+      console.log(data);
       if (data.error) {
         setError(data.error);
         console.log(data.error);
