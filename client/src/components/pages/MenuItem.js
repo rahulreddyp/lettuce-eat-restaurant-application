@@ -80,6 +80,7 @@ const MenuItem = () => {
     var image = `${API}/menu/photo/${item._id}`;
 
   return (
+    <div style={{backgroundColor: "#e7e393"}}>
     <div className="container-fluid">
       <div className="row">
         <div className="col-12">
@@ -135,6 +136,7 @@ const MenuItem = () => {
           <button className="btn btn-secondary">Add to Cart</button>
         </form>
       </div>
+    </div>
     </div>
   );
 };

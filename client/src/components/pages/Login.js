@@ -1,6 +1,7 @@
 // Author : Pavan Abburi
 //This component is used to login in to the application
 import React from "react";
+import Wrapper from "../styles/usermanagementstyles";
 import { Form, Button, Row, Col, Container } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import content from "../static/LoginElements";
@@ -33,9 +34,9 @@ const Login = () => {
 
   const onSubmit = async (data) => {
     console.log(data);
-    
+
     localStorage.clear();
-    const res = await axios.post(API + '/login', data, { headers: headers });
+    const res = await axios.post(API + "/login", data, { headers: headers });
     if (res.data.success === true) {
       console.log(res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
@@ -44,9 +45,9 @@ const Login = () => {
   };
 
   return (
-    <Container style={{ height: "100vh" }}>
-      <h1 style={{ fontSize: "70px" }}>Log In</h1>
-      <Container style={{ width: "75vh", marginTop: "50px" }}>
+    <Wrapper>
+      <Container className="Container">
+        <h1 style={{ fontSize: "40px" }}>Log In</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
@@ -76,7 +77,7 @@ const Login = () => {
           <Button type="submit">Submit</Button>
         </form>
       </Container>
-    </Container>
+    </Wrapper>
   );
 };
 
