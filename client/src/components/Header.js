@@ -1,3 +1,4 @@
+//Authors: Pavan Abburi, Rahul Reddy P
 //This component renders navigation bar of the application
 import React from "react";
 import { Navbar, Nav, NavDropdown, Container, Button } from "react-bootstrap";
