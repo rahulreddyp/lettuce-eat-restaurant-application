@@ -40,7 +40,7 @@ const Login = () => {
     if (res.data.success === true) {
       console.log(res.data);
       localStorage.setItem("user", JSON.stringify(res.data));
-      navigate("/profile");
+      navigate("/menu");
     }
   };
 
