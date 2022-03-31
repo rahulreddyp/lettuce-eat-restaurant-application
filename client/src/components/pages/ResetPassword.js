@@ -9,6 +9,7 @@ import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../API";
+import Wrapper from "../styles/usermanagementstyles";
 
 const headers = {
   'Content-Type': 'application/json'
@@ -59,9 +60,10 @@ const ResetPassword = () => {
   };
 
   return (
-    <Container style={{height: "100vh"}} >
-      <h1 style={{ fontSize: "70px" }}>Reset Password</h1>
-      <Container style={{width: "75vh", marginTop: "50px"}}>
+    <Wrapper>
+      
+      <Container className="Container">
+      <h1 style={{ fontSize: "50px" }}>Reset Password</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
@@ -86,7 +88,7 @@ const ResetPassword = () => {
           <Button type="submit">Submit</Button>
         </form>
       </Container>
-    </Container>
+    </Wrapper>
   );
 };
 
