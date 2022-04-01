@@ -58,7 +58,7 @@ const AppCart = () => {
         {cartItem.map((item, index) => {
          finaltotal = index
           return (
-            <div key={index} className="col-md-4 " style={{display:'flex'}}>
+            <div key={index} className="col-md-4 md-4 " style={{display:'flex'}}>
              <CartCard item={item} amount = {amount} itemname = {itemname} index = {index}/>    
             </div>
           );
@@ -96,9 +96,12 @@ const AppCart = () => {
                     <Badge bg="primary" pill>$ {(0.15* final + final).toFixed(2)}</Badge>
                 </ListGroup.Item>
             </ListGroup>
+
+     <a href="/cart"  style={{margin: '0.3rem'}}  class="btn btn-primary">Place Order</a>
         </div>  
       </div>
      </div>
+     
     </div>
   );
 };

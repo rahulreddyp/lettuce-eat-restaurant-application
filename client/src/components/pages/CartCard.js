@@ -6,7 +6,7 @@ import "../styles/Menu.css";
 import { API } from "../../API";
 import { deleteCartItem } from "../../apicalls/CartCalls";
 import {Dropdown } from "react-bootstrap";
-
+import "../styles/Menu.css";
 import { Badge, CloseButton, ListGroup } from "react-bootstrap"
 const CartCard = ({ item , amount,itemname}) => {
     const [error, setError] = useState("");
@@ -41,8 +41,8 @@ const CartCard = ({ item , amount,itemname}) => {
   let sum = 0;
   return (
 <div className="container">
- <div className = "container" >
-    <div className="card border-primary" style={{ width: "15rem" }}>
+ <div className = "container " >
+    <div className="card border-primary" style={{ width: "25rem" }}>
       <div className="overflow">
       <div class="card-body">
         <h3 class="card-title">{item.name}</h3>
