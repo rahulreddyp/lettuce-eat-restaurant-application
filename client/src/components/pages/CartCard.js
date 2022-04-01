@@ -7,6 +7,7 @@ import { API } from "../../API";
 import { deleteCartItem } from "../../apicalls/CartCalls";
 import {Dropdown } from "react-bootstrap";
 
+import { Badge, CloseButton, ListGroup } from "react-bootstrap"
 const CartCard = ({ item , amount,itemname}) => {
     const [error, setError] = useState("");
     const [Quantity, setQuantity] = useState(1);
@@ -40,17 +41,16 @@ const CartCard = ({ item , amount,itemname}) => {
   let sum = 0;
   return (
 <div className="container">
- <div className = "container">
-    <div className="card border-primary" style={{ width: "20rem" }}>
+ <div className = "container" >
+    <div className="card border-primary" style={{ width: "15rem" }}>
       <div className="overflow">
-      <div class="card-body" style={{ width: "20rem" }}>
+      <div class="card-body">
         <h3 class="card-title">{item.name}</h3>
         <p className="card-description">{item.description}</p>
       </div> 
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Price:  <span className="text-white bg-success rounded p-2">{item.price} </span></li>
         <span className="text-danger text-center">{error}</span>
-        
       </ul>
       <div class="card-body">
         <Dropdown>
@@ -96,14 +96,12 @@ const CartCard = ({ item , amount,itemname}) => {
      
       </div>
       </div>
-    </div>
-    <p>
-      </p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Item total: <Badge bg="secondary" pill>$ {(sum = item.price * Quantity).toFixed(2)} </Badge></li>
+          </ul>
+    </div>   
     </div>
          
-         Item Total: $ {(sum = item.price * Quantity).toFixed(2)} 
-         
-         {/* {amount(item.price * Quantity)} */}
          {amount(sum)}
          {itemname(item.name)}
          
