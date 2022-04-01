@@ -58,7 +58,7 @@ const AppCart = () => {
           );
         })
         }
-        <div className="card" style={{ width: "30rem" }}>
+        <div className="card "  style={{ width: "30rem" }}>
         <div class="card-body" >
         <h3 class="card-title"> Cart Summary: </h3>
         <p className="card-description">Total: $ {final.toFixed(2)}</p>

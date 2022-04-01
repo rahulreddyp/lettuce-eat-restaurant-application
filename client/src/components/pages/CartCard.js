@@ -40,7 +40,7 @@ const CartCard = ({ item , amount,itemname}) => {
   return (
 <div className="container">
  <div className = "container">
-    <div className="card shadow" style={{ width: "20rem" }}>
+    <div className="card border-primary" style={{ width: "20rem" }}>
        <div className="overflow">
        {/* <img
             src={CardImage}
