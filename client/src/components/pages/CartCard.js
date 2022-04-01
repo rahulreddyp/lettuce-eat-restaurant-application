@@ -4,37 +4,37 @@ import React,{ useState} from "react";
 import { useNavigate, withRouter } from "react-router-dom";
 import "../styles/Menu.css";
 import { API } from "../../API";
-
+import { deleteCartItem } from "../../apicalls/CartCalls";
 import {Dropdown } from "react-bootstrap";
 
 const CartCard = ({ item , amount,itemname}) => {
     //const [total, setTotal] = useState('');
     const [error, setError] = useState("");
-    const [Quantity, setQuantity] = useState([]);
+    const [Quantity, setQuantity] = useState(1);
     const [total, setTotal] = useState();
     const navigate = useNavigate();
 
-    const redirectToItemDetails = () => {
+    // const redirectToItemDetails = () => {
 
-        navigate("/menuitem", {state: {itemId: item._id}})
+    //     navigate("/menuitem", {state: {itemId: item._id}})
   
-    };
+    // };
    
     const CardImage = `${API}/menu/photo/${item._id}`;
     const holder = new Map();
     const [items, setItems] = useState({item});
     const removefromcart = async () => {
       const deletemessage = "";
-        // deleteWishlistItem(item._id).then((data)=>{
-        //   if (data.error) {
-        //     setError(data.error);
-        //     deletemessage = data.error;
-        //   } else {
-        //     console.log(data);
-        //     deletemessage = data.message;
-        //     navigate("/wishlist", { state: { deletemessage } });
-        //   }
-        // } ,window.location.reload(false)) 
+        deleteCartItem(item._id).then((data)=>{
+          if (data.error) {
+            setError(data.error);
+            deletemessage = data.error;
+          } else {
+            console.log(data);
+            deletemessage = data.message;
+            navigate("/cart", { state: { deletemessage } });
+          }
+        }) 
       };
   let sum = 0;
   return (
@@ -109,7 +109,7 @@ const CartCard = ({ item , amount,itemname}) => {
       </p>
     </div>
          
-         Item Total: $ {sum = item.price * Quantity} 
+         Item Total: $ {(sum = item.price * Quantity).toFixed(2)} 
          
          {/* {amount(item.price * Quantity)} */}
          {amount(sum)}

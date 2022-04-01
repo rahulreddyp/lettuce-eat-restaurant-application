@@ -3,14 +3,10 @@
 import React, { useState, useEffect } from "react";
 import { getCart } from "../../apicalls/CartCalls";
 import CartCard from "./CartCard";
-import Card from "./totalcard";
 const AppCart = () => {
   const [cartItem, setCartItem] = useState([]);
-  const [total, setTotal] = useState();
   const [final, setFinal] = useState(0);
-   var jj = new Map();
-  const [map, setMap] = useState();
- 
+   var cartElementMap = new Map();
   const loadCart = () => {
     getCart().then((data) => {
   
@@ -21,7 +17,7 @@ const AppCart = () => {
     });
   };
   var finaltotal = 0;
-  let sum = 0;
+  
   useEffect(() => {
     loadCart();
   }, []);
@@ -30,17 +26,17 @@ const AppCart = () => {
   const holder = new Map();
   const amount = (sum)=>{
     finaltotal = sum
-    var sm = 0;
-    console.log(jj)
-    var get_values = jj.values();
+    var total = 0;
+    console.log(cartElementMap)
+    var get_values = cartElementMap.values();
     for(var ele of get_values)
-       sm+=ele;
-       console.log(sm);
-       setFinal(sm)
+       total+=ele;
+       console.log(total);
+       setFinal(total)
   }
   const itemname = (name)=>{  
     holder.set(name,finaltotal)
-    jj = holder  
+    cartElementMap = holder  
   }
 
 
@@ -61,12 +57,16 @@ const AppCart = () => {
             </div>
           );
         })
-        
         }
-         {jj}
-        <p> Total: $ {final} </p>
-        <p> HST: $ {0.15* final}</p>
-        <p> Cart total: $ {0.15* final + final}</p>
+        <div className="card" style={{ width: "30rem" }}>
+        <div class="card-body" >
+        <h3 class="card-title"> Cart Summary: </h3>
+        <p className="card-description">Total: $ {final.toFixed(2)}</p>
+        <p> HST: $ {0.15* final.toFixed(2)}</p>
+        <p> Cart total: $ {(0.15* final + final).toFixed(2)}</p>
+      </div> 
+        </div>
+        
       </div>
      
     </div>

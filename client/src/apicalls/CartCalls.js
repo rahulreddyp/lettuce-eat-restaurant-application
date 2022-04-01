@@ -14,3 +14,21 @@ export const getCart = async () => {
     })
     .catch(err => console.log(err));
 };
+
+export const deleteCartItem = async (item) => {
+    
+    try {
+        const res = await fetch(`${API}/cart/${item}`, {
+            method: "DELETE",
+            //body: JSON.stringify(item), 
+            headers: {
+                Accept: "application/json"
+            }
+        });
+        return await res.json();
+    }catch (err) {
+        return console.log(err);
+    };
+        
+
+};

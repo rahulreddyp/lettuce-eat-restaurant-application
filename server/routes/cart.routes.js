@@ -5,7 +5,9 @@ const cartControllers = require("../controllers/cart.controllers");
 const router = express.Router();
 //params
 
-router.get("/cart", cartControllers.getAllCart);
+router.param("itemId", cartControllers.getCartItemById);
 
+router.get("/cart", cartControllers.getAllCart);
+router.delete("/cart/:itemId",cartControllers.deleteCartItem);
 
 module.exports = router;
