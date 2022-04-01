@@ -1,6 +1,6 @@
 // Author: Deeksha Sareen
 
-import React,{ useState} from "react";
+import React,{ useState, useEffect} from "react";
 import { useNavigate, withRouter } from "react-router-dom";
 import "../styles/Menu.css";
 import { API } from "../../API";
@@ -8,10 +8,8 @@ import { deleteCartItem } from "../../apicalls/CartCalls";
 import {Dropdown } from "react-bootstrap";
 
 const CartCard = ({ item , amount,itemname}) => {
-    //const [total, setTotal] = useState('');
     const [error, setError] = useState("");
     const [Quantity, setQuantity] = useState(1);
-    const [total, setTotal] = useState();
     const navigate = useNavigate();
 
     // const redirectToItemDetails = () => {
@@ -21,10 +19,13 @@ const CartCard = ({ item , amount,itemname}) => {
     // };
    
     const CardImage = `${API}/menu/photo/${item._id}`;
-    const holder = new Map();
+ 
     const [items, setItems] = useState({item});
-    const removefromcart = async () => {
+
+  
+  const removefromcart = () => {
       const deletemessage = "";
+      console.log(item._id)
         deleteCartItem(item._id).then((data)=>{
           if (data.error) {
             setError(data.error);
@@ -41,16 +42,7 @@ const CartCard = ({ item , amount,itemname}) => {
 <div className="container">
  <div className = "container">
     <div className="card border-primary" style={{ width: "20rem" }}>
-       <div className="overflow">
-       {/* <img
-            src={CardImage}
-            alt="Cart Item"
-            style={{ maxHeight: "100%", maxWidth: "100%" }}
-            className="card-img-top mb-3 rounded"
-            onClick={() => {
-              redirectToItemDetails();
-            }}
-         /> */}
+      <div className="overflow">
       <div class="card-body" style={{ width: "20rem" }}>
         <h3 class="card-title">{item.name}</h3>
         <p className="card-description">{item.description}</p>

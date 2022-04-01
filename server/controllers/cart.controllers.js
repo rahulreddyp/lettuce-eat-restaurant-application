@@ -23,6 +23,23 @@ const getAllCart = (req, res) => {
   });
 };
 
+const moveToCart =(req,res)=>{
+  console.log("Step 3" + req.body.name)
+  Cart.findOne({ name: req.body.name }).then((results) => {
+    if (!results) {
+      const cart = new Cart(req.body);
+      cart.save();
+      return res
+        .status(200)
+        .json({ success: true, message: "Item added to cart" });
+    } else {
+      return res
+        .status(200)
+        .json({ success: false, error: "Item already in Cart" });
+    }
+  });
+}
+
 const deleteCartItem = (req, res) => {
   const userID = req.cartitem._id;
   console.log(userID)
@@ -40,6 +57,7 @@ const deleteCartItem = (req, res) => {
 module.exports = {
   getAllCart,
   deleteCartItem,
-  getCartItemById
+  getCartItemById,
+  moveToCart
 
 };

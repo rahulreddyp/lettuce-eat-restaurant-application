@@ -1,10 +1,12 @@
+// Author: Deeksha Sareen
+
 import React, { useState, useEffect } from "react";
 import WishlistCard from "./WishlistCard";
 import { getWishlist } from "../../apicalls/WishlistCalls";
 
 const Wishlist = () => {
   const [wishlistItem, setWishlistItem] = useState([]);
-
+  const [reload, setReload] = useState(false);
   const loadWishlist = () => {
     getWishlist().then((data) => {
       // if (data) {
@@ -19,10 +21,11 @@ const Wishlist = () => {
 
   useEffect(() => {
     loadWishlist();
-  }, []);
+  }, [reload]);
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div style={{backgroundColor: "#e7e393"}}> 
+    <div  className="container d-flex justify-content-center ">
       <div className="row">
         <div className="col-12">
           <div className="jumbotron text-center">
@@ -39,6 +42,7 @@ const Wishlist = () => {
         })}
       </div>
     </div>
+  </div>
   );
 };
 

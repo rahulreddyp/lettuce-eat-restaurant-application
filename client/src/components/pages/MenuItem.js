@@ -9,6 +9,7 @@ import MenuOptions from "./MenuOptions";
 import Heart from "react-animated-heart";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { moveItemtoCart } from "../../apicalls/CartCalls";
 
 const MenuItem = () => {
   const navigate = useNavigate();
@@ -46,21 +47,31 @@ const MenuItem = () => {
 
   const handleChange = (customization_type, e) => {
     const userChoice = e.target.value;
-    setCartItem({ ...cartItem, [customization_type]: userChoice });
-
-    console.log(cartItem);
-  };
-
-  const addtoCart = (e) => {
-    e.preventDefault();
-    setCartItem({
-      ...cartItem,
-      id: item._id,
+    setCartItem({ ...cartItem, [customization_type]: userChoice ,id: item._id,
       name: item.name,
       price: item.price,
       category: item.category,
-    });
-    console.log(cartItem);
+      description: item.description,
+      quantity: 1,
+      });
+
+      console.log(cartItem);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+    console.log(item.customization)
+   
+    console.log(cartItem)
+    moveItemtoCart(cartItem).then((data)=>{
+      console.log("step1")
+      if (data.error) {
+        setError(data.error);
+      } else {
+        setSuccess(data.message);
+        console.log(data);
+      }
+    }) 
     
   };
 
@@ -110,7 +121,6 @@ const MenuItem = () => {
           <div className="col-md-2">
           <Button onClick={addtoWishlist}>Add to Wishlist</Button>
           </div>
-          {/* <div className="col-md-2"><Heart isClick={isClick} onClick={updateWishlist} /></div> */}
           <div className="col-md-2">{/* rating */}</div>
         </div>   
       </div>
@@ -118,7 +128,7 @@ const MenuItem = () => {
       <div className="row">
       <span className="text-danger text-center">{success}</span>
         <span className="text-danger text-center">{error}</span>
-        <form onSubmit={(e) => addtoCart(e)}>
+        <form onSubmit={handleSubmit} method="POST">
           {item.customization &&
             Object.keys(customizations).map((options, index) => {
               return (
@@ -129,11 +139,12 @@ const MenuItem = () => {
                     customizations={customizations}
                     options={options}
                     onChange={(e) => handleChange(options, e)}
+                    required= 'true'
                   />
                 </div>
               );
             })}
-          <button className="btn btn-secondary">Add to Cart</button>
+          <button  type= "submit" onClick={handleSubmit} class = "btn btn-secondary">Add to Cart</button>
         </form>
       </div>
     </div>

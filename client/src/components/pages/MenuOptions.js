@@ -15,6 +15,7 @@ const MenuOptions = ({ index, customizations, options, onChange }) => {
                   <label key={ind}>
                     <input
                       type="radio"
+                      required = "true"
                       value={option}
                       name={options}
                       onChange={onChange}
