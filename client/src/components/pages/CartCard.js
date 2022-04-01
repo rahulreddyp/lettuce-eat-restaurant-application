@@ -41,8 +41,8 @@ const CartCard = ({ item , amount,itemname}) => {
   let sum = 0;
   return (
 <div className="container">
- <div className = "container " >
-    <div className="card border-primary" style={{ width: "25rem" }}>
+ <div className = "container" >
+    <div className="card border-primary" style={{ width: "18rem" }}>
       <div className="overflow">
       <div class="card-body">
         <h3 class="card-title">{item.name}</h3>

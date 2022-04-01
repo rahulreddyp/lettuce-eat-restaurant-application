@@ -64,7 +64,7 @@ const AppCart = () => {
           );
         })
         }
-           <div style={{ width: "30rem", margin:"2rem" ,bottom: 0 , float:"right"}} >
+           <div style={{ width: "20rem", margin:"2rem" ,bottom: 0 , float:"right"}} >
             <h4 className="d-flex justify-content-between align-items-center mb-4">
                 <span className="text-muted">Cart summary</span>
                 <Badge bg="secondary" pill><FaShoppingCart /> </Badge>
