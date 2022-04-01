@@ -12,6 +12,7 @@ import { useNavigate } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
 import { API } from "../../API";
+import Wrapper from "../styles/usermanagementstyles";
 
 const URL = `${API}/updateprofile`;
 const headers = {
@@ -68,13 +69,10 @@ const Editprofile = () => {
   }, [user]);
 
   return (
-    <Container
-      style={{
-        height: "100vh",
-      }}
-    >
-      <h1 style={{ fontSize: "70px" }}>Edit Profile</h1>
-      <Container style={{ width: "75vh", marginTop: "50px" }}>
+    <Wrapper>
+      
+      <Container className="Container">
+      <h1 style={{ fontSize: "50px" }}>Edit Profile</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
@@ -99,7 +97,7 @@ const Editprofile = () => {
           <Button type="submit">Submit</Button>
         </form>
       </Container>
-    </Container>
+    </Wrapper>
   );
 };
 

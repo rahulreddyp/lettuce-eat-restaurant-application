@@ -10,6 +10,13 @@ const Menu = () => {
   const [reload, setReload] = useState(false);
 
   const loadMenu = () => {
+    const reloadCount = sessionStorage.getItem('reloadCount');
+    if(reloadCount < 2) {
+      sessionStorage.setItem('reloadCount', String(reloadCount + 1));
+      window.location.reload();
+    } else {
+      sessionStorage.removeItem('reloadCount');
+    }
     getMenu().then((data) => {
 
       console.log(data);
@@ -27,7 +34,8 @@ const Menu = () => {
   }, [reload]);
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div style={{backgroundColor: "#e7e393"}}>
+    <div className="container d-flex justify-content-center" >
       <div className="row">
         <div className="col-12">
           <div className="jumbotron text-center">
@@ -43,6 +51,7 @@ const Menu = () => {
           );
         })}
       </div>
+    </div>
     </div>
   );
 };
