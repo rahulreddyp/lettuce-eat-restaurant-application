@@ -7,10 +7,11 @@ import { API } from "../../API";
 
 import {Dropdown } from "react-bootstrap";
 
-const CartCard = ({ item }) => {
-  
+const CartCard = ({ item , amount,itemname}) => {
+    //const [total, setTotal] = useState('');
     const [error, setError] = useState("");
- 
+    const [Quantity, setQuantity] = useState([]);
+    const [total, setTotal] = useState();
     const navigate = useNavigate();
 
     const redirectToItemDetails = () => {
@@ -18,10 +19,11 @@ const CartCard = ({ item }) => {
         navigate("/menuitem", {state: {itemId: item._id}})
   
     };
-
+   
     const CardImage = `${API}/menu/photo/${item._id}`;
+    const holder = new Map();
     const [items, setItems] = useState({item});
-  const removefromcart = async () => {
+    const removefromcart = async () => {
       const deletemessage = "";
         // deleteWishlistItem(item._id).then((data)=>{
         //   if (data.error) {
@@ -34,11 +36,10 @@ const CartCard = ({ item }) => {
         //   }
         // } ,window.location.reload(false)) 
       };
-  
-
+  let sum = 0;
   return (
 <div className="container">
-
+ <div className = "container">
     <div className="card shadow" style={{ width: "20rem" }}>
        <div className="overflow">
        {/* <img
@@ -53,7 +54,7 @@ const CartCard = ({ item }) => {
       <div class="card-body" style={{ width: "20rem" }}>
         <h3 class="card-title">{item.name}</h3>
         <p className="card-description">{item.description}</p>
-      </div>
+      </div> 
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Price:  <span className="text-white bg-success rounded p-2">{item.price} </span></li>
         <span className="text-danger text-center">{error}</span>
@@ -61,11 +62,11 @@ const CartCard = ({ item }) => {
       </ul>
       <div class="card-body">
         <Dropdown>
-              <Dropdown.Toggle>Quantity:{items.quantity}</Dropdown.Toggle>
-
+              <Dropdown.Toggle>Quantity:{Quantity}</Dropdown.Toggle>
               <Dropdown.Menu>
                 <Dropdown.Item
                   onClick={() => {
+                    setQuantity(1);
                     setItems({
                       ...items,
                       quantity: 1 
@@ -76,6 +77,7 @@ const CartCard = ({ item }) => {
                 </Dropdown.Item>
                 <Dropdown.Item
                   onClick={() => {
+                    setQuantity(2);
                     setItems({
                       ...items,
                       quantity: 2
@@ -86,11 +88,13 @@ const CartCard = ({ item }) => {
                 </Dropdown.Item>
                 <Dropdown.Item
                    onClick={() => {
+                    setQuantity(3);
                     setItems({
                       ...items,
                       quantity: 3
                     });
                   }}
+
                 >
                   3
                 </Dropdown.Item>
@@ -101,8 +105,21 @@ const CartCard = ({ item }) => {
       </div>
       </div>
     </div>
+    <p>
+      </p>
+    </div>
+         
+         Item Total: $ {sum = item.price * Quantity} 
+         
+         {/* {amount(item.price * Quantity)} */}
+         {amount(sum)}
+         {itemname(item.name)}
+         
+         <br/>
+         
     </div>
   );
+
 };
 
 export default CartCard;
