@@ -6,6 +6,7 @@ import { useNavigate } from 'react-router'
 const navigate = useNavigate
 
 export const getCart = async () => {
+    
     return fetch(`${API}/cart`, {
         method: "GET"
     })
@@ -31,4 +32,20 @@ export const deleteCartItem = async (item) => {
     };
         
 
+};
+
+export const moveItemtoCart = async(item)=> {
+    console.log("Step2"+ item.name)
+    try{
+        const res = await fetch(`${API}/menuitem`, {
+            method: 'PUT',
+            headers: {
+                'Content-Type': 'application/json'
+            },
+            body: JSON.stringify(item)
+        });
+        return await res.json();
+    }catch (err) {
+        return console.log(err);
+    }
 };

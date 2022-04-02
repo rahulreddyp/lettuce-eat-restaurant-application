@@ -1,17 +1,16 @@
 // Author: Deeksha Sareen
 
-import React,{ useState} from "react";
+import React,{ useState, useEffect} from "react";
 import { useNavigate, withRouter } from "react-router-dom";
 import "../styles/Menu.css";
 import { API } from "../../API";
 import { deleteCartItem } from "../../apicalls/CartCalls";
 import {Dropdown } from "react-bootstrap";
-
+import "../styles/Menu.css";
+import { Badge, CloseButton, ListGroup } from "react-bootstrap"
 const CartCard = ({ item , amount,itemname}) => {
-    //const [total, setTotal] = useState('');
     const [error, setError] = useState("");
     const [Quantity, setQuantity] = useState(1);
-    const [total, setTotal] = useState();
     const navigate = useNavigate();
 
     // const redirectToItemDetails = () => {
@@ -21,10 +20,13 @@ const CartCard = ({ item , amount,itemname}) => {
     // };
    
     const CardImage = `${API}/menu/photo/${item._id}`;
-    const holder = new Map();
+ 
     const [items, setItems] = useState({item});
-    const removefromcart = async () => {
+
+  
+  const removefromcart = () => {
       const deletemessage = "";
+      console.log(item._id)
         deleteCartItem(item._id).then((data)=>{
           if (data.error) {
             setError(data.error);
@@ -39,26 +41,16 @@ const CartCard = ({ item , amount,itemname}) => {
   let sum = 0;
   return (
 <div className="container">
- <div className = "container">
-    <div className="card border-primary" style={{ width: "20rem" }}>
-       <div className="overflow">
-       {/* <img
-            src={CardImage}
-            alt="Cart Item"
-            style={{ maxHeight: "100%", maxWidth: "100%" }}
-            className="card-img-top mb-3 rounded"
-            onClick={() => {
-              redirectToItemDetails();
-            }}
-         /> */}
-      <div class="card-body" style={{ width: "20rem" }}>
+ <div className = "container" >
+    <div className="card border-primary" style={{ width: "18rem" }}>
+      <div className="overflow">
+      <div class="card-body">
         <h3 class="card-title">{item.name}</h3>
         <p className="card-description">{item.description}</p>
       </div> 
       <ul class="list-group list-group-flush">
         <li class="list-group-item">Price:  <span className="text-white bg-success rounded p-2">{item.price} </span></li>
         <span className="text-danger text-center">{error}</span>
-        
       </ul>
       <div class="card-body">
         <Dropdown>
@@ -104,14 +96,12 @@ const CartCard = ({ item , amount,itemname}) => {
      
       </div>
       </div>
-    </div>
-    <p>
-      </p>
+          <ul class="list-group list-group-flush">
+            <li class="list-group-item">Item total: <Badge bg="secondary" pill>$ {(sum = item.price * Quantity).toFixed(2)} </Badge></li>
+          </ul>
+    </div>   
     </div>
          
-         Item Total: $ {(sum = item.price * Quantity).toFixed(2)} 
-         
-         {/* {amount(item.price * Quantity)} */}
          {amount(sum)}
          {itemname(item.name)}
          
