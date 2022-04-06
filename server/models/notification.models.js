@@ -6,6 +6,9 @@ const mongoose = require("mongoose");
 
 const notification = new mongoose.Schema(
   {
+    userid: {
+      type: String,
+    },
     content: {
       type: String,
     },
