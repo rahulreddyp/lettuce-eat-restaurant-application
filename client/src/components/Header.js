@@ -1,4 +1,4 @@
-//Authors: Pavan Abburi, Rahul Reddy P
+//Authors: Pavan Abburi
 //This component renders navigation bar of the application
 import React, { useContext } from "react";
 import { UserContext } from "../App";
