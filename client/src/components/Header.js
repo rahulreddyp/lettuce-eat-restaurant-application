@@ -71,7 +71,7 @@ const Header = () => {
             </Nav.Link>
             <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
-            <Nav.link href="/notifications">Notifications</Nav.link>
+            <Nav.Link href="/notifications">Notifications</Nav.Link>
           </Nav>
           {!state && (
             <Button

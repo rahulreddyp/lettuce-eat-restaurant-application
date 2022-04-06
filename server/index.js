@@ -13,7 +13,14 @@ const couponsRouter = require("./routes/coupon.routes");
 const wishlistRouter = require("./routes/wishlist.routes");
 const cartRouter = require("./routes/cart.routes");
 const notificationRouter = require("./routes/notification.routes");
-app.use(cors());
+const corsOpts = {
+  origin: "*",
+  credentials: true,
+  methods: ["GET", "POST", "HEAD", "PUT", "PATCH", "DELETE"],
+  allowedHeaders: ["Content-Type"],
+  exposedHeaders: ["Content-Type"],
+};
+app.use(cors(corsOpts));
 app.use(express.json({ limit: "50mb" }));
 app.use(express.urlencoded({ limit: "50mb" }));
 app.use(bodyParser.json());
