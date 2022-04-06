@@ -3,11 +3,14 @@
 import React, { useState, useEffect } from "react";
 import MenuCard from "./MenuCard";
 import { getMenu } from "../../apicalls/MenuCalls";
+import MenuSidebar from "./MenuSidebar";
+import {FaSortAmountDownAlt} from "react-icons/fa";
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
   const [error, setError] = useState("");
   const [reload, setReload] = useState(false);
+  const [sidebarVisible, setSidebarVisible] = useState(false);
 
   const loadMenu = () => {
     const reloadCount = sessionStorage.getItem('reloadCount');
@@ -43,6 +46,15 @@ const Menu = () => {
             <p>Best food, best served</p>
           </div>
         </div>
+        <div>{<MenuSidebar/> } </div>
+        {/* <div
+        onClick={() => setSidebarVisible(true)}> 
+        Sort <FaSortAmountDownAlt/> 
+        </div>    */}
+              
+        {/* <button onClick={() => this.onSetSidebarOpen(true)}>
+
+        </button> */}
         {menuItems.map((item, index) => {
           return (
             <div key={index} className="col-md-4 mb-4">

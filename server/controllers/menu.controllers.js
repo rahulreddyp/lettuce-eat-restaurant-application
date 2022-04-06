@@ -104,9 +104,23 @@ const getImageObject = (req, res) => {
   );
 };
 
-const getAllMenu = (req, res) => {
-  Menu.find()
+const getAllMenu = (req, res) => {  
+
+  var sortQuery = req.query.sort ? req.query.sort : "_id";
+
+  // var sortQuery2 = req.query.sort2 ? req.query.sort2 : "_id";
+
+  var itemsLimit = req.query.limit ? parseInt(req.query.limit) : 6;
+  var filter = {key: 'price', value: {$gte: 1.99, $lte: 7.99}};  
+
+  console.log(sortQuery);
+
+  const filterOptions = filter ? {[filter.key]: filter.value} : {};
+
+  Menu.find(filterOptions)
     .populate("category")
+    .sort(sortQuery)
+    .limit(itemsLimit)
     .exec((err, menuitems) => {
       if (err) {
         return res.status(400).json({
