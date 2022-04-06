@@ -35,15 +35,15 @@ const ManageMenu = () => {
   }, [reload]);
 
   const deleteMessage = () => (
-    <div className="alert alert-info alert-dismissable fade show" role="alert">
-      {deletemessage}
+    <div className="alert alert-warning alert-dismissable fade show" role="alert">
+      <strong>{deletemessage}</strong>
       <button
         type="button"
-        className="close"
-        data-dismiss="alert"
+        className="btn-close"
+        data-bs-dismiss="alert"
         aria-label="Close"
+        color="none"  
       >
-        <span aria-hidden="true">&times;</span>
       </button>
     </div>
   );
@@ -55,7 +55,7 @@ const ManageMenu = () => {
         <div className="col-12">
           <div className="jumbotron text-center">
             <h1>MANAGE YOUR MENU</h1>
-            <Fragment>{deletemessage ? deleteMessage() : null}</Fragment>
+            {deletemessage ? deleteMessage() : null}
           </div>
         </div>
         {menuItems.map((item, index) => {

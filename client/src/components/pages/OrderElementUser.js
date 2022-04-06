@@ -19,10 +19,14 @@ function OrderElement(props) {
     <>
       <div class="content" align="center">
         <Card
-          style={order_status === "DELIVERED" ? { pointerEvents: "none" } : {}}
           sx={{ maxWidth: 400, maxHeight: 900, m: 2 }}
           onClick={() => {
-            navigator("/updateOrder/" + orderId);
+            if (order_status === "DELIVERED") {
+              navigator("/feedback/" + orderId);
+            }
+            if (order_status === "PREPARING") {
+              navigator("/updateOrder/" + orderId);
+            }
           }}
         >
           <CardActionArea>

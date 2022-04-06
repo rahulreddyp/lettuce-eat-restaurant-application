@@ -1,11 +1,13 @@
 // Author: Rahul Reddy Puchakayala
 
 import React, { useState, useEffect, Fragment } from "react";
-import { useLocation } from "react-router-dom";
+import { useNavigate, useLocation } from "react-router-dom";
 import { updateMenutem, getAllCategories } from "../../apicalls/AdminCalls";
 import { getMenuItem } from "../../apicalls/MenuCalls";
 
 const UpdateMenu = () => {
+  const navigate = useNavigate();
+
   const [error, setError] = useState("");
   const [categories, setCategories] = useState([]);
 
@@ -161,14 +163,15 @@ const UpdateMenu = () => {
 
   const successMessage = () => (
     <div className="alert alert-info alert-dismissable fade show" role="alert">
-      {message}
+      <strong>{message}</strong>
       <button
         type="button"
-        className="close"
-        data-dismiss="alert"
+        className="btn-close"
+        data-bs-dismiss="alert"
         aria-label="Close"
+        color="none"
+        onClick={() => navigate("/admin/menu/manage")}
       >
-        <span aria-hidden="true">&times;</span>
       </button>
     </div>
   );
@@ -178,7 +181,7 @@ const UpdateMenu = () => {
     <div className="container">
       <h2 className="text-center mt-3">Something to update ?</h2>
       <div className="row justify-content-center">
-        <Fragment>{success ? successMessage() : null}</Fragment>
+        {success ? successMessage() : null}
         <span className="text-danger">{error}</span>
         <div className="col-md-5 text-left m-3 p-3 border rounded">
           <form encType="multipart/form-data">

@@ -5,18 +5,19 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import { Button, Card, Container, Dropdown } from "react-bootstrap";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../API";
 
 export default function Order() {
   const navigator = useNavigate();
   useEffect(() => {
     if (!localStorage.getItem("user")) {
       navigator("/login");
-    }
+    } 
   }, []);
 
   const handleSubmit = async () => {
     try {
-      const res = await axios.post("http://localhost:5000/createOrder", {
+      const res = await axios.post( `${API}/createOrder/`, {
         items: ["624343f2f8848fb4c2e5c94a", "62434490f8848fb4c2e5c960"],
         user: {
           _id: JSON.parse(localStorage.getItem("user")).id,
