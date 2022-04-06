@@ -29,6 +29,7 @@ import VerifyOtp from "./components/pages/VerifyOtp";
 import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
 import AppCart from "./components/pages/AppCart";
+import Notifications from "./components/pages/Notifications";
 
 function App() {
   return (
@@ -70,6 +71,7 @@ function App() {
             path="/updateorderstatus/:id"
             element={<UpdateOrderFinalScreen />}
           />
+          <Route path="/notifications" element={<Notifications />}></Route>
           {/* <Route path="/cart" element={<Cart />} /> */}
         </Routes>
       </Router>
