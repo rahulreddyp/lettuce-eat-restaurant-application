@@ -15,21 +15,19 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { padding } from "@mui/system";
 import { useState } from "react";
+import styled from "styled-components";
 
+const NewNavBar = styled(NavDropdown)`
+  margin-left: -500px;
+
+  .dropdown-menu {
+    margin-left: -75px;
+  }
+`;
 const Header = () => {
   const { user, setUser } = useContext(UserContext);
 
-  // const [state, setState] = useState({});
-
-  // const getStorage = () => {
-  //   setState(user);
-  // };
-
-  // console.log("state", state);
-
-  useEffect(() => {
-    // getStorage();
-  }, [user]);
+  useEffect(() => {}, [user]);
 
   const clearStorage = async () => {
     localStorage.clear();
@@ -78,44 +76,9 @@ const Header = () => {
             <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
           </Nav>
-          {/* {!state && (
-            <Button
-              variant="outline-light"
-              onClick={() => {
-                console.log("login");
-                window.location = "/login";
-              }}
-            >
-              Login
-            </Button>
-          )}
-          {state && (
-            <NavDropdown
-              title={
-                <img
-                  className="thumbnail-image"
-                  src="https://t4.ftcdn.net/jpg/01/97/15/87/360_F_197158744_1NBB1dEAHV2j9xETSUClYqZo7SEadToU.jpg"
-                  alt="User"
-                  style={{
-                    width: "30px",
-                    height: "30px",
-                    borderRadius: "100%",
-                    paddingmarginLeft: "1000px",
-                  }}
-                />
-              }
-              id="collasible-nav-dropdown"
-            >
-              <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-              <NavDropdown.Divider />
-              <NavDropdown.Item href="/" onClick={clearStorage}>
-                Signout
-              </NavDropdown.Item>
-            </NavDropdown>
-          )} */}
 
           {user ? (
-            <NavDropdown
+            <NewNavBar
               title={
                 <img
                   className="thumbnail-image"
@@ -129,14 +92,13 @@ const Header = () => {
                   }}
                 />
               }
-              id="collasible-nav-dropdown"
             >
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/" onClick={clearStorage}>
                 Signout
               </NavDropdown.Item>
-            </NavDropdown>
+            </NewNavBar>
           ) : (
             <Button
               variant="outline-light"

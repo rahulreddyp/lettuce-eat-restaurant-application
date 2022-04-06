@@ -2,7 +2,6 @@ import "styled-components";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
-  height: 110vh;
   width: 100%;
   font-size: large;
   background-color: #e7e393;
@@ -10,23 +9,11 @@ const Wrapper = styled.div`
   padding-bottom: 5cm;
 
   .Container {
-    height:fit-content;
-    position: relative;
-    contain: layout inline-size;
-    padding: 1cm;
-    padding-top: 1cm;
-    padding-bottom: 1cm;
-    box-shadow: 0px 10px 10px black;
     background-color: #fea95e;
-
-   
-    
     width: 60%;
     font-family: "Poppins", sans-serif;
-  }
-
-  .Container:hover {
     box-shadow: 0 0 10px #dd7230;
+    padding: 20px;
   }
 
   h3 {
@@ -37,12 +24,6 @@ const Wrapper = styled.div`
   img {
     height: 5cm;
     width: 5cm;
-  }
-
-  .form {
-    margin: auto;
-    padding: 0.25cm;
-    text-align: left;
   }
 `;
 

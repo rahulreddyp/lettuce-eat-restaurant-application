@@ -53,35 +53,40 @@ const Login = () => {
   return (
     <Wrapper>
       <Container className="Container">
-        <h1 style={{ fontSize: "40px" }}>Log In</h1>
-        <form onSubmit={handleSubmit(onSubmit)}>
-          {content.inputs.map((input, key) => {
-            return (
-              <Row key={key}>
-                <Col style={{ textAlign: "left" }}>
-                  <label>{input.label}</label>
-                </Col>
-                <Col>
-                  <Form.Control
-                    name={input.name}
-                    type={input.type}
-                    {...register(input.name, { required: true })}
-                  />
-                </Col>
-                <p>
-                  <ErrorMessage errors={errors} name={input.name} />
-                </p>
-              </Row>
-            );
-          })}
-          <p>
-            Don't have an account? <a href="/signup">SignUp</a>
-          </p>
-          <p>
-            Forgot or Reset password? <a href="/sendmail">Reset here</a>
-          </p>
-          <Button type="submit">Submit</Button>
-        </form>
+        <h1 style={{ fontSize: "40px" }}>LOG IN</h1>
+        <br></br>
+        <Container style={{ width: "50%" }}>
+          <form onSubmit={handleSubmit(onSubmit)}>
+            {content.inputs.map((input, key) => {
+              return (
+                <Row key={key}>
+                  <Col sm={4} md={4} style={{ textAlign: "left" }}>
+                    <label>{input.label}</label>
+                  </Col>
+                  <Col sm={8} md={8}>
+                    <Form.Control
+                      name={input.name}
+                      type={input.type}
+                      {...register(input.name, { required: true })}
+                    />
+                  </Col>
+                  <p>
+                    <ErrorMessage errors={errors} name={input.name} />
+                  </p>
+                </Row>
+              );
+            })}
+            <br></br>
+            <p>
+              Don't have an account? <a href="/signup">SignUp</a>
+            </p>
+            <p>
+              Forgot or Reset password? <a href="/sendmail">Reset here</a>
+            </p>
+            <br></br>
+            <Button type="submit">Submit</Button>
+          </form>
+        </Container>
       </Container>
     </Wrapper>
   );
