@@ -27,6 +27,32 @@ const createNotification = async (req, res) => {
   }
 };
 
+const getNotificationForUser = async (req, res) => {
+  const userid = req.params.id;
+  try {
+    const notification = await Notification.find({
+      userid: `${userid}`,
+    });
+    notification.length > 0
+      ? res.status(200).send({
+          success: true,
+          notification: notification,
+        })
+      : res.status(404).send({
+          success: false,
+          message: "No notifications",
+        });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      message: "Error occured",
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   createNotification,
+  getNotificationForUser,
 };
