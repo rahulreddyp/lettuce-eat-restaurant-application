@@ -40,7 +40,7 @@ const Header = () => {
             <Nav.Link href="/orders">
               Orders <FaOpencart />
             </Nav.Link>
-            <Nav.Link href="/Coupons">
+            <Nav.Link href="/coupons">
               Coupons <FaPercentage />
             </Nav.Link>
             <Nav.Link href="/payments">

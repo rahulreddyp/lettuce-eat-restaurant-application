@@ -29,6 +29,8 @@ import VerifyOtp from "./components/pages/VerifyOtp";
 import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
 import AppCart from "./components/pages/AppCart";
+import Coupons from "./components/pages/Coupons";
+import AddCoupon from "./components/couponcomponents/AddCoupon";
 
 function App() {
   return (
@@ -71,6 +73,8 @@ function App() {
             element={<UpdateOrderFinalScreen />}
           />
           {/* <Route path="/cart" element={<Cart />} /> */}
+          <Route path="/coupons" element={<Coupons />} />
+          <Route path="/addCoupon" element={<AddCoupon />} />
         </Routes>
       </Router>
       <Footer />
