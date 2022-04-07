@@ -59,7 +59,7 @@ const AppCart = () => {
          finaltotal = index
           return (
             <div key={index} className="col-md-4 md-4 " style={{display:'flex'}}>
-             <CartCard item={item} amount = {amount} itemname = {itemname} index = {index}/>    
+             <CartCard item={item} amount = {amount} itemname = {itemname} index = {index} />    
             </div>
           );
         })

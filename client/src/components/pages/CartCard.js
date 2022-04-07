@@ -101,7 +101,7 @@ const CartCard = ({ item , amount,itemname}) => {
           </ul>
     </div>   
     </div>
-         
+        
          {amount(sum)}
          {itemname(item.name)}
          
