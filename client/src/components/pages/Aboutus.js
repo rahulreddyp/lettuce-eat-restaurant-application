@@ -25,19 +25,14 @@ const Aboutus = () => {
                 <span>WITH OUR FOOD.</span>
               </p>
               <h6>
-                One click away to become a member!!
+                One click away to experience our food!!
                 <br>
                 </br>
                 <br></br>
-                <Button className='btn-register' variant="outline-danger">Register</Button>{' '}
+                <Button className='btn-register' variant="outline-danger">Login</Button>{' '}
               </h6>
 
             </Col>
-
-
-
-
-
             <Col sm={7}>
 
               <Image className='img' fluid src={Chef} alt='source-img' />
@@ -69,14 +64,9 @@ const Aboutus = () => {
                     src={Cooking}
                     alt="Third slide"
                   />
-
-
                 </Carousel.Item>
               </Carousel>
             </Col>
-
-
-
             <Col sm={4}>
               <h4 style={{ paddingLeft: '1cm' }}>
                 WHAT WE DO?
@@ -89,17 +79,14 @@ const Aboutus = () => {
                   <Card.Text>
                     We empower our users in discovering tastes by putting information and enabling them to make an informed choice.
                   </Card.Text>
-                </Card.Body>
-
-            
+                </Card.Body>            
                 <Card.Header as="h5">Focusing on Affordabiity</Card.Header>
                 <Card.Body>
                   <Card.Title>Accessibility for customers</Card.Title>
                   <Card.Text>
                     We leave no stone unturned when it comes to making food more affordable and accessible.
                   </Card.Text>
-                </Card.Body>
-              
+                </Card.Body>              
                 <Card.Header as="h5">Improving quality of food</Card.Header>
                 <Card.Body>
                   <Card.Title> 100% Authentic </Card.Title>
@@ -108,12 +95,10 @@ const Aboutus = () => {
                   </Card.Text>
                 </Card.Body>
               </Card>
-
             </Col>
           </Row>
         </div>
         <br></br>
-
       </Container>
     </Wrapper>
 

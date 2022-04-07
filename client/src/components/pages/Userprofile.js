@@ -56,7 +56,7 @@ const Userprofile = () => {
   // };
 
   return (
-    <div style={{ backgroundColor: "#e7e393" }}>
+    <div>
       <Container>
         <Row style={{ display: "flex" }}>
           <Col sm={8}>

@@ -61,7 +61,7 @@ const Login = () => {
   return (
     <Wrapper>
       <Container className="Container">
-        <h1 style={{ fontSize: "40px" }}>LOG IN</h1>
+        <h1 style={{ fontSize: "40px" }}>Log In</h1>
         <br></br>
         <Container style={{ width: "50%" }}>
           <form onSubmit={handleSubmit(onSubmit)}>

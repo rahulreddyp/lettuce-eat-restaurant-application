@@ -34,7 +34,7 @@ const Menu = () => {
   }, [reload]);
 
   return (
-    <div style={{backgroundColor: "#e7e393"}}>
+    <div>
     <div className="container d-flex justify-content-center" >
       <div className="row">
         <div className="col-12">
