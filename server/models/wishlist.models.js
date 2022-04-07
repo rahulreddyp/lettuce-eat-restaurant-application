@@ -9,6 +9,12 @@ const Wishlist = new mongoose.Schema(
     id: {
         type: mongoose.Schema.Types.ObjectId
     },
+    userId: {
+      type: String,
+      trim: true,
+      required: true,
+      maxlength: 1024
+  },
     name: {
       type: String,
       required: true,

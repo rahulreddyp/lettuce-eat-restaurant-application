@@ -34,6 +34,23 @@ export const deleteCartItem = async (item) => {
 
 };
 
+export const deleteCartAll= async () => {
+    
+    try {
+        const res = await fetch(`${API}/payments`, {
+            method: "DELETE",
+            headers: {
+                Accept: "application/json"
+            }
+        });
+        return await res.json();
+    }catch (err) {
+        return console.log(err);
+    };
+        
+
+};
+
 export const moveItemtoCart = async(item)=> {
     console.log("Step2"+ item.name)
     try{

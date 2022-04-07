@@ -120,16 +120,19 @@ const MenuItem = () => {
               <p>{item.dietary}</p>
             </div>
             <div className="col-md-2">{/* <h3>{item.price}</h3> */}</div>
-            <div className="col-md-2">
-              <Button onClick={addtoWishlist}>Add to Wishlist</Button>
-            </div>
+           
             <div className="col-md-2">{/* rating */}</div>
+          
           </div>
         </div>
 
         <div className="row">
+        <div className="col-md-2">
+              <Button onClick={addtoWishlist}>Add to Wishlist</Button>
+            </div>
           <span className="text-danger text-center">{success}</span>
           <span className="text-danger text-center">{error}</span>
+         
           <form onSubmit={handleSubmit} method="POST">
             {item.customization &&
               Object.keys(customizations).map((options, index) => {

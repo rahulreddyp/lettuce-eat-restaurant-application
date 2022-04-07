@@ -40,6 +40,15 @@ const moveToCart = (req, res) => {
   });
 };
 
+const deleteCartAll = (req, res) => {
+  Cart.remove({}, (err, result) => {
+    if (err) {
+      return res.status(400).json({ error: err });
+    }
+    return res.status(200).json({ success: true, message: "Cart cleared" });
+  }
+  );
+}
 const deleteCartItem = (req, res) => {
   const userID = req.cartitem._id;
   console.log(userID);
@@ -59,4 +68,5 @@ module.exports = {
   deleteCartItem,
   getCartItemById,
   moveToCart,
+  deleteCartAll
 };
