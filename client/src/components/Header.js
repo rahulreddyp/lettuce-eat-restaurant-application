@@ -32,7 +32,6 @@ const Header = () => {
   const clearStorage = async () => {
     localStorage.clear();
   };
-
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container fluid>
@@ -61,7 +60,7 @@ const Header = () => {
             <Nav.Link href="/orders">
               Orders <FaOpencart />
             </Nav.Link>
-            <Nav.Link href="/Coupons">
+            <Nav.Link href="/coupons">
               Coupons <FaPercentage />
             </Nav.Link>
             <Nav.Link href="/payments">
@@ -74,7 +73,10 @@ const Header = () => {
               Cart <FaShoppingBasket />
             </Nav.Link>
             <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
+            <Nav.Link href="/feedbacks">See Feedbacks</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
+            <Nav.Link href="/sendnotification">Send Notifications</Nav.Link>
+            <Nav.Link href="/notifications">Notifications</Nav.Link>
           </Nav>
 
           {user ? (

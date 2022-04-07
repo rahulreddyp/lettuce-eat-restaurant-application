@@ -23,8 +23,8 @@ const getAllCart = (req, res) => {
   });
 };
 
-const moveToCart =(req,res)=>{
-  console.log("Step 3" + req.body.name)
+const moveToCart = (req, res) => {
+  console.log("Step 3" + req.body.name);
   Cart.findOne({ name: req.body.name }).then((results) => {
     if (!results) {
       const cart = new Cart(req.body);
@@ -38,11 +38,11 @@ const moveToCart =(req,res)=>{
         .json({ success: false, error: "Item already in Cart" });
     }
   });
-}
+};
 
 const deleteCartItem = (req, res) => {
   const userID = req.cartitem._id;
-  console.log(userID)
+  console.log(userID);
   Cart.findByIdAndDelete(userID, (err, result) => {
     if (err) {
       console.log(err);
@@ -58,6 +58,5 @@ module.exports = {
   getAllCart,
   deleteCartItem,
   getCartItemById,
-  moveToCart
-
+  moveToCart,
 };

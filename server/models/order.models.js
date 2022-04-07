@@ -23,6 +23,10 @@ const Order = new mongoose.Schema(
       type: String,
       enum: ["OUT_FOR_DELIVERY", "PREPARING", "DELIVERED"],
     },
+    feedback: {
+      type: mongoose.Schema.Types.ObjectId,
+      ref: "feedback",
+    },
   },
   {
     collection: "order-data",

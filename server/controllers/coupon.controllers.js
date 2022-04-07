@@ -15,6 +15,34 @@ const applyCouponCode = async (req, res) => {
 
 }
 
+const retrieveCoupons = async(req, res) => {
+    try {
+        const response = await Coupon.find({})
+        return res.json(response)
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send({ success: false, message: 'Unable to retrieve coupons' });
+    }
+}
+
+const saveCoupon = async(req, res) => {
+    const coupon1 = new Coupon({
+        couponCode: req.body.couponCode,
+        discountPercentage: req.body.discountPercentage,
+        expiryDate: req.body.expiryDate
+    })
+    try {
+        const response = await coupon1.save()
+        console.log(response)
+        const responseToSend = { id: response._id, version: response.__v, success: true }
+        console.log(responseToSend)
+        return res.json(responseToSend)
+    } catch (err) {
+        console.log(err)
+        return res.status(500).send({ id: '', version: '', success: false });
+    }
+}
+
 const validateAndCheckCoupon = (couponResponse) => {
     if (null == couponResponse) {
         return { 'success': false, 'message': 'Invalid coupon code' }
@@ -29,6 +57,10 @@ const validateAndCheckCoupon = (couponResponse) => {
 }
 
 
+
+
 module.exports = {
-    applyCouponCode
+    applyCouponCode,
+    retrieveCoupons,
+    saveCoupon
 };
