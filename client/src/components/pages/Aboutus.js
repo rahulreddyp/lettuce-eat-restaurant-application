@@ -5,9 +5,12 @@ import Chef from '../../images/Chef.png';
 import Diet from '../../images/Diet.png';
 import Hamburger from '../../images/Hamburger.png';
 import Cooking from '../../images/Cooking.png'
+import { useNavigate } from 'react-router'
 
 
 const Aboutus = () => {
+  const navigate = useNavigate();
+
   return (
 
     <Wrapper>
@@ -29,7 +32,7 @@ const Aboutus = () => {
                 <br>
                 </br>
                 <br></br>
-                <Button className='btn-register' variant="outline-danger">Login</Button>{' '}
+                <Button onClick={() => navigate("/login")} className='btn-register' variant="outline-danger">Login</Button>{' '}
               </h6>
 
             </Col>
@@ -40,10 +43,11 @@ const Aboutus = () => {
           </Row>
         </div>
 
-        <div >
           <Row >
             <Col sm={7} >
+            <div>
               <Carousel fade>
+              
                 <Carousel.Item>
                   <img
                     className="col-carousel"
@@ -66,6 +70,7 @@ const Aboutus = () => {
                   />
                 </Carousel.Item>
               </Carousel>
+              </div>
             </Col>
             <Col sm={4}>
               <h4 style={{ paddingLeft: '1cm' }}>
@@ -97,7 +102,6 @@ const Aboutus = () => {
               </Card>
             </Col>
           </Row>
-        </div>
         <br></br>
       </Container>
     </Wrapper>
