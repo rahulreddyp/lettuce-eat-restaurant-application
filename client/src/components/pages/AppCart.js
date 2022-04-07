@@ -49,17 +49,15 @@ const AppCart = () => {
   <div style ={{backgroundColor: "#e7e393"}}> 
     <div className="d-flex justify-content-center" >
       <div className="row">
-        <div className="col-12">
           <div className="jumbotron text-center  ">
             <h1>WHAT'S ON YOUR Cart ?</h1>
             <p>Best food, Best served, Best Loved</p>
           </div>
-        </div>
         {cartItem.map((item, index) => {
          finaltotal = index
           return (
-            <div key={index} className="col-md-4 md-4 " style={{display:'flex'}}>
-             <CartCard item={item} amount = {amount} itemname = {itemname} index = {index}/>    
+            <div key={index} className="col-md-3 " style={{display:'flex'}}>
+             <CartCard item={item} amount = {amount} itemname = {itemname} index = {index} />    
             </div>
           );
         })
@@ -85,7 +83,7 @@ const AppCart = () => {
                             <div className="ms-2 me-auto ">
                               HST Total: 
                             </div>
-                            <Badge bg="secondary" pill>$ {0.15* final.toFixed()}</Badge>
+                            <Badge bg="secondary" pill>$ {0.15* final.toFixed(2)}</Badge>
                         </ListGroup.Item>
                         
                 }

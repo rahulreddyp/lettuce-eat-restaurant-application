@@ -15,7 +15,7 @@ import {
   Select,
 } from "@mui/material";
 import { Dropdown, DropdownButton } from "react-bootstrap";
-import { useNavigate } from "react-router";
+import { useNavigate, useParams } from "react-router";
 import { getOrderById } from "../../apicalls/UpdateOrderStatusCalls";
 import axios from "axios";
 import { API } from "../../API";
@@ -31,15 +31,17 @@ function UpdateOrderFinalScreen(props) {
   //   item_map.push(order.items[i].name);
   // }
   const [order, setOrder] = useState([]);
+  const { id } = useParams();
+  var c = id;
+  console.log(c);
 
   const handleChange = (event) => {
     setS(event.target.value);
   };
 
   const loadOrder = () => {
-    var url_str = window.location.href;
-    var c = url_str.substring(56);
-    console.log(c);
+    // var url_str = window.location.href;
+    // var c = url_str.substring(56);
 
     getOrderById(c)
       .then((data) => {

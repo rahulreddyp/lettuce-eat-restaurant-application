@@ -1,6 +1,6 @@
 // Author : Pavan Abburi
 //This component is used to provide signup form for the user to register in the application
-import React from "react";
+import React, { useContext, useState } from "react";
 import Wrapper from "../styles/usermanagementstyles";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
@@ -10,6 +10,7 @@ import * as yup from "yup";
 import { ErrorMessage } from "@hookform/error-message";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import { Spinner } from "react-bootstrap";
 
 import { API } from "../../API";
 
@@ -30,6 +31,8 @@ const schema = yup.object().shape({
 
 const Signup = () => {
   const navigate = useNavigate();
+  const [loading, setLoading] = useState(false);
+
   const {
     register,
     handleSubmit,
@@ -40,13 +43,17 @@ const Signup = () => {
   });
 
   const onSubmit = (data) => {
+    setLoading(true);
     console.log(data);
-    return axios
+    axios
       .post(API + "/register", data, { headers: headers })
       .then((res) => {
-        if (res.data.success === true) {
-          navigate("/login");
-        }
+        setLoading(false);
+        navigate("/login");
+      })
+      .error((err) => {
+        setLoading(false);
+        alert("Server failure");
       });
   };
 
@@ -76,9 +83,13 @@ const Signup = () => {
               );
             })}
             <br></br>
-            <Button style={{ width: "150px" }} type="submit">
-              Submit
-            </Button>
+            {loading ? (
+              <Spinner animation="border" role="status"></Spinner>
+            ) : (
+              <Button style={{ width: "150px" }} type="submit">
+                Submit
+              </Button>
+            )}
           </form>
         </Container>
       </Container>
