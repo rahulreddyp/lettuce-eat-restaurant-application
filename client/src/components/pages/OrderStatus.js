@@ -81,7 +81,9 @@ function OrderStatus() {
         </>
       ) : (
         <>
-          <Typography error="true">{error}</Typography>
+          <Typography error="true" variant="h2">
+            {error}
+          </Typography>
         </>
       )}
       <Button

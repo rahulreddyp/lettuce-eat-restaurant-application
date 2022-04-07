@@ -7,16 +7,17 @@ import { ListItem } from "@mui/material";
 import { ListItemText } from "@mui/material";
 import { Divider } from "@mui/material";
 import { Typography } from "@mui/material";
+import { API } from "../../API";
 
 function Notifications() {
   const user = localStorage.getItem("user");
-
+  //`${API}/updateOrder/` + id,
   useEffect(() => {
     if (user !== null) {
       console.log(JSON.parse(user).email);
       var id = JSON.parse(user).id;
       axios
-        .get(`http://localhost:5000/getNotification/${id}`)
+        .get(`${API}/getNotification/${id}`)
         .then((res) => {
           console.log(res);
           setnotif(res.data.notification);

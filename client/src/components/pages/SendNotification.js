@@ -6,13 +6,15 @@ import MenuItem from "@mui/material/MenuItem";
 import FormControl from "@mui/material/FormControl";
 import Select from "@mui/material/Select";
 import { Input } from "@mui/material";
+import { API } from "../../API";
 import { Button } from "@mui/material";
 
 function SendNotification() {
   const [users, setUsers] = useState([]);
+
   useEffect(() => {
     axios
-      .get("http://localhost:5000/getallusers")
+      .get(`${API}/getallusers`)
       .then((res) => {
         setUsers(res.data.users);
       })
@@ -34,7 +36,7 @@ function SendNotification() {
       content: cont,
     };
     axios
-      .post(`http://localhost:5000/createNotification`, data)
+      .post(`${API}/createNotification`, data)
       .then((res) => {
         console.log(res);
         alert("Notification sent successfully");
