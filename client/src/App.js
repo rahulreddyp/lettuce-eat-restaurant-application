@@ -2,6 +2,7 @@ import "bootstrap/dist/css/bootstrap.min.css";
 import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
+import AddCoupon from "./components/couponcomponents/AddCoupon";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
 import Aboutus from "./components/pages/Aboutus";
@@ -75,7 +76,7 @@ function App() {
             <Route path="/payments" element={<Payments />} />
             <Route path="/addCard" element={<AddCard />} />
             <Route path="/cart" element={<AppCart />} />
-            <Route path="/wishlist" element={<Wishlist />} />
+            {/* <Route path="/wishlist" element={<Wish/>} /> */}
             <Route path="admin" element={<AdminRoute />}>
               <Route path="home" element={<Admin />} />
               <Route index path="menu/add" element={<MenuForm />} />
@@ -96,7 +97,7 @@ function App() {
               element={<SendNotification />}
             ></Route>
             <Route path="/coupons" element={<Coupons />} />
-            <Route path="/addCard" element={<AddCard />} />
+            <Route path="/addCoupon" element={<AddCoupon />} />
           </Routes>
         </Router>
         {/* <Footer /> */}

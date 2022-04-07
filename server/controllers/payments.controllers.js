@@ -3,6 +3,7 @@ Author - rahulmoje
 */
 const Payment = require("../models/payments.models");
 const UserCard = require("../models/userCard.model")
+const sendMail = require('./email.contollers')
 
 const savePaymentData = async (req, res) => {
     const payment1 = new Payment({
@@ -19,8 +20,17 @@ const savePaymentData = async (req, res) => {
     try {
         const response = await payment1.save()
         console.log(response)
+        sendMail.sendMail(req.body.userEmail, 'LettuceEat - Payment Confirmation Details',
+            `Your payment has been successful and orde has been created.\nYour payment confirmation id is - ${response._id}`,
+            function(err, data) {
+            if (err) {
+                console.log('ERROR: ', err);
+            }
+            console.log('Email sent!!!');
+        })
         const responseToSend = { id: response._id, version: response.__v, success: true }
         console.log(responseToSend)
+
         return res.json(responseToSend)
     } catch (err) {
         console.log(err)
