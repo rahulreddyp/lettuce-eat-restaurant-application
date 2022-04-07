@@ -12,6 +12,10 @@ import { Button } from "react-bootstrap";
 import { moveItemtoCart } from "../../apicalls/CartCalls";
 import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 
+import {
+  FaHeart,
+} from "react-icons/fa";
+
 const MenuItem = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
@@ -84,7 +88,10 @@ const MenuItem = () => {
   const addtoWishlist = async () => {
     console.log(item.id);
     console.log("Item to be added " + item.name);
-    putItem(item).then((data) => {
+    if(flag!==true){
+      alert("Please select a customization option!!!");
+    } else {
+      putItem(item).then((data) => {
       if (data.error) {
         alert(data.error);
       } else {
@@ -92,7 +99,8 @@ const MenuItem = () => {
         alert("Item added to wishlist");
         console.log(data);
       }
-    });
+    });} 
+    
   };
 
   var image = `${API}/menu/photo/${item._id}`;
@@ -123,18 +131,17 @@ const MenuItem = () => {
               <p>{item.dietary}</p>
             </div>         
             <div className="col-md-2">{/* <h3>{item.price}</h3> */}</div>
-            <div className="col-md-2">
-              <Button onClick={addtoWishlist}>Add to Wishlist</Button>
-            </div>
+           
             <div className="col-md-2">{/* rating */}</div>
           </div>          
         </div>
 
         {(user !== null) ?
           (
-        <div className="row">
+        <div className="row " style={{textAlign:"center"}}>
           <span className="text-danger text-center">{success}</span>
           <span className="text-danger text-center">{error}</span>
+         
           <form onSubmit={handleSubmit} method="POST">
             {item.customization &&
               Object.keys(customizations).map((options, index) => {
@@ -152,6 +159,8 @@ const MenuItem = () => {
                 );
               })}
               
+            
+            <div className="col" style={{margin: "2rem"}}>
             <button
               type="submit"
               onClick={handleSubmit}
@@ -159,6 +168,9 @@ const MenuItem = () => {
             >
               Add to Cart
             </button>
+            &nbsp; &nbsp;
+              <Button onClick={addtoWishlist}>Add to Wishlist <FaHeart /></Button>
+           </div>
           </form>
         </div>
             ): <></>} 

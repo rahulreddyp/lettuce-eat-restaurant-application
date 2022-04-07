@@ -1,9 +1,27 @@
 /*
 Author - rahulmoje
 */
+import { useEffect,useState} from "react"
 import { Image } from "react-bootstrap"
+import { deleteCartAll } from "../../apicalls/CartCalls";
 
 const PostPayments = (props) => {
+
+const [error, setError] = useState("");
+const removefromcart = () => {
+        console.log("Step1");
+        deleteCartAll().then((data) => {
+          if (data.error) {
+            setError(data.error);
+          } else {
+            console.log(data);
+          }
+        });
+      };
+    useEffect(() => {
+        removefromcart();
+      }, []);
+
     return (
         <div className="py-3 text-center">
             <Image className="mb-4 mx-auto d-block"
