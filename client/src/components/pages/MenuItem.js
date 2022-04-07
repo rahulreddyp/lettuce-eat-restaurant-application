@@ -12,6 +12,10 @@ import { Button } from "react-bootstrap";
 import { moveItemtoCart } from "../../apicalls/CartCalls";
 import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 
+import {
+  FaHeart,
+} from "react-icons/fa";
+
 const MenuItem = () => {
   const navigate = useNavigate();
   const [item, setItem] = useState([]);
@@ -130,10 +134,7 @@ const MenuItem = () => {
 
         {(user !== null) ?
           (
-        <div className="row">
-        <div className="col-md-2">
-              <Button onClick={addtoWishlist}>Add to Wishlist</Button>
-            </div>
+        <div className="row " style={{textAlign:"center"}}>
           <span className="text-danger text-center">{success}</span>
           <span className="text-danger text-center">{error}</span>
          
@@ -154,6 +155,8 @@ const MenuItem = () => {
                 );
               })}
               
+            
+            <div className="col" style={{margin: "2rem"}}>
             <button
               type="submit"
               onClick={handleSubmit}
@@ -161,6 +164,9 @@ const MenuItem = () => {
             >
               Add to Cart
             </button>
+            &nbsp; &nbsp;
+              <Button onClick={addtoWishlist}>Add to Wishlist <FaHeart /></Button>
+           </div>
           </form>
         </div>
             ): <></>} 
