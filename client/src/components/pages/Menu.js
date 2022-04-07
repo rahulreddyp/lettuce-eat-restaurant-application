@@ -6,6 +6,7 @@ import MenuCard from "./MenuCard";
 import { getMenu } from "../../apicalls/MenuCalls";
 import MenuSidebar from "./MenuSidebar";
 import { FaSortAmountDownAlt, FaFilter } from "react-icons/fa";
+import { Navigate, Outlet } from 'react-router-dom';
 
 const Menu = () => {
   const [menuItems, setMenuItems] = useState([]);
@@ -17,7 +18,7 @@ const Menu = () => {
     sidebarOpen: false,
     specType: ""
   });
-
+  
   const { state } = useLocation();
   var { specification } = state || {};
 
@@ -50,7 +51,7 @@ const Menu = () => {
     State.specType = "";
   }, [reload]);
 
-
+ 
   return (
     <div>
     <div className="container d-flex justify-content-center" >

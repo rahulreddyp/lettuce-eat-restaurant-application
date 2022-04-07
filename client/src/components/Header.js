@@ -25,8 +25,13 @@ const NewNavBar = styled(NavDropdown)`
   }
 `;
 const Header = () => {
+
+
   const { user, setUser } = useContext(UserContext);
 
+  const isLoggedIn = JSON.parse(localStorage.getItem("user"));
+
+  console.log(isLoggedIn)
   useEffect(() => {}, [user]);
 
   const clearStorage = async () => {
@@ -54,6 +59,9 @@ const Header = () => {
             <Nav.Link href="/menu">
               Menu <FaPizzaSlice />
             </Nav.Link>
+              {console.log(isLoggedIn)}
+            {(isLoggedIn !== null && isLoggedIn.email !== "group01@gmail.com") ? 
+            ( <>
             <Nav.Link href="/wishlist">
               Wishlist <FaHeart />
             </Nav.Link>
@@ -63,20 +71,19 @@ const Header = () => {
             <Nav.Link href="/coupons">
               Coupons <FaPercentage />
             </Nav.Link>
-            <Nav.Link href="/payments">
-              Payments <FaMoneyBill />
-            </Nav.Link>
-            <Nav.Link href="/createOrder">
-              Create Order Demo <FaMoneyBill />
-            </Nav.Link>
             <Nav.Link href="/Cart">
               Cart <FaShoppingBasket />
             </Nav.Link>
             <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
+            <Nav.Link href="/notifications">Notifications</Nav.Link>
+            </>): (<></>)}
+            
+            {(isLoggedIn !== null && isLoggedIn.email === "group01@gmail.com") ? 
+            (<>
             <Nav.Link href="/feedbacks">See Feedbacks</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
-            <Nav.Link href="/sendnotification">Send Notifications</Nav.Link>
-            <Nav.Link href="/notifications">Notifications</Nav.Link>
+            <Nav.Link href="/sendnotification">Send Notifications</Nav.Link> </>): <></>
+            }
           </Nav>
 
           {user ? (

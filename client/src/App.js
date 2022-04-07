@@ -99,7 +99,7 @@ function App() {
             <Route path="/addCard" element={<AddCard />} />
           </Routes>
         </Router>
-        <Footer />
+        {/* <Footer /> */}
       </UserContext.Provider>
     </div>
   );
