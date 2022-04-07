@@ -35,6 +35,7 @@ const WishlistCard = ({ item }) => {
           console.log(data);
           deletemessage = data.message;
           navigate("/wishlist", { state: { deletemessage } });
+          window.location.reload(false) ;
         }
       } ,window.location.reload(false)) 
     };

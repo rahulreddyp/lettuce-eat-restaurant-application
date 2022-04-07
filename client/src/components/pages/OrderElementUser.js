@@ -35,7 +35,7 @@ function OrderElement(props) {
                 Order Number: {dish_name}
               </Typography>
               {/* variant="body2" color="text.secondary" */}
-              <Typography>Quantity : {quantity}</Typography>
+              <Typography>Items : {quantity}</Typography>
               <Typography>Total : {total}</Typography>
               <Typography>
                 Order Status:{" "}

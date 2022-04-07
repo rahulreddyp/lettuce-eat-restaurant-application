@@ -1,6 +1,7 @@
-//Authors: Pavan Abburi, Rahul Reddy P
+//Authors: Pavan Abburi
 //This component renders navigation bar of the application
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../App";
 import { Navbar, Nav, NavDropdown, Container, Button } from "react-bootstrap";
 import {
   FaPizzaSlice,
@@ -14,17 +15,19 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { padding } from "@mui/system";
 import { useState } from "react";
+import styled from "styled-components";
 
+const NewNavBar = styled(NavDropdown)`
+  margin-left: -500px;
+
+  .dropdown-menu {
+    margin-left: -75px;
+  }
+`;
 const Header = () => {
-  const [state, setState] = useState({});
+  const { user, setUser } = useContext(UserContext);
 
-  const getStorage = () => {
-    setState(localStorage.getItem("user"));
-  };
-
-  useEffect(() => {
-    getStorage();
-  }, []);
+  useEffect(() => {}, [user]);
 
   const clearStorage = async () => {
     localStorage.clear();
@@ -72,20 +75,12 @@ const Header = () => {
             <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
             <Nav.Link href="/feedbacks">See Feedbacks</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
+            <Nav.Link href="/sendnotification">Send Notifications</Nav.Link>
+            <Nav.Link href="/notifications">Notifications</Nav.Link>
           </Nav>
-          {!state && (
-            <Button
-              variant="outline-light"
-              onClick={() => {
-                console.log("login");
-                window.location = "/login";
-              }}
-            >
-              Login
-            </Button>
-          )}
-          {state && (
-            <NavDropdown
+
+          {user ? (
+            <NewNavBar
               title={
                 <img
                   className="thumbnail-image"
@@ -99,24 +94,24 @@ const Header = () => {
                   }}
                 />
               }
-              id="collasible-nav-dropdown"
             >
               <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
               <NavDropdown.Divider />
               <NavDropdown.Item href="/" onClick={clearStorage}>
                 Signout
               </NavDropdown.Item>
-            </NavDropdown>
+            </NewNavBar>
+          ) : (
+            <Button
+              variant="outline-light"
+              onClick={() => {
+                console.log("login");
+                window.location = "/login";
+              }}
+            >
+              Login
+            </Button>
           )}
-          {/* <Button
-            variant="outline-light"
-            onClick={() => {
-              console.log("login");
-              window.location = "/login";
-            }}
-          >
-            Login
-          </Button> */}
         </Navbar.Collapse>
       </Container>
     </Navbar>

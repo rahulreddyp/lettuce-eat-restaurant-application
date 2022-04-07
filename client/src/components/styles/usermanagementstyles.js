@@ -2,7 +2,10 @@ import "styled-components";
 import styled from "styled-components";
 
 const Wrapper = styled.div`
+<<<<<<< HEAD
   height: 110vh;
+=======
+>>>>>>> f6dc52d2ead3c89c29c68b3d17ed7b1323c139af
   width: 100%;
   font-size: large;
   background-color: #e7e393;
@@ -10,6 +13,7 @@ const Wrapper = styled.div`
   padding-bottom: 5cm;
 
   .Container {
+<<<<<<< HEAD
     height:fit-content;
     position: relative;
     contain: layout inline-size;
@@ -27,6 +31,13 @@ const Wrapper = styled.div`
 
   .Container:hover {
     box-shadow: 0 0 10px #dd7230;
+=======
+    background-color: #fea95e;
+    width: 60%;
+    font-family: "Poppins", sans-serif;
+    box-shadow: 0 0 10px #dd7230;
+    padding: 20px;
+>>>>>>> f6dc52d2ead3c89c29c68b3d17ed7b1323c139af
   }
 
   h3 {
@@ -38,12 +49,15 @@ const Wrapper = styled.div`
     height: 5cm;
     width: 5cm;
   }
+<<<<<<< HEAD
 
   .form {
     margin: auto;
     padding: 0.25cm;
     text-align: left;
   }
+=======
+>>>>>>> f6dc52d2ead3c89c29c68b3d17ed7b1323c139af
 `;
 
 export default Wrapper;

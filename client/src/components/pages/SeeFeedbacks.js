@@ -3,6 +3,7 @@ import axios from "axios";
 import React, { useEffect, useState } from "react";
 import FeedbackElement from "./FeedbackElement";
 import { useNavigate } from "react-router-dom";
+import { API } from "../../API";
 
 export default function SeeFeedbacks() {
   const [feedbacks, setFeedbacks] = useState();
@@ -13,7 +14,7 @@ export default function SeeFeedbacks() {
       navigator("/login");
     } else {
       const getData = async () => {
-        const res = await axios.get("http://localhost:5000/getFeedbacks");
+        const res = await axios.get(`${API}/getFeedbacks`);
         setFeedbacks(res.data);
         console.log(res.data);
       };

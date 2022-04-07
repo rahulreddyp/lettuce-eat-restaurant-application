@@ -14,6 +14,7 @@ import axios from "axios";
 import { useParams } from "react-router-dom";
 import { useState } from "react";
 import { useEffect } from "react";
+import { API } from "../../API";
 
 export default function Feedback() {
   const { id } = useParams();
@@ -25,7 +26,7 @@ export default function Feedback() {
   useEffect(() => {
     const getData = async () => {
       try {
-        const res = await axios.get("http://localhost:5000/getFeedbacks/" + id);
+        const res = await axios.get(`${API}/getFeedbacks/` + id);
         if (res.data !== null) {
           console.log(res.data);
           setFeedBack(res.data.text);
