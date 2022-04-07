@@ -6,7 +6,7 @@ import { getWishlist } from "../../apicalls/WishlistCalls";
 
 const Wishlist = () => {
   const [wishlistItem, setWishlistItem] = useState([]);
-
+  const [reload, setReload] = useState(false);
   const loadWishlist = () => {
     getWishlist().then((data) => {
       // if (data) {
@@ -21,15 +21,16 @@ const Wishlist = () => {
 
   useEffect(() => {
     loadWishlist();
-  }, []);
+  }, [reload]);
 
   return (
-    <div className="container d-flex justify-content-center">
+    <div style={{backgroundColor: "#e7e393"}}> 
+    <div  className="container d-flex justify-content-center ">
       <div className="row">
         <div className="col-12">
           <div className="jumbotron text-center">
             <h1>WHAT'S ON OUR Wishlist ?</h1>
-            <p>Best food, Best served, Best Loved</p>
+            <p>Best food, best served, Best Loved</p>
           </div>
         </div>
         {wishlistItem.map((item, index) => {
@@ -41,6 +42,7 @@ const Wishlist = () => {
         })}
       </div>
     </div>
+  </div>
   );
 };
 
