@@ -50,7 +50,10 @@ const Login = () => {
         console.log(res.data);
         localStorage.setItem("user", JSON.stringify(res.data));
         setUser(localStorage.getItem("user"));
-        navigate("/menu");
+
+        console.log(user);      
+
+          navigate("/menu");
       })
       .catch((err) => {
         setLoading(false);

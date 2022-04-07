@@ -8,7 +8,7 @@ const AdminRoute = () => {
 
     const user = JSON.parse(localStorage.getItem("user"));
     
-    return (user && user === "group01@gmail.com")
+    return (user && user.email === "group01@gmail.com")
       ? <Outlet />
       : <GenericNotLoggedInComponent/>;
   };

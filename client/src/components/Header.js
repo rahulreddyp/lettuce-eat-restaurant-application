@@ -56,12 +56,15 @@ const Header = () => {
             className="me-auto"
             style={{ fontWeight: "normal", fontVariant: "-moz-initial" }}
           >
-            <Nav.Link href="/menu">
-              Menu <FaPizzaSlice />
-            </Nav.Link>
+           
+           
+
               {console.log(isLoggedIn)}
             {(isLoggedIn !== null && isLoggedIn.email !== "group01@gmail.com") ? 
             ( <>
+             <Nav.Link href="/menu">
+              Menu <FaPizzaSlice />
+            </Nav.Link>
             <Nav.Link href="/wishlist">
               Wishlist <FaHeart />
             </Nav.Link>
@@ -76,10 +79,17 @@ const Header = () => {
             </Nav.Link>
             <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
             <Nav.Link href="/notifications">Notifications</Nav.Link>
-            </>): (<></>)}
+            </>): (
+              <>
+              <Nav.Link href="/menu">
+              Menu <FaPizzaSlice />
+            </Nav.Link>
+              </>
+            )}
             
             {(isLoggedIn !== null && isLoggedIn.email === "group01@gmail.com") ? 
             (<>
+             <Nav.Link href="/admin/home">Manage Menu</Nav.Link>
             <Nav.Link href="/coupons">Manage Coupons</Nav.Link>
             <Nav.Link href="/feedbacks">See Feedbacks</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
