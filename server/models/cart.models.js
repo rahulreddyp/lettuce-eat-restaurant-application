@@ -15,7 +15,7 @@ const Cart = new mongoose.Schema(
     },
     price: { type: Number, required: true, maxlength: 32, trim: true },
     category: {
-      type: Number,
+      type: String,
       trim: true,
     },
     photo: {
@@ -26,6 +26,22 @@ const Cart = new mongoose.Schema(
       trim: true,
       required: true,
       maxlength: 2000,
+    },
+    customization: {
+      type: Object,
+      trim: true
+    },
+    size:{
+      type:String,
+      trim: true
+    },
+    salt:{
+      type: String,
+      trim: true
+    },
+    "spice level":{
+      type: String,
+      trim: true
     },
     itemvalue:{
       type: String,

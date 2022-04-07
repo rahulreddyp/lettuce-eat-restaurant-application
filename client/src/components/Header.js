@@ -1,6 +1,7 @@
-//Authors: Pavan Abburi, Rahul Reddy P
+//Authors: Pavan Abburi
 //This component renders navigation bar of the application
-import React from "react";
+import React, { useContext } from "react";
+import { UserContext } from "../App";
 import { Navbar, Nav, NavDropdown, Container, Button } from "react-bootstrap";
 import {
   FaPizzaSlice,
@@ -14,22 +15,23 @@ import { useEffect } from "react";
 import { useNavigate } from "react-router-dom";
 import { padding } from "@mui/system";
 import { useState } from "react";
+import styled from "styled-components";
 
-const Header = () => {
+const NewNavBar = styled(NavDropdown)`
+  margin-left: -500px;
 
-  const [state,setState] = useState({});
-
-  const getStorage = () => {
-    setState(localStorage.getItem("user"))
+  .dropdown-menu {
+    margin-left: -75px;
   }
-  
-  useEffect(() => {
-    getStorage()
-  }, []);
+`;
+const Header = () => {
+  const { user, setUser } = useContext(UserContext);
+
+  useEffect(() => {}, [user]);
 
   const clearStorage = async () => {
     localStorage.clear();
-  }
+  };
   return (
     <Navbar bg="dark" expand="lg" variant="dark">
       <Container fluid>
@@ -72,34 +74,43 @@ const Header = () => {
             </Nav.Link>
             <Nav.Link href="/getorderstatus">Track Your Order</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
+            <Nav.Link href="/sendnotification">Send Notifications</Nav.Link>
+            <Nav.Link href="/notifications">Notifications</Nav.Link>
           </Nav>
-          {!state && <Button
-            variant="outline-light"
-            onClick={() => {
-              console.log("login");
-              window.location = "/login";
-            }}
-          >
-            Login
-          </Button>}
-          {state &&
-          <NavDropdown title={<img className="thumbnail-image" 
-          src="https://t4.ftcdn.net/jpg/01/97/15/87/360_F_197158744_1NBB1dEAHV2j9xETSUClYqZo7SEadToU.jpg" 
-          alt="User" 
-          style={{ width: '30px', height: '30px', borderRadius: '100%', paddingmarginLeft : '1000px'}} />} id="collasible-nav-dropdown">
-                        <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
-                        <NavDropdown.Divider />
-                        <NavDropdown.Item href="/" onClick={clearStorage}>Signout</NavDropdown.Item>
-                    </NavDropdown>}
-          {/* <Button
-            variant="outline-light"
-            onClick={() => {
-              console.log("login");
-              window.location = "/login";
-            }}
-          >
-            Login
-          </Button> */}
+
+          {user ? (
+            <NewNavBar
+              title={
+                <img
+                  className="thumbnail-image"
+                  src="https://t4.ftcdn.net/jpg/01/97/15/87/360_F_197158744_1NBB1dEAHV2j9xETSUClYqZo7SEadToU.jpg"
+                  alt="User"
+                  style={{
+                    width: "30px",
+                    height: "30px",
+                    borderRadius: "100%",
+                    paddingmarginLeft: "1000px",
+                  }}
+                />
+              }
+            >
+              <NavDropdown.Item href="/profile">Profile</NavDropdown.Item>
+              <NavDropdown.Divider />
+              <NavDropdown.Item href="/" onClick={clearStorage}>
+                Signout
+              </NavDropdown.Item>
+            </NewNavBar>
+          ) : (
+            <Button
+              variant="outline-light"
+              onClick={() => {
+                console.log("login");
+                window.location = "/login";
+              }}
+            >
+              Login
+            </Button>
+          )}
         </Navbar.Collapse>
       </Container>
     </Navbar>

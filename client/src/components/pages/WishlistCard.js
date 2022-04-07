@@ -5,7 +5,6 @@ import React,{ useState} from "react";
 import { Button } from "react-bootstrap";
 import { useNavigate, withRouter } from "react-router-dom";
 import { deleteWishlistItem ,moveItemtoCart} from "../../apicalls/WishlistCalls";
-import "../styles/Menu.css";
 import { API } from "../../API";
 
 
@@ -36,8 +35,9 @@ const WishlistCard = ({ item }) => {
           console.log(data);
           deletemessage = data.message;
           navigate("/wishlist", { state: { deletemessage } });
+          window.location.reload(false) ;
         }
-      } ,window.location.reload(false)) 
+      }) 
     };
 
   const moveToCart = async () => {

@@ -9,6 +9,7 @@ import MenuOptions from "./MenuOptions";
 import Heart from "react-animated-heart";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
+import { moveItemtoCart } from "../../apicalls/CartCalls";
 
 const MenuItem = () => {
   const navigate = useNavigate();
@@ -17,7 +18,7 @@ const MenuItem = () => {
   const [success, setSuccess] = useState("");
   const [customizations, setCustomizations] = useState([]);
   const [cartItem, setCartItem] = useState([]);
-  const [wishlistitems, setwishlistitems] = useState([]);
+  const [flag, setFlag] = useState(false);
   const { state } = useLocation();
   const { itemId } = state || {};
   const [isClick, setClick] = useState(false);
@@ -46,21 +47,34 @@ const MenuItem = () => {
 
   const handleChange = (customization_type, e) => {
     const userChoice = e.target.value;
-    setCartItem({ ...cartItem, [customization_type]: userChoice });
-
-    console.log(cartItem);
-  };
-
-  const addtoCart = (e) => {
-    e.preventDefault();
-    setCartItem({
-      ...cartItem,
-      id: item._id,
+    setCartItem({ ...cartItem, [customization_type]: userChoice ,id: item._id,
       name: item.name,
       price: item.price,
       category: item.category,
-    });
-    console.log(cartItem);
+      description: item.description,
+      quantity: 1,
+      });
+      setFlag(true);
+      console.log(cartItem);
+  };
+
+  const handleSubmit = (e) => {
+    e.preventDefault();
+   
+    if(flag!==true){
+      alert("Please select a customization option!!!");
+    }else{
+       moveItemtoCart(cartItem).then((data)=>{
+      
+      if (data.error) {
+        alert(data.error);
+      } else {
+        alert(data.message);
+        console.log(data);
+      }
+    }) 
+    }
+   
     
   };
 
@@ -69,9 +83,10 @@ const MenuItem = () => {
     console.log("Item to be added "+ item.name)
     putItem(item).then((data)=>{
       if (data.error) {
-        setError(data.error);
+        alert(data.error)
       } else {
-        setSuccess(data.message);
+        // setSuccess(data.message);
+        alert("Item added to wishlist");
         console.log(data);
       }
     }) 
@@ -110,7 +125,6 @@ const MenuItem = () => {
           <div className="col-md-2">
           <Button onClick={addtoWishlist}>Add to Wishlist</Button>
           </div>
-          {/* <div className="col-md-2"><Heart isClick={isClick} onClick={updateWishlist} /></div> */}
           <div className="col-md-2">{/* rating */}</div>
         </div>   
       </div>
@@ -118,7 +132,7 @@ const MenuItem = () => {
       <div className="row">
       <span className="text-danger text-center">{success}</span>
         <span className="text-danger text-center">{error}</span>
-        <form onSubmit={(e) => addtoCart(e)}>
+        <form onSubmit={handleSubmit} method="POST">
           {item.customization &&
             Object.keys(customizations).map((options, index) => {
               return (
@@ -129,11 +143,13 @@ const MenuItem = () => {
                     customizations={customizations}
                     options={options}
                     onChange={(e) => handleChange(options, e)}
+                    required
+                    
                   />
                 </div>
               );
             })}
-          <button className="btn btn-secondary">Add to Cart</button>
+          <button  type= "submit" onClick={handleSubmit} class = "btn btn-secondary">Add to Cart</button>
         </form>
       </div>
     </div>
