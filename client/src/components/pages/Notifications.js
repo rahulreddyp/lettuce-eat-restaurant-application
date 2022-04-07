@@ -35,6 +35,14 @@ function Notifications() {
       width: "100%",
       bgcolor: "background.paper",
     };
+
+    if (notif.length <= 0) {
+      return (
+        <>
+          <Typography variant="h2">No Notifications</Typography>
+        </>
+      );
+    }
     return (
       <>
         <Typography variant="h3">Your notifications</Typography>

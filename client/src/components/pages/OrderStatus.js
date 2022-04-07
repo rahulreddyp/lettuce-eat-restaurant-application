@@ -2,7 +2,7 @@
 
 import React, { useEffect, useState } from "react";
 import "./css/orderstatus.css";
-import { useNavigate } from "react-router-dom";
+import { useNavigate, useParams } from "react-router-dom";
 import OrderElement from "./OrderElement";
 import Grid from "@mui/material/Grid";
 import { borders } from "@mui/system";
@@ -13,11 +13,13 @@ import { Typography } from "@mui/material";
 function OrderStatus() {
   const [order, setOrder] = useState([]);
   const [error, setError] = useState("");
+  const { orderid } = useParams();
+  var c = orderid;
+  console.log(c);
 
   const loadOrder = () => {
-    var url_str = window.location.href;
-    var c = url_str.substring(53);
-    console.log(c);
+    // var url_str = window.location.href;
+    // var c = url_str.substring(53);
 
     getOrderById(c)
       .then((data) => {
