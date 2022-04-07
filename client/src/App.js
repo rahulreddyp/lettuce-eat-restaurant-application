@@ -30,6 +30,7 @@ import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
 import AppCart from "./components/pages/AppCart";
 import Feedback from "./components/pages/Feedback";
+import SeeFeedbacks from "./components/pages/SeeFeedbacks";
 
 function App() {
   return (
@@ -45,6 +46,7 @@ function App() {
           <Route path="/login" element={<Login />} />
           <Route path="/sendmail" element={<SendMail />} />
           <Route path="/feedback/:id" element={<Feedback />} />
+          <Route path="/feedbacks" element={<SeeFeedbacks />} />
           <Route path="/verifyotp" element={<VerifyOtp />} />
           <Route path="/resetpassword" element={<ResetPassword />} />
           <Route path="/profile" element={<Profile />} />

@@ -62,7 +62,7 @@ const getFeedBackByOrderId = async (req, res) => {
 
 const getAllFeedbacks = async (req, res) => {
   try {
-    const feedBacks = await Feedback.find({});
+    const feedBacks = await Feedback.find({}).populate("order");
     res.status(200).json(feedBacks);
   } catch (error) {
     console.log(error);

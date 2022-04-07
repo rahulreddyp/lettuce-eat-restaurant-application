@@ -95,6 +95,9 @@ export default function Feedback() {
               Items: {orderDetails?.quantity.length}
             </Typography>{" "}
             <CardContent>
+              <Typography variant="body2" color="text.primary">
+                Feedback:
+              </Typography>
               <Typography variant="body2" color="text.secondary">
                 {feedBack}
               </Typography>
