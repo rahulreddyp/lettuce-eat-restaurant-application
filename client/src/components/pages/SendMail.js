@@ -1,6 +1,7 @@
 // Author : Pavan Abburi
 //This component is used to take email input and send mail to user for reseting password
 import React from "react";
+import Wrapper from "../styles/usermanagementstyles";
 import { Form, Button, Row, Col, Container, Card } from "react-bootstrap";
 import { useForm } from "react-hook-form";
 import { yupResolver } from "@hookform/resolvers/yup";
@@ -48,9 +49,9 @@ const SendMail = () => {
   };
 
   return (
-    <Container style={{ height: "100vh" }}>
-      <h1 style={{ fontSize: "70px" }}>Verify Email</h1>
-      <Container style={{ width: "75vh", marginTop: "50px" }}>
+    <Wrapper>      
+      <Container className="Container">
+      <h1 style={{ fontSize: "30px" }}>Verify Email</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
@@ -77,7 +78,7 @@ const SendMail = () => {
           <Button type="submit">Submit</Button>
         </form>
       </Container>
-    </Container>
+    </Wrapper>
   );
 };
 
