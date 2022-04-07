@@ -88,7 +88,10 @@ const MenuItem = () => {
   const addtoWishlist = async () => {
     console.log(item.id);
     console.log("Item to be added " + item.name);
-    putItem(item).then((data) => {
+    if(flag!==true){
+      alert("Please select a customization option!!!");
+    } else {
+      putItem(item).then((data) => {
       if (data.error) {
         alert(data.error);
       } else {
@@ -96,7 +99,8 @@ const MenuItem = () => {
         alert("Item added to wishlist");
         console.log(data);
       }
-    });
+    });} 
+    
   };
 
   var image = `${API}/menu/photo/${item._id}`;
