@@ -23,8 +23,7 @@ function AllOrders() {
     console.log(JSON.parse(localStorage.getItem("user")));
     const getData = async () => {
       const res = await axios.get(
-        `${API}/getAllOrders/` +
-          JSON.parse(localStorage.getItem("user")).id
+        `${API}/getAllOrders/` + JSON.parse(localStorage.getItem("user")).id
       );
       console.log(res);
       setOrders(res.data);
@@ -47,7 +46,7 @@ function AllOrders() {
             <OrderElement
               sx={{ border: 1 }}
               // image_url={image_url}
-              quantity={order.items.length}
+              quantity={order.quantity.length}
               total={order.total}
               order_status={order.orderStatus}
               dish_name={order._id}

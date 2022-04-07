@@ -59,7 +59,7 @@ function SendNotification() {
         }}
       >
         <FormControl>
-          <InputLabel id="demo-simple-select-label">Select A User</InputLabel>
+          <InputLabel id="demo-simple-select-label">Select A Users</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"

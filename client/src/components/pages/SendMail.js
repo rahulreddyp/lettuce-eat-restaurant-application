@@ -51,7 +51,7 @@ const SendMail = () => {
   return (
     <Wrapper>      
       <Container className="Container">
-      <h1 style={{ fontSize: "30px" }}>Verify Email</h1>
+      <h1 style={{ fontSize: "40px" }}>Verify Email</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
