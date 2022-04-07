@@ -35,6 +35,8 @@ import Notifications from "./components/pages/Notifications";
 import SendNotification from "./components/pages/SendNotification";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
+import Coupons from "./components/pages/Coupons";
+import AddCoupon from "./components/couponcomponents/AddCoupon";
 
 export const UserContext = React.createContext();
 
@@ -92,6 +94,8 @@ function App() {
               path="/sendnotification"
               element={<SendNotification />}
             ></Route>
+            <Route path="/coupons" element={<Coupons />} />
+            <Route path="/addCard" element={<AddCard />} />
           </Routes>
         </Router>
         <Footer />
