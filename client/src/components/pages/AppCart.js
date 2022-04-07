@@ -45,11 +45,13 @@ const AppCart = () => {
       quantity: quantities,
       orderStatus: "PREPARING",
     };
-    console.log(params);
     const res = await axios.post(`${API}/createOrder/`, params);
     console.log(res.data);
-    alert("Order created!");
-    navigator("/");
+    //alert("Order created!");
+    localStorage.setItem("orderParams", JSON.stringify(params))
+    localStorage.setItem("cartItem", JSON.stringify(cartItem))
+    navigator("/payments");
+    
   };
 
   var finaltotal = 0;
@@ -162,7 +164,7 @@ const AppCart = () => {
             </ListGroup>
 
             <Button variant="contained" onClick={placeOrder}>
-              Place Order
+              Proceed to payments
             </Button>
           </div>
         </div>
