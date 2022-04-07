@@ -12,6 +12,8 @@ const paymentsRouter = require("./routes/payments.routes");
 const couponsRouter = require("./routes/coupon.routes");
 const wishlistRouter = require("./routes/wishlist.routes");
 const cartRouter = require("./routes/cart.routes");
+const feedBackRouter = require("./routes/feedback.routes");
+
 const notificationRouter = require("./routes/notification.routes");
 const corsOpts = {
   origin: "*",
@@ -35,6 +37,7 @@ app.use(paymentsRouter);
 app.use(couponsRouter);
 app.use(wishlistRouter);
 app.use(cartRouter);
+app.use(feedBackRouter);
 app.use(notificationRouter);
 
 console.log(

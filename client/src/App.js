@@ -1,26 +1,32 @@
-import React, { useContext, useState } from "react";
 import "bootstrap/dist/css/bootstrap.min.css";
+import React, { useEffect, useState } from "react";
 import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Aboutus from "./components/pages/Aboutus";
 import Admin from "./components/pages/Admin";
 import AdminRoute from "./components/pages/AdminRoute";
 import { default as AllOrders } from "./components/pages/AllOrders";
-import { default as OrderStatus } from "./components/pages/OrderStatus";
+import AppCart from "./components/pages/AppCart";
 import Cart from "./components/pages/Cart";
+import Coupons from "./components/pages/Coupons";
 import Editprofile from "./components/pages/Editprofile";
+import Feedback from "./components/pages/Feedback";
 import GetOrderStatus from "./components/pages/GetOrderStatus";
 import HomePage from "./components/pages/HomeScreen";
 import Login from "./components/pages/Login";
 import ManageMenu from "./components/pages/ManageMenu";
 import Menu from "./components/pages/Menu";
-import Aboutus from "./components/pages/Aboutus";
 import MenuForm from "./components/pages/MenuForm";
 import MenuItem from "./components/pages/MenuItem";
+import Notifications from "./components/pages/Notifications";
+import { default as OrderStatus } from "./components/pages/OrderStatus";
 import Payments from "./components/pages/Payments";
 import ResetPassword from "./components/pages/ResetPassword";
+import SeeFeedbacks from "./components/pages/SeeFeedbacks";
 import SendMail from "./components/pages/SendMail";
+import SendNotification from "./components/pages/SendNotification";
 import Signup from "./components/pages/Signup";
 import UpdateMenu from "./components/pages/UpdateMenu";
 import UpdateOrder from "./components/pages/UpdateOrder";
@@ -30,13 +36,6 @@ import Profile from "./components/pages/Userprofile";
 import VerifyOtp from "./components/pages/VerifyOtp";
 import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
-import AppCart from "./components/pages/AppCart";
-import Notifications from "./components/pages/Notifications";
-import SendNotification from "./components/pages/SendNotification";
-import userEvent from "@testing-library/user-event";
-import { useEffect } from "react";
-import Coupons from "./components/pages/Coupons";
-import AddCoupon from "./components/couponcomponents/AddCoupon";
 
 export const UserContext = React.createContext();
 
@@ -62,6 +61,8 @@ function App() {
             <Route path="/sendmail" element={<SendMail />} />
             <Route path="/verifyotp" element={<VerifyOtp />} />
             <Route path="/resetpassword" element={<ResetPassword />} />
+            <Route path="/feedback/:id" element={<Feedback />} />
+            <Route path="/feedbacks" element={<SeeFeedbacks />} />
             <Route path="/profile" element={<Profile />} />
             <Route path="/createOrder" element={<Cart />} />
             <Route path="/wishlist" element={<Wishlist />} />
