@@ -12,14 +12,6 @@ const CartCard = ({ item , amount,itemname}) => {
     const [error, setError] = useState("");
     const [Quantity, setQuantity] = useState(1);
     const navigate = useNavigate();
-
-    // const redirectToItemDetails = () => {
-
-    //     navigate("/menuitem", {state: {itemId: item._id}})
-  
-    // };
-   
-    const CardImage = `${API}/menu/photo/${item._id}`;
  
     const [items, setItems] = useState({item});
 
