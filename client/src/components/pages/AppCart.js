@@ -3,6 +3,9 @@
 import React, { useState, useEffect } from "react";
 import { getCart } from "../../apicalls/CartCalls";
 import CartCard from "./CartCard";
+import { Badge, CloseButton, ListGroup } from "react-bootstrap"
+import {FaShoppingCart} from "react-icons/fa";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 import { Badge, CloseButton, ListGroup } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
 import { useNavigate } from "react-router-dom";
@@ -55,12 +58,18 @@ const AppCart = () => {
   };
 
   var finaltotal = 0;
+  
 
-  useEffect(() => {
-    loadCart();
+   useEffect(() => {
+    if (!localStorage.getItem("user")) {
+      return <GenericNotLoggedInComponent />;
+    } 
+    else {
+      loadCart();
+    }
   }, [reload]);
 
-  useEffect(() => {
+  useEffect(()=>{
     amount();
   }, [final]);
   console.log(cartItem);
