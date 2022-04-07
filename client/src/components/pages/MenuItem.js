@@ -10,6 +10,7 @@ import Heart from "react-animated-heart";
 import { useNavigate } from "react-router-dom";
 import { Button } from "react-bootstrap";
 import { moveItemtoCart } from "../../apicalls/CartCalls";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 
 const MenuItem = () => {
   const navigate = useNavigate();
@@ -24,6 +25,8 @@ const MenuItem = () => {
   const [isClick, setClick] = useState(false);
   const data = JSON.parse(localStorage.getItem("item"));
   //const{item , onAdd} = props;
+
+  const user = JSON.parse(localStorage.getItem("user"));
 
   const getMenuItemDetails = () => {
     if (itemId) {
@@ -95,7 +98,7 @@ const MenuItem = () => {
   var image = `${API}/menu/photo/${item._id}`;
 
   return (
-    <div style={{ backgroundColor: "#e7e393" }}>
+    <div>
       <div className="container-fluid">
         <div className="row">
           <div className="col-12">
@@ -118,14 +121,15 @@ const MenuItem = () => {
           <div className="row">
             <div className="col-md-6">
               <p>{item.dietary}</p>
-            </div>
+            </div>         
             <div className="col-md-2">{/* <h3>{item.price}</h3> */}</div>
            
             <div className="col-md-2">{/* rating */}</div>
-          
-          </div>
+          </div>          
         </div>
 
+        {(user !== null) ?
+          (
         <div className="row">
         <div className="col-md-2">
               <Button onClick={addtoWishlist}>Add to Wishlist</Button>
@@ -149,6 +153,7 @@ const MenuItem = () => {
                   </div>
                 );
               })}
+              
             <button
               type="submit"
               onClick={handleSubmit}
@@ -158,9 +163,9 @@ const MenuItem = () => {
             </button>
           </form>
         </div>
-      </div>
-    </div>
-  );
+            ): <></>} 
+      </div>           
+    </div>)
 };
 
 export default MenuItem;

@@ -30,8 +30,8 @@ const HomeScreen = () => {
               local and national favourites across the globe .All your favourite
               cuisines and dishes at one place.
             </p>
-            <Button variant="outline-danger" onClick={() => navigate("/menu")}>
-              Menu
+            <Button variant="outline-danger" onClick={() => navigate("/aboutus")}>
+              About Us
             </Button>{" "}
             <br></br>
           </Col>
