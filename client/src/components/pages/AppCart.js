@@ -49,25 +49,22 @@ const AppCart = () => {
     const res = await axios.post(`${API}/createOrder/`, params);
     console.log(res.data);
     //alert("Order created!");
-    localStorage.setItem("orderParams", JSON.stringify(params))
-    localStorage.setItem("cartItem", JSON.stringify(cartItem))
+    localStorage.setItem("orderParams", JSON.stringify(params));
+    localStorage.setItem("cartItem", JSON.stringify(cartItem));
     navigator("/payments");
-    
   };
 
   var finaltotal = 0;
-  
 
-   useEffect(() => {
+  useEffect(() => {
     if (!localStorage.getItem("user")) {
       return <GenericNotLoggedInComponent />;
-    } 
-    else {
+    } else {
       loadCart();
     }
   }, [reload]);
 
-  useEffect(()=>{
+  useEffect(() => {
     amount();
   }, [final]);
   console.log(cartItem);

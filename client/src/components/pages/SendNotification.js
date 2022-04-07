@@ -50,14 +50,21 @@ function SendNotification() {
   return (
     <>
       <h1>Select a user to send a notification:</h1>
-      <Box sx={{ minWidth: 120, m: 2 }}>
-        <FormControl fullWidth>
-          <InputLabel id="demo-simple-select-label">Users</InputLabel>
+      <Box
+        sx={{
+          m: 3,
+          display: "flex",
+          justifyContent: "center",
+          flexDirection: "column",
+        }}
+      >
+        <FormControl>
+          <InputLabel id="demo-simple-select-label">Select A Users</InputLabel>
           <Select
             labelId="demo-simple-select-label"
             id="demo-simple-select"
             value={name}
-            label="Users"
+            label="Select a User"
             onChange={handleChange}
           >
             {users.map((user) => {
@@ -69,11 +76,11 @@ function SendNotification() {
             })}
           </Select>
         </FormControl>
-        <FormControl sx={{ m: 2 }}>
+        <FormControl sx={{ m: 3 }}>
           <InputLabel>Content of notification:</InputLabel>
           <Input id="content"></Input>
         </FormControl>
-        <Button sx={{ m: 2 }} onClick={handleSubmit}>
+        <Button variant="contained" sx={{ m: 2 }} onClick={handleSubmit}>
           Send notification
         </Button>
       </Box>
