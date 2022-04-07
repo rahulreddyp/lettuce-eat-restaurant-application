@@ -1,6 +1,6 @@
 // Author: Rahul Reddy Puchakayala
 
-import React, { useState, useEffect, Fragment } from "react";
+import React, { useState, useEffect } from "react";
 import { useLocation } from "react-router-dom";
 import MenuCard from "./MenuCard";
 import { getMenu } from "../../apicalls/MenuCalls";

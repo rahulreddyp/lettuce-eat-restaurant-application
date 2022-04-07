@@ -144,7 +144,7 @@ const MenuItem = () => {
                 </div>
               );
             })}
-          <button  type= "submit" onClick={handleSubmit} class = "btn btn-secondary">Add to Cart</button>
+          <button  type= "submit" onClick={handleSubmit} className = "btn btn-secondary">Add to Cart</button>
         </form>
       </div>
     </div>
