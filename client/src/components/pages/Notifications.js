@@ -13,8 +13,10 @@ function Notifications() {
 
   useEffect(() => {
     if (user !== null) {
+      console.log(JSON.parse(user).email);
+      var id = JSON.parse(user).id;
       axios
-        .get("http://localhost:5000/getNotification/1")
+        .get(`http://localhost:5000/getNotification/${id}`)
         .then((res) => {
           console.log(res);
           setnotif(res.data.notification);

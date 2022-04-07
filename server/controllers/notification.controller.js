@@ -3,6 +3,7 @@
  */
 
 const Notification = require("../models/notification.models");
+const User = require("../models/user.models");
 
 const createNotification = async (req, res) => {
   const { userid, content, read } = req.body;
@@ -52,7 +53,26 @@ const getNotificationForUser = async (req, res) => {
   }
 };
 
+const getAllUsers = async (req, res) => {
+  try {
+    const users = await User.find();
+    // console.log(users);
+    res.status(200).send({
+      success: true,
+      users: users,
+    });
+  } catch (err) {
+    console.log(err);
+    res.status(500).send({
+      success: false,
+      message: "Something went wrong",
+      error: err,
+    });
+  }
+};
+
 module.exports = {
   createNotification,
   getNotificationForUser,
+  getAllUsers,
 };

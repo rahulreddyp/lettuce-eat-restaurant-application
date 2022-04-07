@@ -30,6 +30,7 @@ import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
 import AppCart from "./components/pages/AppCart";
 import Notifications from "./components/pages/Notifications";
+import SendNotification from "./components/pages/SendNotification";
 
 function App() {
   return (
@@ -72,6 +73,10 @@ function App() {
             element={<UpdateOrderFinalScreen />}
           />
           <Route path="/notifications" element={<Notifications />}></Route>
+          <Route
+            path="/sendnotification"
+            element={<SendNotification />}
+          ></Route>
           {/* <Route path="/cart" element={<Cart />} /> */}
         </Routes>
       </Router>
