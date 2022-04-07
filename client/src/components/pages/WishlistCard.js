@@ -48,12 +48,10 @@ const WishlistCard = ({ item }) => {
     const deletemessage = "";
     moveItemtoCart(item).then((data)=>{
       if (data.error) {
-        // setError(data.error);
-        alert(data.error);
+        setError(data.error);
       } else {
         console.log(data);
-        // setError(data.message);
-        alert(data.message);
+        setError(data.message);
         navigate("/wishlist", { state: { deletemessage } });
         window.location.reload()
         
