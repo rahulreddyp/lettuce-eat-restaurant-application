@@ -85,7 +85,7 @@ const AppCart = () => {
                             <div className="ms-2 me-auto ">
                               HST Total: 
                             </div>
-                            <Badge bg="secondary" pill>$ {0.15* final.toFixed()}</Badge>
+                            <Badge bg="secondary" pill>$ {0.15* final.toFixed(2)}</Badge>
                         </ListGroup.Item>
                         
                 }

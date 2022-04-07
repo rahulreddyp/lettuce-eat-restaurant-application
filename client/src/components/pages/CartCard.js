@@ -34,7 +34,9 @@ const CartCard = ({ item , amount,itemname}) => {
           } else {
             console.log(data);
             deletemessage = data.message;
+            alert("Item removed from cart");
             navigate("/cart", { state: { deletemessage } });
+            window.location.reload(false) ;
           }
         }) 
       };
