@@ -130,7 +130,7 @@ const MenuItem = () => {
           </div>          
         </div>
 
-        {(user !== null) ?
+        {(user !== null && user.email !== "group01@gmail.com") ?
           (
         <div className="row">
           <span className="text-danger text-center">{success}</span>
@@ -155,7 +155,7 @@ const MenuItem = () => {
             <button
               type="submit"
               onClick={handleSubmit}
-              class="btn btn-secondary"
+              className="btn btn-secondary"
             >
               Add to Cart
             </button>

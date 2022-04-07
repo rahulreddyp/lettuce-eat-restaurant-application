@@ -14,36 +14,17 @@ const Admin = () => {
                         </li>
                         <li className="list-group-item">
                             <Link to="/admin/menu/manage" className="nav-link">Manage Menu</Link>
-                        </li>
-                        <li className="list-group-item">
-                            <Link to="/orders" className="nav-link">Manage Orders</Link>
-                        </li>    
+                        </li>                      
                     </ul>
                 </div>
             )
     };
 
-
-    // const adminDashboard = () => {
-    //     return(
-    //         <div className="card mb-4">
-    //             <ul className="list-group">
-    //                 <li className="list-group-item ">
-    //                     <p className="badge badge-success">Name:</p>
-    //                 </li>
-    //                 <li className="list-group-item">
-    //                     <p className="badge badge-success">Email:</p>
-    //                 </li>
-    //             </ul>
-    //         </div>
-    //     )
-    // }
-
     return (        
         <div className="container p-4">
             <div className="jumbotron text-center">
             <h1>Hey, admin</h1>
-            <p>Manage all your services here..</p>
+            <p>Manage all your menu services here..</p>
           </div>
          <div className="row justify-content-center">
             <div className="col-md-6">
