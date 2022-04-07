@@ -80,6 +80,7 @@ const Header = () => {
             
             {(isLoggedIn !== null && isLoggedIn.email === "group01@gmail.com") ? 
             (<>
+            <Nav.Link href="/coupons">Manage Coupons</Nav.Link>
             <Nav.Link href="/feedbacks">See Feedbacks</Nav.Link>
             <Nav.Link href="/updateorderstatus">Update Order Status</Nav.Link>
             <Nav.Link href="/sendnotification">Send Notifications</Nav.Link> </>): <></>
