@@ -34,7 +34,7 @@ const CartCard = ({ item , amount,itemname}) => {
           } else {
             console.log(data);
             deletemessage = data.message;
-            alert("Item removed from cart");
+            alert(deletemessage);
             navigate("/cart", { state: { deletemessage } });
             window.location.reload(false) ;
           }
@@ -43,8 +43,7 @@ const CartCard = ({ item , amount,itemname}) => {
   let sum = 0;
   return (
 <div className="container">
- <div className = "container" >
-    <div className="card border-primary" style={{ width: "18rem" }}>
+    <div className="card border-primary" style={{ width: "17rem" , justifyContent: "spaceBetween"}}>
       <div className="overflow">
       <div class="card-body">
         <h3 class="card-title">{item.name}</h3>
@@ -101,8 +100,7 @@ const CartCard = ({ item , amount,itemname}) => {
           <ul class="list-group list-group-flush">
             <li class="list-group-item">Item total: <Badge bg="secondary" pill>$ {(sum = item.price * Quantity).toFixed(2)} </Badge></li>
           </ul>
-    </div>   
-    </div>
+    </div>  
         
          {amount(sum)}
          {itemname(item.name)}

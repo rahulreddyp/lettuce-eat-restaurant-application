@@ -24,7 +24,6 @@ const getAllCart = (req, res) => {
 };
 
 const moveToCart =(req,res)=>{
-  console.log("Step 3" + req.body.name)
   Cart.findOne({ name: req.body.name }).then((results) => {
     if (!results) {
       const cart = new Cart(req.body);
