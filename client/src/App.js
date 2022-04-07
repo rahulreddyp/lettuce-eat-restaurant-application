@@ -100,7 +100,7 @@ function App() {
             <Route path="/addCoupon" element={<AddCoupon />} />
           </Routes>
         </Router>
-        <Footer />
+        {/* <Footer /> */}
       </UserContext.Provider>
     </div>
   );

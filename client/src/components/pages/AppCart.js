@@ -3,8 +3,6 @@
 import React, { useState, useEffect } from "react";
 import { getCart } from "../../apicalls/CartCalls";
 import CartCard from "./CartCard";
-import { Badge, CloseButton, ListGroup } from "react-bootstrap"
-import {FaShoppingCart} from "react-icons/fa";
 import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 import { Badge, CloseButton, ListGroup } from "react-bootstrap";
 import { FaShoppingCart } from "react-icons/fa";
@@ -93,7 +91,7 @@ const AppCart = () => {
   };
   // console.log(cartItem);
   return (
-    <div style={{ backgroundColor: "#e7e393" }}>
+    <div>
       <div className="d-flex justify-content-center">
         <div className="row">
           <div className="jumbotron text-center  ">
