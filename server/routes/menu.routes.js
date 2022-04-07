@@ -13,12 +13,12 @@ router.get("/menu", menuControllers.getAllMenu);
 router.get("/menu/categories", menuControllers.getAllCategories);
 
 router.get("/menu/:itemId", menuControllers.getMenuItem);
-router.get("/menu/photo/:itemId", menuControllers.getImageObject);
+router.get("/menu/photo/:itemId",  menuControllers.getImageObject);
 router.get("/menu/category/:categoryId", menuControllers.getMenuItemCategory);
 
 router.post("/menu/add", menuControllers.createMenuItem);
 router.delete("/menu/:itemId", menuControllers.deleteMenuItem);
-router.put("/menu/:itemId", menuControllers.updateMenuItem);
+router.put("/menu/:itemId",  menuControllers.updateMenuItem);
 
 //  checkAuth.verifyToken,
 

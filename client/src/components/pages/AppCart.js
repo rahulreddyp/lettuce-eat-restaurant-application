@@ -88,7 +88,7 @@ const AppCart = () => {
   };
   // console.log(cartItem);
   return (
-    <div style={{ backgroundColor: "#e7e393" }}>
+    <div>
       <div className="d-flex justify-content-center">
         <div className="row">
           <div className="jumbotron text-center  ">
