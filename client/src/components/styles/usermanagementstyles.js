@@ -8,7 +8,7 @@ const Wrapper = styled.div`
 >>>>>>> f6dc52d2ead3c89c29c68b3d17ed7b1323c139af
   width: 100%;
   font-size: large;
-  background-color: #e7e393;
+  background-color: white;
   padding-top: 2cm;
   padding-bottom: 5cm;
 

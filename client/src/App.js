@@ -4,11 +4,13 @@ import { BrowserRouter as Router, Route, Routes } from "react-router-dom";
 import "./App.css";
 import Footer from "./components/Footer";
 import Header from "./components/Header";
+import Aboutus from "./components/pages/Aboutus";
 import Admin from "./components/pages/Admin";
 import AdminRoute from "./components/pages/AdminRoute";
 import { default as AllOrders } from "./components/pages/AllOrders";
 import AppCart from "./components/pages/AppCart";
 import Cart from "./components/pages/Cart";
+import Coupons from "./components/pages/Coupons";
 import Editprofile from "./components/pages/Editprofile";
 import Feedback from "./components/pages/Feedback";
 import GetOrderStatus from "./components/pages/GetOrderStatus";
@@ -67,6 +69,7 @@ function App() {
             <Route path="/getOrders/" element={<OrderStatus />} />
             <Route path="/updateOrder/:id" element={<UpdateOrder />} />
             <Route path="/editprofile" element={<Editprofile />} />
+            <Route path="/aboutus" element={<Aboutus />} />
             <Route path="/menu" element={<Menu />} />
             <Route path="/menuitem" element={<MenuItem />} />
             <Route path="/payments" element={<Payments />} />
@@ -92,6 +95,8 @@ function App() {
               path="/sendnotification"
               element={<SendNotification />}
             ></Route>
+            <Route path="/coupons" element={<Coupons />} />
+            <Route path="/addCard" element={<AddCard />} />
           </Routes>
         </Router>
         <Footer />
