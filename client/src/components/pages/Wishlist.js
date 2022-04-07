@@ -9,9 +9,7 @@ const Wishlist = () => {
   const [reload, setReload] = useState(false);
   const loadWishlist = () => {
     getWishlist().then((data) => {
-      // if (data) {
-      //   // setError(data.error);
-      // } else 
+    
       {
         console.log(data);
         setWishlistItem(data);
