@@ -29,7 +29,6 @@ const schema = yup.object().shape({
 const Editprofile = () => {
   const user = JSON.parse(localStorage.getItem("user"));
   const navigate = useNavigate();
-  const [newUserDetails, setNewUserDetails] = useState({});
   const {
     register,
     handleSubmit,
@@ -45,36 +44,32 @@ const Editprofile = () => {
       address: data.address,
     };
 
-    const res = await axios.put(
-      `${API}/updateprofile`,
-      updatedData,
-      {
-        headers: {
-          "Content-Type": "application/json",
-          "x-access-token": user.token,
-        },
-      }
-    );
+    const res = await axios.put(`${API}/updateprofile`, updatedData, {
+      headers: {
+        "Content-Type": "application/json",
+        "x-access-token": user.token,
+      },
+    });
     if (res.data.success === true) {
       Object.keys(data).forEach((key) => {
         user[key] = data[key];
       });
       console.log(user);
       window.localStorage.setItem("user", JSON.stringify(user));
-      navigate("/menu");
+      navigate("/profile");
     }
   };
+
   useEffect(() => {
-    console.log("user updated");
-  }, [user]);
+    console.log("hello");
+  }, []);
 
   return (
     <Wrapper>
-      
       <Container className="Container">
-      <h1 style={{ fontSize: "50px" }}>Edit Profile</h1>
+        <h1 style={{ fontSize: "50px" }}>Edit Profile</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
-          {content.inputs.map((input, key) => {
+          {content(user).map((input, key) => {
             return (
               <Row key={key}>
                 <Col style={{ textAlign: "left" }}>
