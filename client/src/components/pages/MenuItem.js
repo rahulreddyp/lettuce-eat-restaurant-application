@@ -18,7 +18,7 @@ const MenuItem = () => {
   const [success, setSuccess] = useState("");
   const [customizations, setCustomizations] = useState([]);
   const [cartItem, setCartItem] = useState([]);
-  const [wishlistitems, setwishlistitems] = useState([]);
+  const [flag, setFlag] = useState(false);
   const { state } = useLocation();
   const { itemId } = state || {};
   const [isClick, setClick] = useState(false);
@@ -54,24 +54,27 @@ const MenuItem = () => {
       description: item.description,
       quantity: 1,
       });
-
+      setFlag(true);
       console.log(cartItem);
   };
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log(item.customization)
    
-    console.log(cartItem)
-    moveItemtoCart(cartItem).then((data)=>{
-      console.log("step1")
+    if(flag!==true){
+      alert("Please select a customization option!!!");
+    }else{
+       moveItemtoCart(cartItem).then((data)=>{
+      
       if (data.error) {
-        setError(data.error);
+        alert(data.error);
       } else {
-        setSuccess(data.message);
+        alert(data.message);
         console.log(data);
       }
     }) 
+    }
+   
     
   };
 
@@ -80,9 +83,10 @@ const MenuItem = () => {
     console.log("Item to be added "+ item.name)
     putItem(item).then((data)=>{
       if (data.error) {
-        setError(data.error);
+        alert(data.error)
       } else {
-        setSuccess(data.message);
+        // setSuccess(data.message);
+        alert("Item added to wishlist");
         console.log(data);
       }
     }) 
@@ -139,7 +143,8 @@ const MenuItem = () => {
                     customizations={customizations}
                     options={options}
                     onChange={(e) => handleChange(options, e)}
-                    required= 'true'
+                    required
+                    
                   />
                 </div>
               );

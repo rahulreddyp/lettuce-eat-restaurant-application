@@ -31,6 +31,8 @@ import VerifyOtp from "./components/pages/VerifyOtp";
 import Wishlist from "./components/pages/Wishlist";
 import AddCard from "./components/paymentscomponents/AddCard";
 import AppCart from "./components/pages/AppCart";
+import Notifications from "./components/pages/Notifications";
+import SendNotification from "./components/pages/SendNotification";
 import userEvent from "@testing-library/user-event";
 import { useEffect } from "react";
 
@@ -85,6 +87,11 @@ function App() {
               element={<UpdateOrderFinalScreen />}
             />
             {/* <Route path="/cart" element={<Cart />} /> */}
+            <Route path="/notifications" element={<Notifications />}></Route>
+            <Route
+              path="/sendnotification"
+              element={<SendNotification />}
+            ></Route>
           </Routes>
         </Router>
         <Footer />
