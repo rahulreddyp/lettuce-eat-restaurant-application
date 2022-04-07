@@ -1,22 +1,24 @@
 // Author: Rahul Reddy Puchakayala
 
+// Reference: 
+// https://www.npmjs.com/package/react-sidebar
+// https://stackoverflow.com/questions/57348509/need-to-render-a-sidebar-component-onclick-from-another-component
+
 import React, { useState } from "react";
 import Sidebar from "react-sidebar";
-import { FaSortAmountDownAlt, FaFilter } from "react-icons/fa";
 import { getAllCategories } from "../../apicalls/AdminCalls";
 import { useNavigate } from "react-router-dom";
 import {RangeSlider} from '@adobe/react-spectrum';
-
 
 const MenuSidebar = ({
   setReload = function (r) {
     return r;
   },
-  reload = undefined,
+  reload = undefined, specType
 }) => {
   const [state, setState] = useState({
     specType: "",
-    setOpen: false,
+    setOpen: true,
     selectedOption: "",
     sortBy: "",
     sortOption: "",
@@ -37,7 +39,6 @@ const MenuSidebar = ({
   const onSetSidebarOpen = (open) => {
     setState({ ...state, setOpen: open });
   };
-
 
   const loadCategories = () => {
     getAllCategories().then((data) => {
@@ -60,7 +61,9 @@ const MenuSidebar = ({
       const sortByAscDesc = state.sortBy === "+" ? "" : state.sortBy;
 
       const sortValue = sortByAscDesc + state.sortOption;
+      console.log(sortValue);
       setReload(!reload);
+
       navigate("/menu", { state: { specification: { sort: sortValue } } });
     }
   };
@@ -73,7 +76,7 @@ const MenuSidebar = ({
     if (!filter.key || !filter.value) {
       setError("Please choose an option to sort menu items!");
     } else {
-      
+      console.log(state.filter);
       setReload(!reload);
       navigate("/menu", { state: { specification: { [filter.key]: filter.value } } });
     }
@@ -82,17 +85,23 @@ const MenuSidebar = ({
   const handleChange = (e) => {
     const name = e.target.name;
     
-    // setState({
-    //   ...state,
-    //   [name]: e.target.value,
-    //   selectedOption: e.target.value,
-    // });
-
-    setFilter({...filter, key: name, value: e.target.value});
-
+    setState({
+      ...state,
+      [name]: e.target.value,
+      selectedOption: e.target.value,
+    });
   };
 
+  const handleFilterChange = (e) => {
+    const name = e.target.name;
+    setFilter({...filter, key: name, value: e.target.value});
+  }
+
   const handleClear = () => {
+
+    setReload(!reload);
+    navigate("/menu", { state: { specification: {} } });
+    
     setState({ ...state, selectedOption: "", sortBy: "", sortOption: "" });
 
     setFilter({...filter, key: "", value: ""});
@@ -105,7 +114,7 @@ const MenuSidebar = ({
         <h2>Sort</h2>
         <span className="text-danger text-center">{error}</span>
         <form>
-          <div className="btn btn-default" onClick={() => handleClear()}>
+          <div className="btn btn-default text-white" onClick={() => handleClear()}>
             <u>clear</u>
           </div>
           <div className="form-group mb-3">
@@ -145,10 +154,11 @@ const MenuSidebar = ({
             </label>
           </div>
           <button
-            className="btn btn-default fw-bold"
+            className="btn btn-default fw-bold text-white"
             type="submit"
             onClick={handleSubmit}
           >
+
             Apply
           </button>
         </form>
@@ -163,7 +173,7 @@ const MenuSidebar = ({
         <h2>Filter</h2>
         <span className="text-danger text-center">{error}</span>
         <form>
-          <div className="btn btn-default" onClick={() => handleClear()}>
+          <div className="btn btn-default text-white" onClick={() => handleClear()}>
             <u>clear</u>
           </div>
           <div className="form-group mb-3">
@@ -171,7 +181,7 @@ const MenuSidebar = ({
             <select
                 className="form-control"
                 name="category"
-                onChange={handleChange}
+                onChange={handleFilterChange}
               >
                 <option value="">Select Category</option>
                 {categories &&
@@ -187,20 +197,7 @@ const MenuSidebar = ({
             <div className="slider__track" />
             <div className="slider__range" />
           </div>
-          <label className="fw-bold">Choose Price Range:</label>
-                {/* <input
-              type="range"
-              min= "2.0"
-              max="30.0"
-              step="0.1" 
-              value={filter.minVal}
-              className="thumb thumb--zindex-3"
-              onChange={(e) => {
-                const value = Math.min(+e.target.value, filter.maxVal - 1);
-                setFilter.minVal(value);
-                e.target.value = value.toString();
-              }}
-            /> */}
+          <label className="fw-bold">Choose Price Range:</label>               
 
             {/* Reference: https://react-spectrum.adobe.com/react-spectrum/RangeSlider.html */}
             <RangeSlider
@@ -227,9 +224,9 @@ const MenuSidebar = ({
   };
 
   return (
-    // state.specType === "sort" ? sortContent() :
     <Sidebar
-      sidebar={filterContent()}
+      sidebar= 
+      {specType === "sort" ? sortContent() : filterContent()}
       open={state.setOpen}
       onSetOpen={onSetSidebarOpen}
       styles={{
@@ -241,26 +238,8 @@ const MenuSidebar = ({
         },
       }}
     >
-      <button
-        className="btn btn-primary"
-        onClick={() => {
-          onSetSidebarOpen(true)
-          // setState({ ...state, specType: "sort" });
-        }}
-      >
-        Sort <FaSortAmountDownAlt />
-      </button>
-
-      <button
-        className="btn btn-secondary"
-        onClick={() => {
-          onSetSidebarOpen(true);
-          // loadCategories();
-          // setState({ ...state, specType: "filter" });
-        }}
-      >
-        Filter <FaFilter />
-      </button>
+      
+     <></>
     </Sidebar>
   );
 };

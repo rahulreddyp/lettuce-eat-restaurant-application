@@ -14,7 +14,7 @@ const ManageMenu = () => {
   var { deletemessage } = state || {};
 
   const loadMenu = () => {   
-    getMenu().then((data) => {
+    getMenu({}).then((data) => {
       if (data.error) {
         // setError(data.error);
       } else {

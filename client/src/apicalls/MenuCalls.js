@@ -6,7 +6,7 @@ export const getMenu = (specification) => {
     var url = `${API}/menu`;
     if(specification !== "") {
         
-        console.log(Object.entries(specification));
+        // console.log(Object.entries(specification));
         Object.entries(specification).map((key) => { url += "?" + key[0] + "=" + key[1]})
     }
 
