@@ -82,9 +82,9 @@ video {
   background-color: #dd7230;  
   color: white;
   font-size: 25px; 
-  position: relative;
+  position: fixed;
   bottom: 0;
   width: 100%;
-  height: 2.5rem;
+  height: 0.5px;
   padding-bottom: 2.5rem; 
  }

@@ -51,6 +51,8 @@ const VerifyOtp = () => {
     if (res.data.success === true) {
       localStorage.setItem('otpemail', JSON.stringify(res.data));
       navigate("/resetpassword");
+    }else{
+      alert("Please enter valid OTP");
     }
   };
 
@@ -58,7 +60,7 @@ const VerifyOtp = () => {
     <Wrapper>
       
       <Container className="Container">
-      <h1 style={{ fontSize: "70px" }}>Verify OTP</h1>
+      <h1 style={{ fontSize: "40px" }}>Verify OTP</h1>
         <form onSubmit={handleSubmit(onSubmit)}>
           {content.inputs.map((input, key) => {
             return (
