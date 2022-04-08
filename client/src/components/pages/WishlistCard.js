@@ -11,6 +11,7 @@ import { API } from "../../API";
 const WishlistCard = ({ item }) => {
     //const [wishlistitem, setItem] = useState([]);
     //setItem = item
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [cartItem, setCartItem] = useState([]);
@@ -23,7 +24,7 @@ const WishlistCard = ({ item }) => {
   
     };
 
-    const CardImage = `${API}/menu/photo/${item._id}`;
+    const CardImage = `${API}/menu/photo/${item.id}`;
 
   const removefromWishlist = async () => {
     const deletemessage = "";
@@ -41,18 +42,15 @@ const WishlistCard = ({ item }) => {
     };
 
   const moveToCart = async () => {
- 
+     console.log(item)
     item.quantity = 1;
-    item.itemvalue= "small";
     console.log(item);
     const deletemessage = "";
     moveItemtoCart(item).then((data)=>{
       if (data.error) {
-        alert(data.error);
+        alert("Item already in cart");
       } else {
         console.log(data);
-        alert(data.message);
-        // navigate("/wishlist", { state: { deletemessage } });
         window.location.reload(false)
         
       }

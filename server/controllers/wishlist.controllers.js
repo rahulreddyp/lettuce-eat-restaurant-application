@@ -47,7 +47,7 @@ const moveToCart = (req, res) => {
       });
     } else {
       return res
-        .status(200)
+        .status(400)
         .json({ success: false, error: "Item already in Cart" });
     }
   });
