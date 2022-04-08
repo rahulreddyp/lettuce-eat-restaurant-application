@@ -23,6 +23,7 @@ const MenuItem = () => {
   const [success, setSuccess] = useState("");
   const [customizations, setCustomizations] = useState([]);
   const [cartItem, setCartItem] = useState([]);
+  const [wishlistItem, setWishlistItem] = useState([]);
   const [flag, setFlag] = useState(false);
   const { state } = useLocation();
   const { itemId } = state || {};
@@ -64,8 +65,19 @@ const MenuItem = () => {
       description: item.description,
       quantity: 1,
     });
+    setWishlistItem({
+      ...wishlistItem,
+      [customization_type]: userChoice,
+      id: item._id,
+      name: item.name,
+      price: item.price,
+      category: item.category,
+      description: item.description,
+      quantity: 1,
+    });
     setFlag(true);
     console.log(cartItem);
+    console.log(wishlistItem)
   };
 
   const handleSubmit = (e) => {
