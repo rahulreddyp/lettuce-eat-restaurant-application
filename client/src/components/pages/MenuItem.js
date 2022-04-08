@@ -73,6 +73,7 @@ const MenuItem = () => {
       price: item.price,
       category: item.category,
       description: item.description,
+      photo: item.photo,
       quantity: 1,
     });
     setFlag(true);
@@ -103,7 +104,7 @@ const MenuItem = () => {
     if(flag!==true){
       alert("Please select a customization option!!!");
     } else {
-      putItem(item).then((data) => {
+      putItem(wishlistItem).then((data) => {
       if (data.error) {
         alert(data.error);
       } else {
