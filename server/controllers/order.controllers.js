@@ -9,6 +9,7 @@ const mongoClient = require("mongodb").MongoClient;
 var ObjectId = require("mongodb").ObjectID;
 
 const createOrder = async (req, res) => {
+  console.log('body', req.body)
   const { items, user, orderStatus, quantity, total } = req.body;
   try {
     const newOrder = new Order({

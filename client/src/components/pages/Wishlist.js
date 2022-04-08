@@ -3,9 +3,12 @@
 import React, { useState, useEffect } from "react";
 import WishlistCard from "./WishlistCard";
 import { getWishlist } from "../../apicalls/WishlistCalls";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 
 const Wishlist = () => {
   const [wishlistItem, setWishlistItem] = useState([]);
+
+  const user = localStorage.getItem("user");
   const [reload, setReload] = useState(false);
   const loadWishlist = () => {
     getWishlist().then((data) => {
@@ -17,12 +20,16 @@ const Wishlist = () => {
     });
   };
 
+ 
   useEffect(() => {
-    loadWishlist();
+    if (!localStorage.getItem("user")) {
+      return <GenericNotLoggedInComponent />;
+    } else {
+      loadWishlist();
+    }
   }, [reload]);
-
   return (
-    <div style={{backgroundColor: "#e7e393"}}> 
+    <div> 
     <div  className="container d-flex justify-content-center ">
       <div className="row">
         <div className="col-12">

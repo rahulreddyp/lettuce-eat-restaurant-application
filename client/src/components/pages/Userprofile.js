@@ -1,31 +1,62 @@
 // Author : Pavan Abburi
 //This component is used to render profile details of logged in user
-import React from "react";
+import React, { useContext, useEffect, useState } from "react";
 import { Col, Container, Row, Figure, Button } from "react-bootstrap";
 import Image from "react-bootstrap/Image";
 import { FaUser, FaVolumeUp } from "react-icons/fa";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import { API } from "../../API";
+import { UserContext } from "../../App";
 
 const Userprofile = () => {
   const navigate = useNavigate();
-  let data = JSON.parse(localStorage.getItem("user"));
-  const editProfile = () => {
-      navigate("/editprofile")
-  }
+  const { user, setUser } = useContext(UserContext);
+  const [data, setData] = useState(JSON.parse(localStorage.getItem("user")));
 
-  const deleteProfile = async() => {
-    console.log(data.id);
-    const res = await axios.post(`${API}/deleteprofile`, data, { headers: {'Content-Type': 'application/json','x-access-token':data.token} });
-    if (res.data.success === true) {
-        localStorage.clear();
-        navigate("/");
-      }
+  const editProfile = () => {
+    navigate("/editprofile");
   };
 
+  useEffect(() => {
+    console.log(data);
+    if (!data) {
+      navigate("/");
+    }
+  }, []);
+
+  const deleteProfile = async () => {
+    const res = await axios
+      .post(`${API}/deleteprofile`, data, {
+        headers: {
+          "Content-Type": "application/json",
+          "x-access-token": data.token,
+        },
+      })
+      .then((resp) => {
+        if (resp.data.success) {
+          localStorage.clear();
+          setUser(null);
+          navigate("/");
+        }
+      });
+
+    // localStorage.clear();
+    // setUser(null);
+    // navigate("/");
+  };
+
+  // const deleteProfile = async() => {
+  //   console.log(data.id);
+  //   const res = await axios.post(`${API}/deleteprofile`, data, { headers: {'Content-Type': 'application/json','x-access-token':data.token} });
+  //   if (res.data.success === true) {
+  //       localStorage.clear();
+  //       navigate("/");
+  //     }
+  // };
+
   return (
-    <div  style={{backgroundColor: "#e7e393"}}>
+    <div>
       <Container>
         <Row style={{ display: "flex" }}>
           <Col sm={8}>

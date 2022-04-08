@@ -2,12 +2,15 @@
 
 import React from "react";
 import { Navigate, Outlet } from 'react-router-dom';
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 
 const AdminRoute = () => {
-    // return isAuthenticated()?.role === 1 
-    return 1===1
+
+    const user = JSON.parse(localStorage.getItem("user"));
+    
+    return (user && user.email === "group01@gmail.com")
       ? <Outlet />
-      : <Navigate to='/login' replace />;
+      : <GenericNotLoggedInComponent/>;
   };
 
 export default AdminRoute;  

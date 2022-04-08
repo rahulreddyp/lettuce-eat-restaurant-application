@@ -65,7 +65,7 @@ const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = 
   );
 
   return (
-    <div className="card shadow" title={title}>
+    <div className="card h-100 w-70 shadow" title={title}>
       {menuModal(item._id)}
       <div
         onClick={() => {
@@ -77,15 +77,14 @@ const MenuCard = ({ item, isAdmin, setReload = function(r) {return r}, reload = 
             src={CardImage}
             alt="Menu Item"
             style={{ maxHeight: "100%", maxWidth: "100%" }}
-            className="card-img-top mb-3 rounded"
+            className="card-img-top img-responsive mb-3 rounded"
           />
           <div className="card-body">
-            {/* {redirectToItemDetails()} */}
             <h3 className="card-title">{item.name}</h3>
             <p className="card-description">{item.description}</p>
-            <span className="text-white bg-success rounded p-2">
+            <div className="text-white mx-auto bg-success rounded">
               $ {item.price}
-            </span>
+            </div>
           </div>
         </div>
       </div>

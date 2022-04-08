@@ -10,4 +10,5 @@ router.param("itemId", cartControllers.getCartItemById);
 router.get("/cart", cartControllers.getAllCart);
 router.delete("/cart/:itemId",cartControllers.deleteCartItem);
 router.put("/menuitem", cartControllers.moveToCart);
+router.delete("/payments", cartControllers.deleteCartAll);
 module.exports = router;
