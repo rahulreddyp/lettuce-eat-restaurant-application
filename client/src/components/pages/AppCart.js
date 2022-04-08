@@ -31,6 +31,7 @@ const AppCart = () => {
   const placeOrder = async () => {
     const itemIds = [];
     const quantities = [];
+    console.log(cartItem)
     cartItem.map((i, idx) => {
       itemIds.push(i["id"]);
       quantities.push(i["quantity"]);

@@ -34,7 +34,7 @@ const WishlistCard = ({ item }) => {
         } else {
           console.log(data);
           deletemessage = data.message;
-          navigate("/wishlist", { state: { deletemessage } });
+          // navigate("/wishlist", { state: { deletemessage } });
           window.location.reload(false) ;
         }
       } ,window.location.reload(false)) 
@@ -48,12 +48,12 @@ const WishlistCard = ({ item }) => {
     const deletemessage = "";
     moveItemtoCart(item).then((data)=>{
       if (data.error) {
-        setError(data.error);
+        alert(data.error);
       } else {
         console.log(data);
-        setError(data.message);
-        navigate("/wishlist", { state: { deletemessage } });
-        window.location.reload()
+        alert(data.message);
+        // navigate("/wishlist", { state: { deletemessage } });
+        window.location.reload(false)
         
       }
     }) 

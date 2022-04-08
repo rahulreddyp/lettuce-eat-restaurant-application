@@ -20,16 +20,14 @@ const Wishlist = () => {
     });
   };
 
-  // useEffect(() => {
-  //   loadWishlist();
-  // }, [reload]);
-
-  if (user === null) {
-    return <GenericNotLoggedInComponent />;
-  } else {
-    loadWishlist();
-  }
-
+ 
+  useEffect(() => {
+    if (!localStorage.getItem("user")) {
+      return <GenericNotLoggedInComponent />;
+    } else {
+      loadWishlist();
+    }
+  }, [reload]);
   return (
     <div> 
     <div  className="container d-flex justify-content-center ">
