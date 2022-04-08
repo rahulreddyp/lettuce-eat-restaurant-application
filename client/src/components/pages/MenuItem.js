@@ -73,6 +73,7 @@ const MenuItem = () => {
       price: item.price,
       category: item.category,
       description: item.description,
+      photo: item.photo,
       quantity: 1,
     });
     setFlag(true);

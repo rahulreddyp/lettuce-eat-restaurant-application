@@ -51,8 +51,7 @@ const WishlistCard = ({ item }) => {
         alert(data.error);
       } else {
         console.log(data);
-        alert("Item moved to cart");
-        // navigate("/wishlist", { state: { deletemessage } });
+        setSuccess(data.message);
         window.location.reload(false)
         
       }
