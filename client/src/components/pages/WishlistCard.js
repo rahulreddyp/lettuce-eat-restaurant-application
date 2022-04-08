@@ -48,10 +48,9 @@ const WishlistCard = ({ item }) => {
     const deletemessage = "";
     moveItemtoCart(item).then((data)=>{
       if (data.error) {
-        alert(data.error);
+        alert("Item already in cart");
       } else {
         console.log(data);
-        setSuccess(data.message);
         window.location.reload(false)
         
       }
