@@ -24,7 +24,7 @@ const WishlistCard = ({ item }) => {
   
     };
 
-    const CardImage = `${API}/menu/photo/${item._id}`;
+    const CardImage = `${API}/menu/photo/${item.id}`;
 
   const removefromWishlist = async () => {
     const deletemessage = "";
