@@ -103,12 +103,12 @@ const MenuItem = () => {
     if(flag!==true){
       alert("Please select a customization option!!!");
     } else {
-      putItem(item).then((data) => {
+      putItem(wishlistItem).then((data) => {
       if (data.error) {
         alert(data.error);
       } else {
         // setSuccess(data.message);
-        alert("Item added to wishlist");
+        alert(data.message);
         console.log(data);
       }
     });} 

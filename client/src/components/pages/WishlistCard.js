@@ -11,6 +11,7 @@ import { API } from "../../API";
 const WishlistCard = ({ item }) => {
     //const [wishlistitem, setItem] = useState([]);
     //setItem = item
+
     const [error, setError] = useState("");
     const [success, setSuccess] = useState("");
     const [cartItem, setCartItem] = useState([]);
@@ -41,9 +42,8 @@ const WishlistCard = ({ item }) => {
     };
 
   const moveToCart = async () => {
- 
+     console.log(item)
     item.quantity = 1;
-    item.itemvalue= "small";
     console.log(item);
     const deletemessage = "";
     moveItemtoCart(item).then((data)=>{
@@ -51,7 +51,7 @@ const WishlistCard = ({ item }) => {
         alert(data.error);
       } else {
         console.log(data);
-        alert(data.message);
+        alert("Item moved to cart");
         // navigate("/wishlist", { state: { deletemessage } });
         window.location.reload(false)
         
