@@ -108,7 +108,7 @@ const MenuItem = () => {
         alert(data.error);
       } else {
         // setSuccess(data.message);
-        alert("Item added to wishlist");
+        alert(data.message);
         console.log(data);
       }
     });} 

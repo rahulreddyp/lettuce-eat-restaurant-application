@@ -48,6 +48,7 @@ const getFeedBackByOrderId = async (req, res) => {
           order,
           feedback: "No feedback!",
         });
+        return
       }
       res.status(200).json(feedback);
     }

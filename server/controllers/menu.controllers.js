@@ -108,7 +108,7 @@ const getAllMenu = (req, res) => {
 
   var sortQuery = req.query.sort ? req.query.sort : "_id";
 
-  var itemsLimit = req.query.limit ? parseInt(req.query.limit) : 6;
+  var itemsLimit = req.query.limit ? parseInt(req.query.limit) : 12;
   // var filter = {key: 'price', value: {$gte: 1.99, $lte: 7.99}};  
 
   const filterOptions = req.query.category ? {"category": req.query.category} : {};
