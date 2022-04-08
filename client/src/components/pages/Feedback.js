@@ -42,7 +42,7 @@ export default function Feedback() {
   const handleSubmit = async () => {
     try {
       const res = await axios.post(
-        "http://localhost:5000/createFeedBack/" + id,
+        `${API}/createFeedBack/` + id,
         {
           content,
         }
