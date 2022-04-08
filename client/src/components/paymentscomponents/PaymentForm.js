@@ -7,6 +7,8 @@ import {
   retrieveUserCards,
   savePaymentData,
 } from "../../apicalls/PaymentCalls";
+import { API } from "../../API";
+import axios from "axios";
 
 var CryptoJS = require("crypto-js");
 
@@ -153,6 +155,9 @@ const PaymentForm = (props) => {
             paymentId: response.id,
           });
           setValidated(true);
+          axios.post(`${API}/createOrder/`, JSON.parse(localStorage.getItem("orderParams")))
+          .then((res) => {console.log(res.data)});
+          
         } else {
           setValidated(false);
           props.setPaymentStatus({
