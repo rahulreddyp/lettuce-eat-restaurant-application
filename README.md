@@ -59,7 +59,11 @@ type `npm run setup-backend` to install the node modules for backend
 type `npm start` to run the application
 ```
 
-After the successfull installation and running, You should see the web page running on `http://localhost:3000` with the Main Menu Page Design being displayed
+After the successfull installation and running, You should see the web page running on `http://localhost:3000` with the Main Menu Page Design being displayed.
+
+To access the admin portal, the credentials are,
+Email : group01@gmail.com
+Password : 12345678
 
 ## Running the tests
 
