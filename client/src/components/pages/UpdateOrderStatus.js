@@ -30,6 +30,15 @@ function UpdateOrderStatus() {
   var status = "";
   var user_address = "";
   var key = "";
+
+  if(orders===null){
+    return(
+      <>
+      <h1 align="center"> No orders </h1>
+      </>
+    )
+  }
+  
   return (
     <>
       <Grid>
