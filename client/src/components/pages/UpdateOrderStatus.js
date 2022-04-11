@@ -31,7 +31,7 @@ function UpdateOrderStatus() {
   var user_address = "";
   var key = "";
 
-  if(orders===null){
+  if(orders===null || orders.length===0){
     return(
       <>
       <h1 align="center"> No orders </h1>
