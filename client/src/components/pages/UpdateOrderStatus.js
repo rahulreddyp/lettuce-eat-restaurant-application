@@ -51,7 +51,7 @@ function UpdateOrderStatus() {
           var len = order.items.length;
           var item_map = [];
           for (let i = 0; i < len; i++) {
-            item_map.push(order.items[i].name);
+            item_map.push(order.items[i].name + ", ");
           }
           console.log(len);
           return (
