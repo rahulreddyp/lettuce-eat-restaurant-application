@@ -32,6 +32,10 @@ function SendNotification() {
 
   const handleSubmit = () => {
     var cont = document.getElementById("content").value;
+    if(cont.length<=0 || name.length<=0){
+      alert("Please enter the required values")
+    }
+    else{
     const data = {
       userid: name,
       content: cont,
@@ -46,6 +50,7 @@ function SendNotification() {
         console.log(err);
         alert("Some error occured.");
       });
+    }
   };
 
  if (user === null) {
