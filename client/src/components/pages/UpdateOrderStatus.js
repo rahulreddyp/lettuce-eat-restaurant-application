@@ -11,6 +11,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import Grid from "@mui/material/Grid";
 import UserElement from "./UserElement";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 import { getAllOrders } from "../../apicalls/UpdateOrderStatusCalls";
 
 function UpdateOrderStatus() {

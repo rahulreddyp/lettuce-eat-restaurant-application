@@ -6,6 +6,7 @@ import CardActions from "@mui/material/CardActions";
 import CardContent from "@mui/material/CardContent";
 import CardMedia from "@mui/material/CardMedia";
 import Typography from "@mui/material/Typography";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 import {
   Box,
   CardActionArea,
@@ -35,10 +36,7 @@ function UpdateOrderFinalScreen(props) {
   var c = id;
   console.log(c);
 
-  const user = localStorage.getItem("user");
- if (user === null) {
-    return <GenericNotLoggedInComponent />;
-  } 
+  
 
   const handleChange = (event) => {
     setS(event.target.value);
@@ -67,6 +65,8 @@ function UpdateOrderFinalScreen(props) {
 
   const navigator = useNavigate();
 
+  
+
   if (order.length != 0) {
     console.log(order);
     var name = order.user.firstName + " " + order.user.lastName;
@@ -87,6 +87,11 @@ function UpdateOrderFinalScreen(props) {
   // item_map.set("Burger", 3);
   // }
   const [s, setS] = useState("");
+
+  const user = localStorage.getItem("user");
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
 
   return (
     <>

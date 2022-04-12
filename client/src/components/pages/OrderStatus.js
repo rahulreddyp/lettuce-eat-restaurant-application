@@ -9,6 +9,7 @@ import { borders } from "@mui/system";
 import { Button } from "react-bootstrap";
 import { getOrderById } from "../../apicalls/UpdateOrderStatusCalls";
 import { Typography } from "@mui/material";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 
 function OrderStatus() {
   const [order, setOrder] = useState([]);
@@ -18,10 +19,7 @@ function OrderStatus() {
 
   console.log(c);
 
-  const user = localStorage.getItem("user");
- if (user === null) {
-    return <GenericNotLoggedInComponent />;
-  } 
+ 
 
   const loadOrder = () => {
     // var url_str = window.location.href;
@@ -65,6 +63,11 @@ function OrderStatus() {
   }
 
   const navigator = useNavigate();
+ const user = localStorage.getItem("user");
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
+  
   const image_url =
     "https://www.cookwithmanali.com/wp-content/uploads/2019/05/Paneer-Butter-Masala.jpg";
   const dish_name = "Paneer Tikka Masala";

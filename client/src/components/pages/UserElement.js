@@ -10,6 +10,7 @@ import Typography from "@mui/material/Typography";
 import { CardActionArea } from "@mui/material";
 import { Dropdown, DropdownButton } from "react-bootstrap";
 import { useNavigate } from "react-router";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 
 function UserElement(props) {
   const { name, item_map, status, user_address, id } = props;
