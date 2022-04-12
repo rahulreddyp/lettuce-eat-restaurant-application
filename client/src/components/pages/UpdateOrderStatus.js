@@ -31,6 +31,11 @@ function UpdateOrderStatus() {
   var user_address = "";
   var key = "";
 
+  const user = localStorage.getItem("user");
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
+
   if(orders===null || orders.length===0){
     return(
       <>

@@ -13,6 +13,10 @@ import { CardActionArea, Paper } from "@mui/material";
 function OrderElement(props) {
   const navigator = useNavigate();
   const { item_map, quantity, user_address, order_status } = props;
+  const user = localStorage.getItem("user");
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
   return (
     <>
       <div className="content" align="center">

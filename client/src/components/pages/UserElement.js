@@ -14,6 +14,10 @@ import { useNavigate } from "react-router";
 function UserElement(props) {
   const { name, item_map, status, user_address, id } = props;
   const navigator = useNavigate();
+  const user = localStorage.getItem("user");
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
   return (
     <>
       <div class="container" align="center">

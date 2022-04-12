@@ -35,6 +35,11 @@ function UpdateOrderFinalScreen(props) {
   var c = id;
   console.log(c);
 
+  const user = localStorage.getItem("user");
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
+
   const handleChange = (event) => {
     setS(event.target.value);
   };

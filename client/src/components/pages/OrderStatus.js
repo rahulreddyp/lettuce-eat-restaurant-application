@@ -15,7 +15,13 @@ function OrderStatus() {
   const [error, setError] = useState("");
   const { orderid } = useParams();
   var c = orderid;
+
   console.log(c);
+
+  const user = localStorage.getItem("user");
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
 
   const loadOrder = () => {
     // var url_str = window.location.href;

@@ -1,5 +1,6 @@
 import React, { useEffect, useState } from "react";
 import axios from "axios";
+import GenericNotLoggedInComponent from "./GenericNotLoggedInComponent";
 import Box from "@mui/material/Box";
 import InputLabel from "@mui/material/InputLabel";
 import MenuItem from "@mui/material/MenuItem";
@@ -11,7 +12,7 @@ import { Button } from "@mui/material";
 
 function SendNotification() {
   const [users, setUsers] = useState([]);
-
+  const user = localStorage.getItem("user");
   useEffect(() => {
     axios
       .get(`${API}/getallusers`)
@@ -46,6 +47,11 @@ function SendNotification() {
         alert("Some error occured.");
       });
   };
+
+ if (user === null) {
+    return <GenericNotLoggedInComponent />;
+  } 
+  
 
   return (
     <>
