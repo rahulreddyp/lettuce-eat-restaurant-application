@@ -3,10 +3,8 @@
 
 # Lettuce-Eat Project
 
-**[Optional]** If what is being submitted is an individual Lab or Assignment. Otherwise, include a brief one paragraph description about the project.
-
 - _Date Created_: 10 APR 2022
-- _Last Modification Date_: 10 APR 2022
+- _Last Modification Date_: 12 APR 2022
 - _Lab URL_: https://lettuce-eat-app.herokuapp.com/
 - _Git URL_: https://git.cs.dal.ca/ashaikh/csci-5709_group-01
 
