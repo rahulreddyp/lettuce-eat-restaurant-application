@@ -8,15 +8,6 @@
 - _Lab URL_: https://lettuce-eat-app.herokuapp.com/
 - _Git URL_: https://git.cs.dal.ca/ashaikh/csci-5709_group-01
 
-## Authors
-
-- [Aadil Sadik Mohmed Shaikh](ad979991@dal.ca) - _Full Stack Developer_
-- [Arpan Nayankumar Bhatt](ar205025@dal.ca) - _Full Stack Developer_
-- [Deeksha Sareen](dk930654@dal.ca) - _Full Stack Developer_
-- [Pavan Abburi](pv696088@dal.ca) - _Full Stack Developer_
-- [Rahul Moje](rahul.reddyp@dal.ca) - _Full Stack Developer_
-- [Rahul Reddy Puchakayla](rh547954@dal.ca) - _Full Stack Developer_
-
 ## Getting Started
 
 See deployment for notes on how to deploy the project on a live system.
