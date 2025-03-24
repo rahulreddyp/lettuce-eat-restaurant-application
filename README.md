@@ -3,10 +3,9 @@
 
 # Lettuce-Eat Project
 
-- _Date Created_: 10 APR 2022
-- _Last Modification Date_: 12 APR 2022
-- _Lab URL_: https://lettuce-eat-app.herokuapp.com/
-- _Git URL_: https://git.cs.dal.ca/ashaikh/csci-5709_group-01
+- URL_: https://lettuce-eat-app.herokuapp.com/
+
+![image](https://github.com/user-attachments/assets/f32a89d9-77fc-413a-9808-994f7e2b8410)
 
 ## Getting Started
 
